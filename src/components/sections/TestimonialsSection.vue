@@ -1,0 +1,147 @@
+<template>
+  <section class="bg-[#FAF8F5] py-20 overflow-hidden">
+    <div class="mx-auto max-w-[1140px] px-6">
+
+      <!-- Subtitle & Title -->
+      <div class="mb-12 text-center">
+        <span class="text-[0.875rem] font-medium text-[#B85C38] tracking-wide block mb-2">
+          Testimonial
+        </span>
+        <h2 class="font-serif text-[2.5rem] font-bold text-[#1F1F1F] leading-tight">
+          What Our Customers Are Saying
+        </h2>
+      </div>
+
+      <!-- Testimonials Grid (2 Cards) -->
+      <div class="grid grid-cols-2 gap-8 max-md:grid-cols-1">
+        <div
+          v-for="(t, index) in visibleTestimonials"
+          :key="index"
+          class="flex overflow-hidden rounded-[24px] bg-white shadow-sm border border-black/5 min-h-[340px]"
+        >
+          <!-- Left Content Box -->
+          <div class="flex-1 p-8 flex flex-col justify-between bg-[#FDFBF7]">
+            <div>
+              <!-- Quote Icon (Brownish/Terracotta) -->
+              <div class="mb-4 text-[#B85C38]">
+                <svg width="36" height="28" viewBox="0 0 36 28" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M0 28V16.3333C0 7.31111 5.4 1.86667 16.2 0L18 3.5C12.6 4.97778 9.9 8.24444 9.9 13.3H16.2V28H0ZM19.8 28V16.3333C19.8 7.31111 25.2 1.86667 36 0L37.8 3.5C32.4 4.97778 29.7 8.24444 29.7 13.3H36V28H19.8Z"/>
+                </svg>
+              </div>
+
+              <!-- Star Rating + Number -->
+              <div class="flex items-center gap-2 mb-4">
+                <div class="flex text-black text-sm tracking-widest">
+                  ★★★★★
+                </div>
+                <span class="font-bold text-sm text-black ml-1">5.0</span>
+              </div>
+
+              <!-- Testimonial Text -->
+              <p class="text-[0.875rem] leading-relaxed text-[#555555]">
+                "{{ t.text }}"
+              </p>
+            </div>
+          </div>
+
+          <!-- Right Image with Overlay Name & Role -->
+          <div class="relative w-[50%] min-w-[200px] overflow-hidden">
+            <img
+              :src="t.avatar"
+              :alt="t.name"
+              class="h-full w-full object-cover object-center"
+            />
+            <!-- Dark Gradient Overlay for text readability -->
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-6 text-white">
+              <h4 class="font-bold text-[1.125rem] leading-snug">{{ t.name }}</h4>
+              <p class="text-[0.8125rem] text-white/80 mt-0.5">{{ t.role }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Controls: Arrows on Left, Slide Counter on Right -->
+      <div class="mt-10 flex items-center justify-between">
+        <!-- Prev/Next Navigation Buttons -->
+        <div class="flex items-center gap-3">
+          <button
+            @click="prevSlide"
+            class="flex h-12 w-12 items-center justify-center rounded-full bg-black text-white transition-all hover:bg-black/80 active:scale-95 cursor-pointer"
+            aria-label="Previous Testimonial"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+          </button>
+          <button
+            @click="nextSlide"
+            class="flex h-12 w-12 items-center justify-center rounded-full bg-black text-white transition-all hover:bg-black/80 active:scale-95 cursor-pointer"
+            aria-label="Next Testimonial"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Slide Indicator Line / Number -->
+        <div class="flex items-center gap-2 text-[0.8125rem] font-medium text-[#777]">
+          <span>0{{ currentIndex + 1 }}</span>
+          <div class="h-[2px] w-12 bg-black/10 relative overflow-hidden rounded-full">
+            <div
+              class="absolute top-0 bottom-0 bg-black transition-all duration-300"
+              :style="{
+                left: `${(currentIndex / (testimonials.length - 1)) * 100}%`,
+                width: `${100 / testimonials.length}%`
+              }"
+            ></div>
+          </div>
+          <span>0{{ testimonials.length }}</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</template>
+
+<script setup>
+import { ref, computed } from 'vue'
+
+const currentIndex = ref(0)
+
+const testimonials = [
+  {
+    text: 'Absolutely love the quality and design! The chair is not only stylish but also incredibly comfortable. The entire shopping experience was smooth and pleasant.',
+    name: 'Alyssa Nguyen',
+    role: 'Interior Designer',
+    avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&q=80',
+  },
+  {
+    text: 'Excellent service and stunning design. The product looks even better in person and adds so much character to my space. Delivery was fast and the quality is impressive!',
+    name: 'Marco Antonio',
+    role: 'Product Designer',
+    avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&q=80',
+  },
+  {
+    text: 'Kayora\'s furniture transformed my entire living space. The materials feel premium and durable. Will definitely purchase again for future projects!',
+    name: 'Sofia Reyes',
+    role: 'Architect',
+    avatar: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600&q=80',
+  },
+]
+
+// Menampilkan 2 item per slide
+const visibleTestimonials = computed(() => {
+  const first = testimonials[currentIndex.value]
+  const second = testimonials[(currentIndex.value + 1) % testimonials.length]
+  return [first, second]
+})
+
+const nextSlide = () => {
+  currentIndex.value = (currentIndex.value + 1) % testimonials.length
+}
+
+const prevSlide = () => {
+  currentIndex.value = (currentIndex.value - 1 + testimonials.length) % testimonials.length
+}
+</script>
