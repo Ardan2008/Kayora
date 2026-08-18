@@ -7,6 +7,15 @@
         <h2 class="font-display text-[2.25rem] leading-[1.15] text-text font-semibold">
           Our Best Quality Products
         </h2>
+        <p v-if="hasQuery" class="mt-2 text-sm text-text-muted">
+          Showing results for <span class="font-semibold text-primary">"{{ searchQuery }}"</span>
+          <button
+            class="ml-2 cursor-pointer border-none bg-transparent p-0 text-xs font-semibold text-text-muted underline hover:text-primary"
+            @click="clearSearch"
+          >
+            Clear
+          </button>
+        </p>
       </div>
 
       <!-- Filter Tabs -->
@@ -20,7 +29,7 @@
               ? 'bg-primary border-primary text-white shadow-sm'
               : 'border-border bg-transparent text-text-muted hover:border-primary hover:text-primary'
           ]"
-          @click="activeTab = tab"
+          @click="activeTab = tab; clearSearch()"
         >
           {{ tab }}
         </button>
@@ -46,10 +55,16 @@
               class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
             <button
-              class="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full border-none bg-white/90 text-text backdrop-blur-sm opacity-0 transition-all duration-300 group-hover:opacity-100 hover:bg-red-50 hover:text-red-500 shadow-sm cursor-pointer"
-              aria-label="Add to wishlist"
+              :class="[
+                'absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full border-none backdrop-blur-sm transition-all duration-300 shadow-sm cursor-pointer',
+                isInWishlist(product.id)
+                  ? 'bg-red-500 text-white opacity-100'
+                  : 'bg-white/90 text-text opacity-0 group-hover:opacity-100 hover:bg-red-50 hover:text-red-500'
+              ]"
+              :aria-label="isInWishlist(product.id) ? 'Remove from wishlist' : 'Add to wishlist'"
+              @click.stop="toggleWishlist(product)"
             >
-              <Heart class="h-4 w-4" />
+              <Heart class="h-4 w-4" :fill="isInWishlist(product.id) ? 'currentColor' : 'none'" />
             </button>
           </div>
 
@@ -65,7 +80,7 @@
               <span class="font-display text-[1.05rem] font-bold text-text">
                 ${{ product.price.toFixed(2) }}
               </span>
-              
+
               <!-- Modern Add to Cart Button -->
               <button
                 @click.stop="addToCart(product)"
@@ -89,35 +104,33 @@
         </div>
         <h3 class="font-display text-lg font-semibold text-text">Product Not Found</h3>
         <p class="mt-2 text-sm text-text-muted leading-relaxed">
-          We couldn't find any products in this category. Try selecting a different filter.
+          {{ hasQuery
+            ? `We couldn't find any products matching "${searchQuery}".`
+            : "We couldn't find any products in this category. Try selecting a different filter." }}
         </p>
+        <button
+          v-if="hasQuery"
+          class="mt-4 cursor-pointer rounded-full border-none bg-primary px-5 py-2 text-xs font-semibold text-white hover:opacity-90"
+          @click="clearSearch"
+        >
+          Clear search
+        </button>
       </div>
 
     </div>
-
-    <!-- Floating Modern Notification Toast -->
-    <Teleport to="body">
-      <Transition name="toast">
-        <div
-          v-if="isToastVisible"
-          class="fixed bottom-6 right-6 z-[100] flex items-center gap-3 rounded-full bg-text px-5 py-3 text-white shadow-xl backdrop-blur-md"
-        >
-          <div class="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-white">
-            <Check class="h-3.5 w-3.5" />
-          </div>
-          <span class="text-[0.8125rem] font-medium">{{ toastMessage }}</span>
-        </div>
-      </Transition>
-    </Teleport>
   </section>
 </template>
 
 <script setup>
 import { ref, computed } from 'vue'
 import { Search, Heart, Plus, Check } from 'lucide-vue-next'
-import { useCart } from '@/composables/useCart.js' 
+import { useCart } from '@/composables/useCart.js'
+import { useWishlist } from '@/composables/useWishlist.js'
+import { useSearch } from '@/composables/useSearch.js'
 
 const { addToCart, toastMessage, isToastVisible } = useCart()
+const { isInWishlist, toggleWishlist } = useWishlist()
+const { searchQuery, clearSearch, hasQuery } = useSearch()
 
 const tabs = ['All', 'Chair', 'Table', 'Sofa', 'Bed']
 const activeTab = ref('All')
@@ -188,9 +201,21 @@ const products = [
   }
 ]
 
-const filteredProducts = computed(() =>
-  activeTab.value === 'All' ? products : products.filter(p => p.category === activeTab.value)
-)
+const filteredProducts = computed(() => {
+  let list = activeTab.value === 'All'
+    ? products
+    : products.filter(p => p.category === activeTab.value)
+
+  if (hasQuery.value) {
+    const q = searchQuery.value.trim().toLowerCase()
+    list = list.filter(p =>
+      p.name.toLowerCase().includes(q) ||
+      p.category.toLowerCase().includes(q)
+    )
+  }
+
+  return list
+})
 </script>
 
 <style scoped>

@@ -1,12 +1,12 @@
 <template>
   <section id="blog" class="relative bg-[#FAF9F6] py-24 overflow-hidden">
     <!-- Ambient Background Glow -->
-    <div class="pointer-events-none absolute -top-40 left-1/2 h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-primary/5 blur-[120px]"></div>
+    <div class="pointer-events-none absolute -top-40 left-1/2 h-125 w-125 -translate-x-1/2 rounded-full bg-primary/5 blur-[120px]"></div>
 
-    <div class="relative mx-auto max-w-[1200px] px-6">
+    <div class="relative mx-auto max-w-300 px-6">
 
       <!-- Section Header -->
-      <div class="mx-auto mb-16 max-w-[620px] text-center">
+      <div class="mx-auto mb-16 max-w-155 text-center">
         <h2 class="font-display text-4xl font-semibold leading-tight text-text sm:text-[2.75rem]">
           Latest From Our Journal
         </h2>
@@ -21,7 +21,7 @@
           v-for="post in posts"
           :key="post.id"
           @click="openPost(post)"
-          class="group relative flex flex-col justify-between cursor-pointer overflow-hidden rounded-[24px] border border-black/5 bg-white p-3.5 transition-all duration-500 hover:-translate-y-2 hover:border-primary/30 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.08)]"
+          class="group relative flex flex-col justify-between cursor-pointer overflow-hidden rounded-3xl border border-black/5 bg-white/70 p-3.5 transition-all duration-500 hover:-translate-y-2 hover:border-primary/30 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.08)]"
         >
           <!-- Image Container -->
           <div class="relative aspect-[16/11] w-full overflow-hidden rounded-[18px] bg-[#f0ede6]">

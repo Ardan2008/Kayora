@@ -4,7 +4,9 @@ const cartItems = ref([])
 const isCartOpen = ref(false)
 const isCartBouncing = ref(false)
 const toastMessage = ref('')
+const toastProduct = ref(null)
 const isToastVisible = ref(false)
+let toastTimer = null
 
 export function useCart() {
   const addToCart = (product) => {
@@ -18,9 +20,21 @@ export function useCart() {
     isCartBouncing.value = true
     setTimeout(() => { isCartBouncing.value = false }, 400)
 
-    toastMessage.value = `${product.name} added to cart!`
-    isToastVisible.value = true
-    setTimeout(() => { isToastVisible.value = false }, 2500)
+    toastMessage.value = `${product.name} added to cart`
+    toastProduct.value = product
+
+    isToastVisible.value = false
+    requestAnimationFrame(() => {
+      isToastVisible.value = true
+    })
+
+    clearTimeout(toastTimer)
+    toastTimer = setTimeout(() => { isToastVisible.value = false }, 3000)
+  }
+
+  const dismissToast = () => {
+    clearTimeout(toastTimer)
+    isToastVisible.value = false
   }
 
   const updateQuantity = (id, delta) => {
@@ -37,6 +51,10 @@ export function useCart() {
     cartItems.value = cartItems.value.filter(i => i.id !== id)
   }
 
+  const isInCart = (id) => {
+    return cartItems.value.some(item => item.id === id)
+  }
+
   const totalCartCount = computed(() => {
     return cartItems.value.reduce((acc, item) => acc + item.quantity, 0)
   })
@@ -51,10 +69,13 @@ export function useCart() {
     addToCart,
     updateQuantity,
     removeFromCart,
+    isInCart,
     totalCartCount,
     totalPrice,
     isCartBouncing,
     toastMessage,
-    isToastVisible
+    toastProduct,
+    isToastVisible,
+    dismissToast
   }
 }

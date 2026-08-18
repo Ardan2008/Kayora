@@ -1,25 +1,4 @@
 <template>
-  <!-- Navbar -->
-  <header class="fixed top-0 z-50 flex w-full items-center justify-between bg-background/90 px-16 py-5 backdrop-blur max-md:px-6">
-    <span class="font-display text-[1.5rem] italic tracking-tight text-text">Kayuma</span>
-
-    <nav class="flex items-center gap-9 max-md:hidden">
-      <a href="#home" class="text-[0.8125rem] font-medium tracking-wide text-text hover:text-primary">HOME</a>
-      <a href="#shop" class="text-[0.8125rem] font-medium tracking-wide text-text-muted hover:text-primary">SHOP</a>
-      <a href="#collection" class="text-[0.8125rem] font-medium tracking-wide text-text-muted hover:text-primary">COLLECTION</a>
-      <a href="#categories" class="text-[0.8125rem] font-medium tracking-wide text-text-muted hover:text-primary">CATEGORIES</a>
-      <a href="#blog" class="text-[0.8125rem] font-medium tracking-wide text-text-muted hover:text-primary">BLOG</a>
-    </nav>
-
-    <div class="flex items-center gap-2.5">
-      <button v-for="(Icon, i) in [Search, Heart, ShoppingBag, User]" :key="i"
-        class="flex h-9 w-9 items-center justify-center rounded-full border border-text/15 bg-transparent text-text transition-colors duration-200 hover:bg-text hover:text-white"
-        :aria-label="['Search','Wishlist','Cart','Account'][i]">
-        <component :is="Icon" :size="15" />
-      </button>
-    </div>
-  </header>
-
   <!-- Hero -->
   <section id="home" class="grid grid-cols-2 overflow-hidden pt-16 max-md:grid-cols-1">
     <!-- Left: Content -->
@@ -99,7 +78,7 @@
 </template>
 
 <script setup>
-import { Star, Plus, Search, Heart, ShoppingBag, User, ArrowUpRight } from 'lucide-vue-next'
+import { Star, Plus } from 'lucide-vue-next'
 </script>
 
 <style scoped>
