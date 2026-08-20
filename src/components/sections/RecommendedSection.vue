@@ -52,7 +52,7 @@
             <div class="relative aspect-[5/4] overflow-hidden bg-background">
               <img :src="p.img" :alt="p.name" class="h-full w-full object-cover transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-110" />
 
-              <!-- Wishlist Button (disamakan dengan Shop section) -->
+              <!-- Wishlist Button (consistent with Shop section) -->
               <button
                 :class="[
                   'absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full border-none backdrop-blur-sm transition-all duration-300 shadow-sm cursor-pointer',
@@ -72,7 +72,7 @@
               <div class="mt-auto flex items-center justify-between pt-2.5">
                 <span class="font-display text-[1.0625rem] font-bold text-text">${{ p.price.toFixed(2) }}</span>
 
-                <!-- Add to Cart Button (disamakan dengan Shop section) -->
+                <!-- Add to Cart Button (consistent with Shop section) -->
                 <button
                   @click.stop="addToCart(p)"
                   class="flex h-[34px] w-[34px] flex-shrink-0 items-center justify-center rounded-full border-[1.5px] border-text bg-transparent text-text text-[1.15rem] leading-none cursor-pointer transition-all duration-300 hover:border-primary hover:bg-primary/15 hover:text-primary active:bg-primary/25"
@@ -159,7 +159,7 @@
                   </div>
                 </div>
 
-                <!-- Empty state kalau kategori belum ada produknya -->
+                <!-- Empty state when category has no products yet -->
                 <div v-else class="flex flex-col items-center justify-center py-14 text-center">
                   <p class="text-sm text-text-muted">Belum ada produk untuk kategori ini.</p>
                 </div>
@@ -186,15 +186,15 @@ const { isInWishlist, toggleWishlist } = useWishlist()
 const categories = [
   {
     name: 'Bedroom Furniture',
-    img: 'https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=500&q=80'
+    img: '/images/bedroom/bedroom2.png'
   },
   {
     name: 'Living Room Furniture',
-    img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=500&q=80'
+    img: '/images/living-room.png'
   },
   {
     name: 'Dining Room Furniture',
-    img: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=500&q=80'
+    img: '/images/dining-room.png'
   },
 ]
 
@@ -204,49 +204,48 @@ const recommended = [
     name: 'Bright Lounge Armchair',
     category: 'Chair',
     price: 87.00,
-    img: '/images/kursi.png'
+    img: '/images/chair/chair.png'
   },
   {
     id: 2,
     name: 'Cloud Comfort Sofa',
     category: 'Sofa',
     price: 278.00,
-    img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&q=80'
+    img: '/images/sofa/sofa2.png'
   },
   {
     id: 3,
     name: 'Walnut Coffee Table',
     category: 'Table',
     price: 145.00,
-    img: 'https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=400&q=80'
+    img: '/images/table/table4.png'
   },
   {
     id: 4,
     name: 'Sunshine Accent Chair',
     category: 'Chair',
     price: 189.00,
-    img: 'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=400&q=80'
+    img: '/images/chair/chair2.png'
   }
 ]
 
-// Data produk per kategori untuk popup "View all"
-// TODO: ganti dengan data asli / fetch dari API sesuai kategori
+// Product data per category for "View all" popup
 const categoryProducts = {
   'Bedroom Furniture': [
-    { id: 101, name: 'Nordic Oak Bed Frame', category: 'Bed', price: 420.00, img: 'https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=400&q=80' },
-    { id: 102, name: 'Linen Upholstered Headboard', category: 'Bed', price: 210.00, img: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=400&q=80' },
-    { id: 103, name: 'Bedside Table Duo', category: 'Table', price: 95.00, img: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=400&q=80' },
+    { id: 101, name: 'Nordic Oak Bed Frame', category: 'Bed', price: 420.00, img: '/images/bedroom/bedroom3.png' },
+    { id: 102, name: 'Linen Upholstered Headboard', category: 'Bed', price: 210.00, img: '/images/bedroom/bedroom4.png' },
+    { id: 103, name: 'Bedside Table Duo', category: 'Table', price: 95.00, img: '/images/table/table3.png' },
   ],
   'Living Room Furniture': [
-    { id: 201, name: 'Cloud Comfort Sofa', category: 'Sofa', price: 278.00, img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&q=80' },
-    { id: 202, name: 'Aurora Velvet Sofa', category: 'Sofa', price: 349.00, img: 'https://images.unsplash.com/photo-1550254478-ead40cc54513?w=400&q=80' },
-    { id: 203, name: 'Bright Lounge Armchair', category: 'Chair', price: 87.00, img: '/images/kursi.png' },
-    { id: 204, name: 'Walnut Coffee Table', category: 'Table', price: 145.00, img: 'https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=400&q=80' },
+    { id: 201, name: 'Cloud Comfort Sofa', category: 'Sofa', price: 278.00, img: '/images/sofa/sofa3.png' },
+    { id: 202, name: 'Aurora Velvet Sofa', category: 'Sofa', price: 349.00, img: '/images/sofa/sofa2.png' },
+    { id: 203, name: 'Bright Lounge Armchair', category: 'Chair', price: 87.00, img: '/images/chair/chair.png' },
+    { id: 204, name: 'Walnut Coffee Table', category: 'Table', price: 145.00, img: '/images/table/table2.png' },
   ],
   'Dining Room Furniture': [
-    { id: 301, name: 'Golden Column Side Table', category: 'Table', price: 89.00, img: 'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=400&q=80' },
-    { id: 302, name: "Funct'il Shell Dining Chair", category: 'Chair', price: 168.00, img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&q=80' },
-    { id: 303, name: 'Cascade Pendant Lamp', category: 'Table', price: 233.00, img: 'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=400&q=80' },
+    { id: 301, name: 'Golden Column Side Table', category: 'Table', price: 89.00, img: '/images/table/table4.png' },
+    { id: 302, name: "Funct'il Shell Dining Chair", category: 'Chair', price: 168.00, img: '/images/chair/chair2.png' },
+    { id: 303, name: 'Cascade Pendant Lamp', category: 'Table', price: 233.00, img: '/images/table/table5.png' },
   ],
 }
 

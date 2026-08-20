@@ -1,6 +1,6 @@
 import { ref, computed } from 'vue'
 
-// Singleton state — dishare ke semua komponen yang import useWishlist()
+// Singleton state — shared across all components that import useWishlist()
 const wishlistItems = ref([])
 
 export function useWishlist() {
@@ -8,12 +8,34 @@ export function useWishlist() {
     return wishlistItems.value.some(item => item.id === id)
   }
 
+  const addToWishlist = (product) => {
+    // Normalize fields for consistency across the app (wishlist, cart, toast, etc.)
+    const normalized = {
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      img: product.img || product.image, // fallback from 'image' to 'img'
+      category: product.category || product.desc || '',
+    }
+
+    if (!isInWishlist(normalized.id)) {
+      wishlistItems.value.push(normalized)
+    }
+  }
+
   const toggleWishlist = (product) => {
     const idx = wishlistItems.value.findIndex(item => item.id === product.id)
     if (idx > -1) {
       wishlistItems.value.splice(idx, 1)
     } else {
-      wishlistItems.value.push({ ...product })
+      const normalized = {
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        img: product.img || product.image,
+        category: product.category || product.desc || '',
+      }
+      wishlistItems.value.push(normalized)
     }
   }
 
@@ -30,6 +52,7 @@ export function useWishlist() {
   return {
     wishlistItems,
     isInWishlist,
+    addToWishlist,
     toggleWishlist,
     removeFromWishlist,
     clearWishlist,

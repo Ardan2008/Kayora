@@ -10,18 +10,27 @@ let toastTimer = null
 
 export function useCart() {
   const addToCart = (product) => {
-    const existing = cartItems.value.find(item => item.id === product.id)
+    // Normalize fields for consistency across the app (cart, wishlist, toast, etc.)
+    const normalized = {
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      img: product.img || product.image, // fallback from 'image' to 'img'
+      category: product.category || product.desc || '',
+    }
+
+    const existing = cartItems.value.find(item => item.id === normalized.id)
     if (existing) {
       existing.quantity++
     } else {
-      cartItems.value.push({ ...product, quantity: 1 })
+      cartItems.value.push({ ...normalized, quantity: 1 })
     }
 
     isCartBouncing.value = true
     setTimeout(() => { isCartBouncing.value = false }, 400)
 
-    toastMessage.value = `${product.name} added to cart`
-    toastProduct.value = product
+    toastMessage.value = `${normalized.name} added to cart`
+    toastProduct.value = normalized
 
     isToastVisible.value = false
     requestAnimationFrame(() => {

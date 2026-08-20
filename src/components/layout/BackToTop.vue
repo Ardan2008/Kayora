@@ -4,33 +4,36 @@
       v-if="isVisible"
       @click="scrollToTop"
       aria-label="Back to top"
-      class="group fixed bottom-6 right-6 z-40 flex h-13 w-13 cursor-pointer items-center justify-center rounded-full border-none bg-transparent p-0 transition-transform duration-300 hover:scale-105 active:scale-90 max-sm:bottom-4 max-sm:right-4 max-sm:h-12 max-sm:w-12"
+      class="group fixed bottom-6 right-6 z-40 flex h-13 w-13 cursor-pointer items-center justify-center rounded-full border-none bg-transparent p-0 transition-transform duration-300 hover:scale-105 active:scale-95 max-sm:bottom-4 max-sm:right-4 max-sm:h-12 max-sm:w-12"
     >
-      <!-- Glow halo di belakang, muncul saat hover -->
+      <!-- Glow halo behind -->
       <span
-        class="absolute inset-0 rounded-full bg-primary opacity-0 blur-lg transition-opacity duration-500 group-hover:opacity-40"
+        class="absolute inset-0 rounded-full bg-primary/30 opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-100"
       ></span>
 
-      <!-- Progress Ring -->
+      <!-- SVG Progress Ring -->
       <svg
-        class="absolute inset-0 h-full w-full -rotate-90"
+        class="absolute inset-0 h-full w-full -rotate-90 pointer-events-none"
         viewBox="0 0 52 52"
       >
+        <!-- Track Ring: Dark and transparent for contrast on light backgrounds -->
         <circle
           cx="26"
           cy="26"
           r="23.5"
           fill="none"
-          stroke="rgba(255,255,255,0.15)"
+          stroke="currentColor"
           stroke-width="2.5"
+          class="text-black/15 dark:text-white/20"
         />
 
+        <!-- Progress Indicator Ring -->
         <circle
           cx="26"
           cy="26"
           r="23.5"
           fill="none"
-          stroke="var(--color-primary)"
+          stroke="var(--color-primary, #10b981)"
           stroke-width="2.5"
           stroke-linecap="round"
           :stroke-dasharray="circumference"
@@ -39,34 +42,26 @@
         />
       </svg>
 
-      <!-- Core button -->
+      <!-- Core Glass Button (Apple Aesthetic + Auto Contrast) -->
       <span
-        class="relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-full bg-text text-white shadow-[0_8px_24px_rgba(0,0,0,0.25)] max-sm:h-9 max-sm:w-9"
+        class="glass-core relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-full max-sm:h-9 max-sm:w-9"
       >
-        <!-- Liquid fill -->
-        <span
-          class="liquid-fill absolute left-1/2 bottom-[-10%] h-[130%] w-[130%] -translate-x-1/2 rounded-[45%] bg-primary"
-        ></span>
+        <!-- Liquid Fill Layer -->
+        <span class="liquid-fill absolute bg-primary"></span>
 
         <!-- Gelembung -->
-        <span
-          class="bubble bubble-1 absolute rounded-full bg-primary/80"
-        ></span>
+        <span class="bubble bubble-1 absolute rounded-full bg-white/80"></span>
+        <span class="bubble bubble-2 absolute rounded-full bg-white/70"></span>
+        <span class="bubble bubble-3 absolute rounded-full bg-white/60"></span>
 
-        <span
-          class="bubble bubble-2 absolute rounded-full bg-primary/70"
-        ></span>
-
-        <span
-          class="bubble bubble-3 absolute rounded-full bg-primary/60"
-        ></span>
-
-        <!-- Arrow -->
-        <ArrowUp
-          :size="16"
-          stroke-width="2.4"
-          class="relative z-10 transition-transform duration-300 group-hover:-translate-y-0.5"
-        />
+        <!-- Arrow Icon with Auto-Invert Color based on Background -->
+        <span class="relative z-10 flex items-center justify-center blend-icon">
+          <ArrowUp
+            :size="16"
+            stroke-width="2.8"
+            class="transition-transform duration-300 group-hover:-translate-y-0.5"
+          />
+        </span>
       </span>
     </button>
   </Transition>
@@ -88,15 +83,12 @@ const dashOffset = computed(() => {
 
 const handleScroll = () => {
   const scrollTop = window.scrollY
-  const docHeight =
-    document.documentElement.scrollHeight - window.innerHeight
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight
 
   isVisible.value = scrollTop > 400
 
   scrollProgress.value =
-    docHeight > 0
-      ? Math.min((scrollTop / docHeight) * 100, 100)
-      : 0
+    docHeight > 0 ? Math.min((scrollTop / docHeight) * 100, 100) : 0
 }
 
 const scrollToTop = () => {
@@ -117,115 +109,138 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-/* Fade up */
+/* Adaptive Apple Glassmorphism */
+.glass-core {
+  /* Uses a color blend to remain readable on both white and dark backgrounds */
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.08),
+    0 1px 2px rgba(0, 0, 0, 0.1),
+    inset 0 1px 1px rgba(255, 255, 255, 0.6);
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Dark Mode OOTB (Automatically adapts if root HTML has a dark class) */
+:global(.dark) .glass-core {
+  background: rgba(30, 30, 30, 0.55);
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 
+    0 8px 24px rgba(0, 0, 0, 0.4),
+    inset 0 1px 1px rgba(255, 255, 255, 0.2);
+}
+
+/* Auto Invert Icon Color: Arrow is black on light bg, white on liquid/dark bg */
+.blend-icon {
+  color: #1c1c1e; /* Default arrow color on light background */
+  transition: color 0.3s ease;
+}
+
+:global(.dark) .blend-icon {
+  color: #ffffff;
+}
+
+/* On hover & liquid fill, arrow color is forced to white */
+.group:hover .blend-icon {
+  color: #ffffff !important;
+}
+
+/* Vue Transition (Fade Up) */
 .fade-up-enter-active {
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .fade-up-leave-active {
-  transition: all 0.25s ease-in;
+  transition: all 0.25s cubic-bezier(0.7, 0, 0.84, 0);
 }
 
 .fade-up-enter-from {
   opacity: 0;
-  transform: translateY(16px) scale(0.7) rotate(-10deg);
+  transform: translateY(20px) scale(0.6) rotate(-8deg);
 }
 
 .fade-up-leave-to {
   opacity: 0;
-  transform: translateY(8px) scale(0.8);
+  transform: translateY(12px) scale(0.8);
 }
 
-/* liquid fill */
+/* Liquid Fill Effect */
 .liquid-fill {
+  left: 50%;
+  bottom: -20%;
+  width: 140%;
+  height: 140%;
+  border-radius: 42%;
   opacity: 0;
-  transform: scale(0.3);
-  transform-origin: bottom center;
-  transition:
-    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
-    border-radius 0.6s ease,
-    opacity 0.3s ease;
+  transform: translate(-50%, 40%) scale(0.4) rotate(0deg);
+  transform-origin: center center;
+  transition: 
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.4s ease,
+    border-radius 0.7s ease;
 }
 
-/* liquid */
 .group:hover .liquid-fill {
   opacity: 1;
-  transform: scale(1.15);
-  border-radius: 40%;
+  transform: translate(-50%, 0%) scale(1.1) rotate(180deg);
+  border-radius: 38%;
 }
 
-
-/* bubbles */
+/* Bubbles Effect */
 .bubble {
-  bottom: 6%;
+  bottom: 0%;
   opacity: 0;
-  visibility: hidden;
   pointer-events: none;
-  animation: none;
 }
 
-/* Ukuran bubble */
 .bubble-1 {
-  left: 32%;
-  width: 5px;
-  height: 5px;
-}
-
-.bubble-2 {
-  left: 55%;
+  left: 30%;
   width: 4px;
   height: 4px;
 }
 
-.bubble-3 {
-  left: 45%;
+.bubble-2 {
+  left: 52%;
   width: 3px;
   height: 3px;
 }
 
-/* bubble */
-.group:hover .bubble {
-  opacity: 1;
-  visibility: visible;
+.bubble-3 {
+  left: 42%;
+  width: 2.5px;
+  height: 2.5px;
 }
 
-/* bubble 1 */
 .group:hover .bubble-1 {
-  animation: rise 1.1s ease-in-out infinite;
-  animation-delay: 0s;
+  animation: rise 1.2s ease-in-out infinite;
+  animation-delay: 0.1s;
 }
 
-/* bubble 2 */
 .group:hover .bubble-2 {
-  animation: rise 1.3s ease-in-out infinite;
-  animation-delay: 0.25s;
+  animation: rise 1.4s ease-in-out infinite;
+  animation-delay: 0.3s;
 }
 
-/* bubble 3 */
 .group:hover .bubble-3 {
-  animation: rise 0.9s ease-in-out infinite;
+  animation: rise 1s ease-in-out infinite;
   animation-delay: 0.5s;
 }
 
-
-/* bubble animation */
-
 @keyframes rise {
   0% {
-    transform: translateY(0) scale(0.6);
+    transform: translateY(0) scale(0.5);
     opacity: 0;
   }
-
-  25% {
+  30% {
     opacity: 1;
   }
-
   80% {
-    opacity: 0.6;
+    opacity: 0.5;
   }
-
   100% {
-    transform: translateY(-22px) scale(1);
+    transform: translateY(-24px) scale(1.2);
     opacity: 0;
   }
 }

@@ -178,7 +178,7 @@ const posts = [
     readTime: '4',
     excerpt:  'Make the most of your living room with carefully curated furniture that speaks to your personality while maintaining functionality.',
     content:  'Elegance in interior design starts with balance. Choose focal pieces like our Velvet Lou Armchair and complement them with subtle accent tables to create dynamic spaces without overwhelming the senses.',
-    img:      'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&q=80',
+    img:      '/images/lifestyle.png',
   },
   {
     id:       2,
@@ -188,7 +188,7 @@ const posts = [
     readTime: '3',
     excerpt:  'Discover how minimalist principles can transform cluttered spaces into serene sanctuaries that feel both functional and inspiring.',
     content:  'Minimalism isn\'t about empty rooms; it\'s about intentionality. Every item should serve a clear function or bring genuine aesthetic harmony to the inhabitant.',
-    img:      'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80',
+    img:      '/images/design-tips.png',
   },
   {
     id:       3,
@@ -198,7 +198,7 @@ const posts = [
     readTime: '5',
     excerpt:  'Strategic mirror placement and reflective metallic surfaces can alter the perceived dimension of any room instantly.',
     content:  'By positioning reflective textures near direct light sources, natural illumination bounces across ambient corners, instantly generating depth and openness.',
-    img:      'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=800&q=80',
+    img:      '/images/tips&tricks.png',
   },
 ]
 </script>

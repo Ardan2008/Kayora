@@ -7,7 +7,7 @@
         <!-- Left: Chair Image (3 cols) -->
         <div class="col-span-3 flex justify-center max-md:col-span-12">
           <img
-            src="/images/kursi.png"
+            src="/images/chair/chair.png"
             alt="Featured chair"
             class="h-auto max-h-[290px] w-auto object-contain drop-shadow-[0_12px_24px_rgba(0,0,0,0.18)] max-md:max-h-[200px]"
           />
@@ -23,7 +23,7 @@
             Elegant, comfortable, and affordable just for a limited time!
           </p>
 
-          <!-- Timer dengan Titik Dua (:) Pas di Tengah -->
+          <!-- Timer with Colon (:) Centered -->
           <div class="mb-8 flex items-center justify-center gap-2 sm:gap-3">
             <template v-for="(unit, index) in timer" :key="unit.label">
               <!-- Box Timer -->
@@ -55,10 +55,10 @@
           </a>
         </div>
 
-        <!-- Right: Sofa Image (3 cols -> Digeser lebih ke kanan agar jauh dari timer) -->
+        <!-- Right: Sofa Image (3 cols -> Shifted further right to stay away from timer) -->
         <div class="col-span-3 relative flex items-center justify-end max-md:col-span-12 max-md:justify-center max-md:mt-6">
           <img
-            src="/images/sofa.png"
+            src="/images/sofa/sofa.png"
             alt="Featured sofa"
             class="w-[500px] max-w-none translate-x-[50%] object-contain drop-shadow-[0_16px_32px_rgba(0,0,0,0.2)] max-md:w-[280px] max-md:translate-x-0"
           />

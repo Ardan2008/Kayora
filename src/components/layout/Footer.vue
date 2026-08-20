@@ -5,7 +5,7 @@
 
       <!-- Brand -->
       <div class="max-md:col-span-full">
-        <!-- Wordmark: Menggunakan font serif, italic -->
+        <!-- Wordmark: Uses serif font, italic -->
         <router-link to="/" class="mb-1 inline-block font-['Fraunces',serif] text-[1.75rem] font-semibold italic tracking-tight text-white no-underline">
           Kayora
         </router-link>
@@ -34,7 +34,7 @@
         </h4>
         <ul class="flex list-none flex-col gap-2.5 p-0">
           <li v-for="l in shopLinks" :key="l.label">
-            <!-- Link style: underline animasi menggunakan warna bg-text -->
+            <!-- Link style: animated underline using bg-text color -->
             <a :href="l.href" class="relative text-[0.8125rem] text-white/70 no-underline transition-colors duration-200 after:absolute after:-bottom-0.5 after:left-0 after:h-px after:w-0 after:bg-text after:transition-all after:duration-300 hover:text-white hover:after:w-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
               {{ l.label }}
             </a>

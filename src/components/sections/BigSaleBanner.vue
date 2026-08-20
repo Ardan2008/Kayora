@@ -2,7 +2,7 @@
   <section class="bg-background pb-20">
     <div class="mx-auto grid max-w-[1200px] grid-cols-12 gap-6 px-6 max-md:grid-cols-1">
 
-      <!-- Left: Big Sale Card (5 cols) -->
+      <!-- Left: Big Sale Card -->
       <div class="col-span-5 relative flex flex-col items-center justify-between overflow-hidden rounded-[24px] bg-[#3B4D40] p-8 pt-10 text-center min-h-[440px] max-md:col-span-1">
         <!-- Text & Button Container -->
         <div class="z-10 flex flex-col items-center">
@@ -21,12 +21,12 @@
         <!-- Decorative Furniture Overlay at Bottom -->
         <div class="relative mt-auto w-full h-[160px] flex items-end justify-between pointer-events-none">
           <img
-            src="/images/sofa.png"
+            src="/images/sofa/sofa2.png"
             alt="Yellow Sofa"
             class="w-[52%] -ml-6 -mb-4 h-[160px] object-contain filter drop-shadow-[0_12px_20px_rgba(0,0,0,0.3)] transition-transform duration-300"
           />
           <img
-            src="/images/kursi.png"
+            src="/images/chair/chair.png"
             alt="Chair and Table"
             class="w-[52%] -mr-6 -mb-4 h-[160px] object-contain filter drop-shadow-[0_12px_20px_rgba(0,0,0,0.3)] transition-transform duration-300"
           />
@@ -40,7 +40,7 @@
           :key="item.id"
           class="flex flex-col justify-between overflow-hidden rounded-[20px] bg-[#F8F8F8] p-7 pb-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-md min-h-[400px]"
         >
-          <!-- Product Info (Ukuran Title & Price Diperbesar) -->
+          <!-- Product Info (Title & Price sizing enlarged) -->
           <div>
             <h3 class="font-serif text-[1.45rem] font-medium leading-[1.25] text-[#222222] mb-2 tracking-tight">
               {{ item.name }}
@@ -71,13 +71,13 @@ const saleProducts = [
     id: 1,
     name:  'Natural Touch Side Table',
     price: 234.00,
-    img:   '/images/kursi.png',
+    img:   '/images/chair/chair.png',
   },
   {
     id: 2,
     name:  'Velvet Classic Armchair',
     price: 234.00,
-    img:   '/images/sofa.png',
+    img:   '/images/sofa/sofa.png',
   },
 ]
 </script>

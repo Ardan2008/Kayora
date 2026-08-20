@@ -1,74 +1,75 @@
 <template>
-  <section id="collection" class="bg-background py-20">
-    <div class="mx-auto grid max-w-[1200px] grid-cols-2 gap-16 px-6 items-center max-md:grid-cols-1 max-md:gap-8">
+  <section id="collection" class="bg-background py-20 overflow-hidden">
+    <div class="mx-auto grid max-w-300 grid-cols-2 gap-12 px-6 items-center max-lg:grid-cols-1 max-lg:gap-12">
 
-      <!-- Left: Text -->
-      <div>
-        <span class="mb-3 inline-block text-[0.75rem] font-semibold uppercase tracking-[0.1em] text-primary">About Us</span>
-        <h2 class="mb-5 font-display text-[2rem] leading-[1.2] text-text">
-          Designing Spaces That<br>
-          Feel Like Home
+      <!-- Left: Text Content -->
+      <div class="z-10">
+        
+        <!-- Subtitle Badge / Tag -->
+        <span class="mb-3 inline-block text-[0.75rem] font-semibold uppercase tracking-widest text-primary">About Us</span>
+
+        <!-- Modern Editorial Heading -->
+        <h2 class="mb-6 font-display text-[2.25rem] sm:text-[2.75rem] leading-[1.12] tracking-tight text-text">
+          Designing Spaces That <br />
+          <span class="font-normal italic text-primary">Feel Like Home</span>
         </h2>
-        <p class="mb-8 text-[0.875rem] leading-7 text-text-muted">
-          At Kayora, we believe great design starts with comfort and ends
-          with personal expression. From cozy corners to statement pieces,
-          our interiors bring warmth, function, and timeless beauty to every
-          room. Let us help you create a space that's truly yours.
+
+        <!-- Paragraph Typography -->
+        <p class="mb-8 text-[0.9375rem] font-normal leading-[1.75] text-text-muted max-w-115 tracking-normal">
+          At <strong class="font-semibold text-text">Kayora</strong>, we believe great design starts with comfort and ends with personal expression. From cozy corners to statement pieces, our interiors bring warmth, function, and timeless beauty to every room.
         </p>
+        
+        <!-- Clean Editorial Button: LEARN MORE -->
         <button
           type="button"
           @click="openModal"
-          class="inline-flex items-center gap-2 rounded-full bg-text px-7 py-3 text-[0.8125rem] font-semibold text-white no-underline transition-all duration-300 hover:bg-primary hover:-translate-y-0.5 cursor-pointer border-none shadow-sm"
+          class="inline-flex items-center justify-center rounded-full bg-text px-7 py-3 text-[0.8125rem] font-medium tracking-wider text-white transition-all duration-300 hover:bg-primary active:scale-95 cursor-pointer border-none shadow-sm"
         >
-          LEARN MORE
+          <span>LEARN MORE</span>
         </button>
       </div>
 
-      <!-- Right: Images -->
-      <div class="grid grid-cols-2 gap-4 max-md:grid-cols-1">
-        <div class="col-start-1 row-span-2 max-md:row-auto">
-          <img
-            :src="mainImages[mainIndex].src"
-            :alt="mainImages[mainIndex].alt"
-            class="h-full min-h-[280px] w-full rounded-[20px] object-cover transition-opacity duration-300"
-          />
+      <!-- Right: Overlapping Layout -->
+      <div class="relative w-full h-115 sm:h-125 flex items-center justify-center">
+        
+        <!-- Main Large Image -->
+        <div class="absolute left-0 top-0 h-95 sm:h-105 w-[62%] sm:w-[65%] overflow-hidden rounded-2xl shadow-xl z-10 bg-slate-100">
+          <TransitionGroup name="fade">
+            <img
+              v-for="(img, idx) in mainImages"
+              v-show="idx === mainIndex"
+              :key="img.src"
+              :src="img.src"
+              :alt="img.alt"
+              class="absolute inset-0 h-full w-full object-cover"
+            />
+          </TransitionGroup>
         </div>
-        <div class="relative max-md:col-start-1">
-          <img
-            :src="sideImages[sideIndex].src"
-            :alt="sideImages[sideIndex].alt"
-            class="h-[200px] w-full rounded-[20px] object-cover transition-opacity duration-300"
-          />
-          <!-- Carousel arrows -->
-          <div class="mt-4 flex justify-end gap-2.5">
-            <button
-              type="button"
-              @click="prevSlide"
-              class="flex h-9 w-9 items-center justify-center rounded-full border-[1.5px] border-border bg-white text-text cursor-pointer transition-all duration-200 hover:border-primary hover:bg-primary hover:text-white"
-              aria-label="Previous image"
-            >
-              <ArrowLeft class="h-4 w-4" />
-            </button>
-            <button
-              type="button"
-              @click="nextSlide"
-              class="flex h-9 w-9 items-center justify-center rounded-full border-[1.5px] border-border bg-white text-text cursor-pointer transition-all duration-200 hover:border-primary hover:bg-primary hover:text-white"
-              aria-label="Next image"
-            >
-              <ArrowRight class="h-4 w-4" />
-            </button>
-          </div>
+
+        <!-- Secondary Accent Image -->
+        <div class="absolute right-0 bottom-0 h-[260px] sm:h-[300px] w-[50%] sm:w-[52%] overflow-hidden rounded-2xl shadow-2xl z-20 bg-slate-100 border-4 border-background">
+          <TransitionGroup name="fade">
+            <img
+              v-for="(img, idx) in sideImages"
+              v-show="idx === sideIndex"
+              :key="img.src"
+              :src="img.src"
+              :alt="img.alt"
+              class="absolute inset-0 h-full w-full object-cover"
+            />
+          </TransitionGroup>
         </div>
+
       </div>
 
     </div>
 
-    <!-- Premium Redesigned Modal -->
+    <!-- Premium Modal Section -->
     <Teleport to="body">
-      <Transition name="modal-bounce">
+      <Transition name="modal">
         <div
           v-if="isModalOpen"
-          class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-md p-4 sm:p-6"
+          class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4 sm:p-6"
           @click.self="closeModal"
           @keydown.esc="closeModal"
         >
@@ -78,43 +79,40 @@
             aria-modal="true"
             aria-labelledby="about-modal-title"
             tabindex="-1"
-            class="relative flex max-h-[88vh] w-full max-w-[620px] flex-col overflow-hidden rounded-[28px] bg-white shadow-2xl transition-all"
+            class="relative flex max-h-[88vh] w-full max-w-[600px] flex-col overflow-hidden rounded-2xl bg-white shadow-xl transition-all border border-border/40"
           >
-            <!-- Header Image Banner dengan Overlay Gradient -->
+            <!-- Header Image Banner -->
             <div class="relative h-48 sm:h-56 w-full shrink-0 overflow-hidden bg-slate-100">
               <img
                 src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800&q=80"
                 alt="Interior Design Artistry"
                 class="h-full w-full object-cover"
               />
-              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+              <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
               
-              <!-- Badge Kategori -->
-              <span class="absolute top-6 left-6 rounded-full bg-white/20 px-3.5 py-1 text-[0.7rem] font-medium tracking-widest text-white backdrop-blur-md uppercase border border-white/30">
+              <span class="absolute top-5 left-6 text-[0.7rem] font-semibold tracking-widest text-white/90 uppercase">
                 Our Story
               </span>
 
-              <!-- Close Button Modern Glassmorphism -->
               <button
                 type="button"
                 @click="closeModal"
                 aria-label="Close"
-                class="absolute right-5 top-5 flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-white/30 bg-black/20 text-white backdrop-blur-md transition-all duration-300 hover:rotate-90 hover:bg-white hover:text-black"
+                class="absolute right-4 top-4 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-black/30 text-white transition-colors duration-200 hover:bg-black/60 border-none"
               >
                 <X class="h-4 w-4" />
               </button>
 
-              <!-- Judul Modal di atas Banner Gambar -->
               <div class="absolute bottom-5 left-6 right-6">
-                <h3 id="about-modal-title" class="font-display text-[1.65rem] sm:text-[1.85rem] font-semibold leading-tight text-white">
+                <h3 id="about-modal-title" class="font-display text-[1.5rem] sm:text-[1.75rem] font-semibold leading-tight text-white">
                   Crafting Timeless Comfort
                 </h3>
               </div>
             </div>
 
-            <!-- Content Area dengan Custom Scrollbar -->
-            <div class="overflow-y-auto p-6 sm:p-8 space-y-4 text-[0.9rem] leading-relaxed text-text-muted">
-              <p class="text-text font-medium text-[0.95rem] leading-7">
+            <!-- Content Area -->
+            <div class="overflow-y-auto p-6 sm:p-8 space-y-4 text-[0.875rem] leading-relaxed text-text-muted">
+              <p class="text-text font-medium text-[0.9375rem] leading-7">
                 At Kayora, we believe great design starts with comfort and ends with personal expression. Every space tells a story — we simply provide the masterpiece pieces to write it with.
               </p>
               
@@ -124,9 +122,8 @@
                 It began with a simple frustration: furniture that looked good in a showroom but never quite fit real life. So we set out to design pieces that hold up to daily use without giving up on craft — solid joinery, natural materials, and finishes that age gracefully over time.
               </p>
 
-              <!-- Highlight Quote Card -->
-              <div class="my-4 rounded-2xl bg-[#F8F6F2] p-4 sm:p-5 border-l-4 border-primary">
-                <p class="italic text-text text-[0.875rem] leading-6">
+              <div class="my-4 rounded-lg bg-slate-50 p-4 border-l-2 border-primary">
+                <p class="italic text-text text-[0.8438rem] leading-6">
                   "Furniture shouldn't just fill a room — it should anchor your moments, support your routines, and inspire your daily living."
                 </p>
               </div>
@@ -137,12 +134,14 @@
             </div>
 
             <!-- Modal Footer -->
-            <div class="shrink-0 border-t border-border bg-[#FAFAFA] px-6 py-4 flex items-center justify-between">
-              <span class="text-[0.75rem] font-medium text-text-muted tracking-wider uppercase">Kayora Design Studio</span>
+            <div class="shrink-0 border-t border-border/60 bg-slate-50/50 px-6 py-4 flex items-center justify-between">
+              <span class="text-[0.75rem] font-mono text-text-muted tracking-wider uppercase">Kayora Studio</span>
+              
+              <!-- Clean Secondary Button: Got It -->
               <button
                 type="button"
                 @click="closeModal"
-                class="rounded-full bg-text px-6 py-2.5 text-[0.75rem] font-semibold text-white transition-all duration-300 hover:bg-primary cursor-pointer border-none"
+                class="inline-flex items-center justify-center rounded-full bg-text px-6 py-2 text-[0.75rem] font-medium tracking-wider text-white transition-colors duration-200 hover:bg-primary active:scale-95 cursor-pointer border-none"
               >
                 Got It
               </button>
@@ -156,35 +155,41 @@
 </template>
 
 <script setup>
-import { ref, nextTick, onBeforeUnmount, watch } from 'vue'
-import { ArrowLeft, ArrowRight, X } from 'lucide-vue-next'
+import { ref, onMounted, onUnmounted, nextTick, watch } from 'vue'
+import { X } from 'lucide-vue-next'
 
 const mainImages = [
-  { src: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600&q=80', alt: 'Modern living room' },
-  { src: 'https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=600&q=80', alt: 'Minimalist dining room' },
-  { src: 'https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=600&q=80', alt: 'Sunlit reading nook' },
+  { src: '/images/living-room.png', alt: 'Modern living room' },
+  { src: '/images/dining-room.png', alt: 'Minimalist dining room' },
+  { src: '/images/reading-nook.png', alt: 'Sunlit reading nook' },
 ]
 
 const sideImages = [
-  { src: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&q=80', alt: 'Stylish bedroom' },
-  { src: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=400&q=80', alt: 'Cozy armchair corner' },
-  { src: 'https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?w=400&q=80', alt: 'Warm study space' },
+  { src: '/images/bedroom/bedroom3.png', alt: 'Stylish bedroom' },
+  { src: '/images/armchair.png', alt: 'Cozy armchair corner' },
+  { src: '/images/warm-study.png', alt: 'Warm study space' },
 ]
 
 const mainIndex = ref(0)
 const sideIndex = ref(0)
+let timer = null
 
-function nextSlide() {
-  mainIndex.value = (mainIndex.value + 1) % mainImages.length
-  sideIndex.value = (sideIndex.value + 1) % sideImages.length
+function startAutoSlide() {
+  timer = setInterval(() => {
+    mainIndex.value = (mainIndex.value + 1) % mainImages.length
+    sideIndex.value = (sideIndex.value + 1) % sideImages.length
+  }, 4500)
 }
 
-function prevSlide() {
-  mainIndex.value = (mainIndex.value - 1 + mainImages.length) % mainImages.length
-  sideIndex.value = (sideIndex.value - 1 + sideImages.length) % sideImages.length
-}
+onMounted(() => {
+  startAutoSlide()
+})
 
-// Modal
+onUnmounted(() => {
+  if (timer) clearInterval(timer)
+})
+
+// Modal Logic
 const isModalOpen = ref(false)
 const modalPanel = ref(null)
 let lastFocusedEl = null
@@ -212,27 +217,29 @@ watch(isModalOpen, async (open) => {
 function handleKeydown(e) {
   if (e.key === 'Escape') closeModal()
 }
-
-onBeforeUnmount(() => {
-  document.removeEventListener('keydown', handleKeydown)
-})
 </script>
 
 <style scoped>
-/* Animasi Scale Bounce Modal */
-.modal-bounce-enter-active {
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.modal-bounce-leave-active {
-  transition: all 0.2s cubic-bezier(0.7, 0, 0.84, 0);
+/* Ultra-smooth Crossfade Animation */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.modal-bounce-enter-from {
+.fade-enter-from,
+.fade-leave-to {
   opacity: 0;
-  transform: scale(0.92) translateY(12px);
 }
-.modal-bounce-leave-to {
+
+/* Modal Simple Fade & Scale */
+.modal-enter-active,
+.modal-leave-active {
+  transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modal-enter-from,
+.modal-leave-to {
   opacity: 0;
-  transform: scale(0.96) translateY(8px);
+  transform: scale(0.97);
 }
 </style>

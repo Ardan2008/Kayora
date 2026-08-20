@@ -262,10 +262,18 @@
               >
                 <img :src="item.img" :alt="item.name" class="h-20 w-20 rounded-xl object-cover bg-[#f0ede6] flex-shrink-0" />
 
-                <div class="flex flex-1 flex-col justify-between self-stretch py-0.5 min-w-0">
-                  <div>
-                    <span class="text-[0.625rem] font-bold uppercase tracking-wider text-primary">{{ item.category }}</span>
-                    <h4 class="text-xs font-semibold text-text truncate leading-snug">{{ item.name }}</h4>
+                <div class="flex flex-1 flex-col justify-between self-stretch py-0.5 min-w-0 pr-6">
+                  <div class="min-w-0">
+                    <TruncatedText
+                      :text="item.category"
+                      as="span"
+                      className="block text-[0.625rem] font-bold uppercase tracking-wider text-primary"
+                    />
+                    <TruncatedText
+                      :text="item.name"
+                      as="h4"
+                      className="text-xs font-semibold text-text leading-snug"
+                    />
                   </div>
 
                   <div class="flex items-center justify-between mt-2">
@@ -378,10 +386,18 @@
               >
                 <img :src="item.img" :alt="item.name" class="h-20 w-20 rounded-xl object-cover bg-[#f0ede6] flex-shrink-0" />
 
-                <div class="flex flex-1 flex-col justify-between self-stretch py-0.5 min-w-0">
-                  <div>
-                    <span class="text-[0.625rem] font-bold uppercase tracking-wider text-primary">{{ item.category }}</span>
-                    <h4 class="text-xs font-semibold text-text truncate leading-snug">{{ item.name }}</h4>
+                <div class="flex flex-1 flex-col justify-between self-stretch py-0.5 min-w-0 pr-6">
+                  <div class="min-w-0">
+                    <TruncatedText
+                      :text="item.category"
+                      as="span"
+                      className="block text-[0.625rem] font-bold uppercase tracking-wider text-primary"
+                    />
+                    <TruncatedText
+                      :text="item.name"
+                      as="h4"
+                      className="text-xs font-semibold text-text leading-snug"
+                    />
                   </div>
 
                   <div class="flex items-center justify-between mt-2">
@@ -533,6 +549,7 @@ import { ShoppingCart, Search, Heart, Menu, X, Plus, Minus, Trash2, Check, Home,
 import { useCart } from '@/composables/useCart.js'
 import { useWishlist } from '@/composables/useWishlist.js'
 import { useSearch } from '@/composables/useSearch.js'
+import TruncatedText from '@/components/TruncatedText.vue'
 
 const {
   cartItems,

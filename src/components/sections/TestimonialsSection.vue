@@ -1,15 +1,21 @@
 <template>
   <section class="bg-[#FAF8F5] py-20 overflow-hidden">
-    <div class="mx-auto max-w-[1140px] px-6">
+    <div class="mx-auto max-w-285 px-6">
 
-      <!-- Subtitle & Title -->
-      <div class="mb-12 text-center">
-        <span class="text-[0.875rem] font-medium text-[#B85C38] tracking-wide block mb-2">
-          Testimonial
-        </span>
-        <h2 class="font-serif text-[2.5rem] font-bold text-[#1F1F1F] leading-tight">
-          What Our Customers Are Saying
-        </h2>
+      <!-- Subtitle & Title: Asymmetric Left-Aligned -->
+      <div class="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
+        <div>
+          <span class="mb-2 block text-[0.75rem] font-semibold uppercase tracking-widest text-primary">
+            Testimonials
+          </span>
+          <h2 class="font-display text-[2.25rem] sm:text-[2.75rem] leading-[1.12] tracking-tight text-text">
+            Loved by Spaces <br />
+            <span class="font-normal italic text-primary">Designed for Living.</span>
+          </h2>
+        </div>
+        <p class="font-serif italic text-[0.9375rem] text-text-muted max-w-sm font-normal leading-relaxed tracking-wide">
+          Real homes, real stories. Discover how Kayora transforms everyday living into extraordinary experiences.
+        </p>
       </div>
 
       <!-- Testimonials Grid (2 Cards) -->
@@ -29,10 +35,10 @@
                 </svg>
               </div>
 
-              <!-- Star Rating + Number -->
+              <!-- Star Rating + Number (Lucide Star Icons) -->
               <div class="flex items-center gap-2 mb-4">
-                <div class="flex text-black text-sm tracking-widest">
-                  ★★★★★
+                <div class="flex items-center gap-1 text-amber-500">
+                  <Star v-for="n in 5" :key="n" class="h-4 w-4 fill-amber-500 stroke-amber-500" />
                 </div>
                 <span class="font-bold text-sm text-black ml-1">5.0</span>
               </div>
@@ -66,28 +72,24 @@
         <div class="flex items-center gap-3">
           <button
             @click="prevSlide"
-            class="flex h-12 w-12 items-center justify-center rounded-full bg-black text-white transition-all hover:bg-black/80 active:scale-95 cursor-pointer"
+            class="flex h-12 w-12 items-center justify-center rounded-full bg-black text-white transition-all hover:bg-primary active:scale-95 cursor-pointer"
             aria-label="Previous Testimonial"
           >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M19 12H5M12 19l-7-7 7-7"/>
-            </svg>
+            <ArrowLeft class="h-5 w-5" />
           </button>
           <button
             @click="nextSlide"
-            class="flex h-12 w-12 items-center justify-center rounded-full bg-black text-white transition-all hover:bg-black/80 active:scale-95 cursor-pointer"
+            class="flex h-12 w-12 items-center justify-center rounded-full bg-black text-white transition-all hover:bg-primary active:scale-95 cursor-pointer"
             aria-label="Next Testimonial"
           >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M5 12h14M12 5l7 7-7 7"/>
-            </svg>
+            <ArrowRight class="h-5 w-5" />
           </button>
         </div>
 
         <!-- Slide Indicator Line / Number -->
         <div class="flex items-center gap-2 text-[0.8125rem] font-medium text-[#777]">
           <span>0{{ currentIndex + 1 }}</span>
-          <div class="h-[2px] w-12 bg-black/10 relative overflow-hidden rounded-full">
+          <div class="h-0.5 w-12 bg-black/10 relative overflow-hidden rounded-full">
             <div
               class="absolute top-0 bottom-0 bg-black transition-all duration-300"
               :style="{
@@ -106,6 +108,7 @@
 
 <script setup>
 import { ref, computed } from 'vue'
+import { Star, ArrowLeft, ArrowRight } from 'lucide-vue-next'
 
 const currentIndex = ref(0)
 
@@ -130,7 +133,7 @@ const testimonials = [
   },
 ]
 
-// Menampilkan 2 item per slide
+// Display 2 items per slide
 const visibleTestimonials = computed(() => {
   const first = testimonials[currentIndex.value]
   const second = testimonials[(currentIndex.value + 1) % testimonials.length]

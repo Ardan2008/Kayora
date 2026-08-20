@@ -19,20 +19,36 @@
       </div>
 
       <!-- Filter Tabs -->
-      <div class="mb-10 flex flex-wrap justify-center gap-2.5">
-        <button
-          v-for="tab in tabs"
-          :key="tab"
-          :class="[
-            'rounded-full border-[1.5px] px-5 py-2 text-[0.8125rem] font-medium transition-all duration-300 cursor-pointer',
-            activeTab === tab
-              ? 'bg-primary border-primary text-white shadow-sm'
-              : 'border-border bg-transparent text-text-muted hover:border-primary hover:text-primary'
-          ]"
-          @click="activeTab = tab; clearSearch()"
-        >
-          {{ tab }}
-        </button>
+      <div class="mb-10 flex flex-wrap justify-center gap-2">
+        <div class="relative">
+          <!-- Decorative blurred blobs so the glass effect has something to refract -->
+          <div class="pointer-events-none absolute -top-6 left-8 h-16 w-16 rounded-full bg-primary/25 blur-2xl"></div>
+          <div class="pointer-events-none absolute -top-4 right-10 h-14 w-14 rounded-full bg-[#C89B3C]/20 blur-2xl"></div>
+
+          <div
+            ref="tabContainer"
+            class="relative flex flex-wrap justify-center gap-1.5 rounded-full border border-white/50 bg-white/25 p-1.5 shadow-[0_8px_32px_rgba(0,0,0,0.08)] backdrop-blur-xl backdrop-saturate-150"
+          >
+            <!-- Sliding glass indicator -->
+            <div
+              class="absolute left-0 top-1.5 bottom-1.5 rounded-full bg-white/95 shadow-[0_2px_10px_rgba(0,0,0,0.14),inset_0_1px_0_rgba(255,255,255,0.9)] backdrop-blur-md transition-all duration-300 ease-[cubic-bezier(0.34,1.15,0.64,1)]"
+              :style="indicatorStyle"
+            />
+
+            <button
+              v-for="tab in tabs"
+              :key="tab"
+              :ref="el => setTabRef(el, tab)"
+              :class="[
+                'relative z-10 rounded-full px-5 py-2 text-[0.8125rem] font-medium transition-colors duration-300 cursor-pointer',
+                activeTab === tab ? 'text-text' : 'text-text-muted hover:text-text'
+              ]"
+              @click="selectTab(tab)"
+            >
+              {{ tab }}
+            </button>
+          </div>
+        </div>
       </div>
 
       <!-- Product Grid -->
@@ -73,9 +89,24 @@
             <span class="text-[0.625rem] font-bold uppercase tracking-[0.08em] text-primary">
               {{ product.category }}
             </span>
-            <h3 class="mt-1 mb-3 text-[0.875rem] font-semibold leading-5 text-text line-clamp-1">
+            <h3 class="mt-1 mb-1.5 text-[0.875rem] font-semibold leading-5 text-text line-clamp-1">
               {{ product.name }}
             </h3>
+
+            <!-- Star Rating -->
+            <div class="mb-3 flex items-center gap-1">
+              <div class="flex gap-0.5">
+                <Star
+                  v-for="i in 5"
+                  :key="i"
+                  :size="11"
+                  :fill="i <= Math.round(product.rating) ? '#C89B3C' : 'none'"
+                  :color="i <= Math.round(product.rating) ? '#C89B3C' : '#d4d4d4'"
+                />
+              </div>
+              <span class="text-[0.6875rem] text-text-muted">({{ product.reviews }})</span>
+            </div>
+
             <div class="flex items-center justify-between pt-1">
               <span class="font-display text-[1.05rem] font-bold text-text">
                 ${{ product.price.toFixed(2) }}
@@ -122,8 +153,8 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
-import { Search, Heart, Plus, Check } from 'lucide-vue-next'
+import { ref, reactive, computed, nextTick, onMounted } from 'vue'
+import { Search, Heart, Plus, Check, Star } from 'lucide-vue-next'
 import { useCart } from '@/composables/useCart.js'
 import { useWishlist } from '@/composables/useWishlist.js'
 import { useSearch } from '@/composables/useSearch.js'
@@ -135,69 +166,115 @@ const { searchQuery, clearSearch, hasQuery } = useSearch()
 const tabs = ['All', 'Chair', 'Table', 'Sofa', 'Bed']
 const activeTab = ref('All')
 
+// --- Sliding glass indicator logic ---
+const tabContainer = ref(null)
+const tabRefs = reactive({})
+const indicatorStyle = reactive({ width: '0px', transform: 'translateX(0px)' })
+
+function setTabRef(el, tab) {
+  if (el) tabRefs[tab] = el
+}
+
+function updateIndicator() {
+  const el = tabRefs[activeTab.value]
+  if (!el) return
+  indicatorStyle.width = `${el.offsetWidth}px`
+  indicatorStyle.transform = `translateX(${el.offsetLeft}px)`
+}
+
+function selectTab(tab) {
+  activeTab.value = tab
+  clearSearch()
+  nextTick(updateIndicator)
+}
+
+onMounted(() => {
+  nextTick(updateIndicator)
+  window.addEventListener('resize', updateIndicator)
+})
+// --- End sliding indicator logic ---
+
 const products = [
   {
     id: 1,
     name: 'Velvet Lou Armchair',
     category: 'Chair',
     price: 199.00,
-    img: 'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=400&q=80'
+    rating: 4.5,
+    reviews: 128,
+    img: '/images/chair/chair.png'
   },
   {
     id: 2,
     name: "Funct'il Shell Lounge Chair",
     category: 'Chair',
     price: 168.00,
-    img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&q=80'
+    rating: 4,
+    reviews: 76,
+    img: '/images/chair/chair2.png'
   },
   {
     id: 3,
-    name: 'Cascade Pendant Lamp',
+    name: 'Cascade Wood Coffee Table',
     category: 'Table',
     price: 233.00,
-    img: 'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=400&q=80'
+    rating: 5,
+    reviews: 203,
+    img: '/images/table/table3.png'
   },
   {
     id: 4,
     name: 'Golden Column Side Table',
     category: 'Table',
     price: 89.00,
-    img: 'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=400&q=80'
+    rating: 3.5,
+    reviews: 42,
+    img: '/images/table/table4.png'
   },
   {
     id: 5,
     name: 'Emerald Olive Lounge Chair',
     category: 'Chair',
     price: 319.00,
-    img: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&q=80'
+    rating: 4.5,
+    reviews: 156,
+    img: '/images/chair/chair.png'
   },
   {
     id: 6,
     name: 'Cloud Comfort Sofa Chair',
     category: 'Sofa',
     price: 278.00,
-    img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&q=80'
+    rating: 4,
+    reviews: 89,
+    img: '/images/sofa/sofa3.png'
   },
   {
     id: 7,
     name: 'Walnut Burl Coffee Table',
     category: 'Table',
     price: 299.00,
-    img: 'https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=400&q=80'
+    rating: 5,
+    reviews: 174,
+    img: '/images/table/table2.png'
   },
   {
     id: 8,
     name: 'Sunshine Accent Chair',
     category: 'Chair',
     price: 189.00,
-    img: '/images/kursi.png'
+    rating: 3.5,
+    reviews: 31,
+    img: '/images/chair/chair.png'
   },
   {
     id: 9,
     name: 'Aurora Velvet Sofa',
     category: 'Sofa',
     price: 349.00,
-    img: 'https://images.unsplash.com/photo-1550254478-ead40cc54513?w=400&q=80'
+    rating: 4.5,
+    reviews: 211,
+    img: '/images/sofa/sofa3.png'
   }
 ]
 

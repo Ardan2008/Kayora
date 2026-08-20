@@ -1,6 +1,6 @@
 import { ref, computed } from 'vue'
 
-// Singleton state — dishare ke semua komponen yang import useSearch()
+// Singleton state — shared across all components that import useSearch()
 const searchQuery = ref('')
 
 export function useSearch() {
