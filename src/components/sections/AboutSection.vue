@@ -1,5 +1,5 @@
 <template>
-  <section id="collection" class="bg-background py-20 overflow-hidden">
+  <section id="about" class="bg-background py-20 overflow-hidden">
     <div class="mx-auto grid max-w-300 grid-cols-2 gap-12 px-6 items-center max-lg:grid-cols-1 max-lg:gap-12">
 
       <!-- Left: Text Content -->
@@ -41,13 +41,14 @@
               :key="img.src"
               :src="img.src"
               :alt="img.alt"
+              loading="lazy"
               class="absolute inset-0 h-full w-full object-cover"
             />
           </TransitionGroup>
         </div>
 
         <!-- Secondary Accent Image -->
-        <div class="absolute right-0 bottom-0 h-[260px] sm:h-[300px] w-[50%] sm:w-[52%] overflow-hidden rounded-2xl shadow-2xl z-20 bg-slate-100 border-4 border-background">
+        <div class="absolute right-0 bottom-0 h-65 sm:h-75 w-[50%] sm:w-[52%] overflow-hidden rounded-2xl shadow-2xl z-20 bg-slate-100 border-4 border-background">
           <TransitionGroup name="fade">
             <img
               v-for="(img, idx) in sideImages"
@@ -55,6 +56,7 @@
               :key="img.src"
               :src="img.src"
               :alt="img.alt"
+              loading="lazy"
               class="absolute inset-0 h-full w-full object-cover"
             />
           </TransitionGroup>
@@ -79,7 +81,7 @@
             aria-modal="true"
             aria-labelledby="about-modal-title"
             tabindex="-1"
-            class="relative flex max-h-[88vh] w-full max-w-[600px] flex-col overflow-hidden rounded-2xl bg-white shadow-xl transition-all border border-border/40"
+            class="relative flex max-h-[88vh] w-full max-w-150 flex-col overflow-hidden rounded-2xl bg-white shadow-xl transition-all border border-border/40"
           >
             <!-- Header Image Banner -->
             <div class="relative h-48 sm:h-56 w-full shrink-0 overflow-hidden bg-slate-100">
@@ -88,7 +90,7 @@
                 alt="Interior Design Artistry"
                 class="h-full w-full object-cover"
               />
-              <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+              <div class="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent"></div>
               
               <span class="absolute top-5 left-6 text-[0.7rem] font-semibold tracking-widest text-white/90 uppercase">
                 Our Story
@@ -159,15 +161,15 @@ import { ref, onMounted, onUnmounted, nextTick, watch } from 'vue'
 import { X } from 'lucide-vue-next'
 
 const mainImages = [
-  { src: '/images/living-room.png', alt: 'Modern living room' },
-  { src: '/images/dining-room.png', alt: 'Minimalist dining room' },
-  { src: '/images/reading-nook.png', alt: 'Sunlit reading nook' },
+  { src: '/images/living-room.webp', alt: 'Modern living room' },
+  { src: '/images/dining-room.webp', alt: 'Minimalist dining room' },
+  { src: '/images/reading-nook.webp', alt: 'Sunlit reading nook' },
 ]
 
 const sideImages = [
-  { src: '/images/bedroom/bedroom3.png', alt: 'Stylish bedroom' },
-  { src: '/images/armchair.png', alt: 'Cozy armchair corner' },
-  { src: '/images/warm-study.png', alt: 'Warm study space' },
+  { src: '/images/bedroom/bedroom3.webp', alt: 'Stylish bedroom' },
+  { src: '/images/armchair.webp', alt: 'Cozy armchair corner' },
+  { src: '/images/warm-study.webp', alt: 'Warm study space' },
 ]
 
 const mainIndex = ref(0)

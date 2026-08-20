@@ -24,15 +24,16 @@
           class="group relative flex flex-col justify-between cursor-pointer overflow-hidden rounded-3xl border border-black/5 bg-white/70 p-3.5 transition-all duration-500 hover:-translate-y-2 hover:border-primary/30 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.08)]"
         >
           <!-- Image Container -->
-          <div class="relative aspect-[16/11] w-full overflow-hidden rounded-[18px] bg-[#f0ede6]">
-            <img 
-              :src="post.img" 
-              :alt="post.title" 
-              class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-108" 
+          <div class="relative aspect-16/11 w-full overflow-hidden rounded-[18px] bg-[#f0ede6]">
+            <img
+              :src="post.img"
+              :alt="post.title"
+              loading="lazy"
+              class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-108"
             />
             
             <!-- Glassmorphism Badge -->
-            <span class="absolute top-3.5 left-3.5 rounded-full border border-white/30 bg-white/70 px-3.5 py-1 text-[0.625rem] font-bold uppercase tracking-[0.1em] text-text backdrop-blur-md shadow-xs">
+            <span class="absolute top-3.5 left-3.5 rounded-full border border-white/30 bg-white/70 px-3.5 py-1 text-[0.625rem] font-bold uppercase tracking-widest text-text backdrop-blur-md shadow-xs">
               {{ post.category }}
             </span>
           </div>
@@ -73,13 +74,13 @@
       <Transition name="fade">
         <div
           v-if="selectedPost"
-          class="fixed inset-0 z-[100] flex items-center justify-center bg-black/40 p-4 sm:p-6 backdrop-blur-md"
+          class="fixed inset-0 z-100 flex items-center justify-center bg-black/40 p-4 sm:p-6 backdrop-blur-md"
           @click="closePost"
         >
           <Transition name="slide-up">
             <div
               v-if="selectedPost"
-              class="relative flex max-h-[90vh] w-full max-w-[760px] flex-col overflow-hidden rounded-[32px] bg-white shadow-2xl border border-white/40"
+              class="relative flex max-h-[90vh] w-full max-w-190 flex-col overflow-hidden rounded-4xl bg-white shadow-2xl border border-white/40"
               @click.stop
             >
               <!-- Fixed Close Button -->
@@ -107,8 +108,8 @@
                   {{ selectedPost.title }}
                 </h2>
 
-                <div class="mb-8 aspect-[16/9] w-full overflow-hidden rounded-[20px] bg-[#f0ede6] shadow-sm">
-                  <img :src="selectedPost.img" :alt="selectedPost.title" class="h-full w-full object-cover" />
+                <div class="mb-8 aspect-video w-full overflow-hidden rounded-lg bg-[#f0ede6] shadow-sm">
+                  <img :src="selectedPost.img" :alt="selectedPost.title" loading="lazy" class="h-full w-full object-cover" />
                 </div>
 
                 <!-- Article Content Body -->
@@ -178,7 +179,7 @@ const posts = [
     readTime: '4',
     excerpt:  'Make the most of your living room with carefully curated furniture that speaks to your personality while maintaining functionality.',
     content:  'Elegance in interior design starts with balance. Choose focal pieces like our Velvet Lou Armchair and complement them with subtle accent tables to create dynamic spaces without overwhelming the senses.',
-    img:      '/images/lifestyle.png',
+    img:      '/images/lifestyle.webp',
   },
   {
     id:       2,
@@ -188,7 +189,7 @@ const posts = [
     readTime: '3',
     excerpt:  'Discover how minimalist principles can transform cluttered spaces into serene sanctuaries that feel both functional and inspiring.',
     content:  'Minimalism isn\'t about empty rooms; it\'s about intentionality. Every item should serve a clear function or bring genuine aesthetic harmony to the inhabitant.',
-    img:      '/images/design-tips.png',
+    img:      '/images/design-tips.webp',
   },
   {
     id:       3,
@@ -198,7 +199,7 @@ const posts = [
     readTime: '5',
     excerpt:  'Strategic mirror placement and reflective metallic surfaces can alter the perceived dimension of any room instantly.',
     content:  'By positioning reflective textures near direct light sources, natural illumination bounces across ambient corners, instantly generating depth and openness.',
-    img:      '/images/tips&tricks.png',
+    img:      '/images/tips&tricks.webp',
   },
 ]
 </script>

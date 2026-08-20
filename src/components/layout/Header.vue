@@ -241,7 +241,7 @@
               </button>
             </div>
 
-            <!-- List Product Keranjang -->
+            <!-- Cart Product List -->
             <div class="flex-1 overflow-y-auto px-6 py-4 space-y-3 max-sm:px-4">
               <!-- Empty State Cart -->
               <div v-if="cartItems.length === 0" class="flex h-full flex-col items-center justify-center text-center py-12">
@@ -260,7 +260,7 @@
                 :key="item.id"
                 class="group relative flex items-center gap-4 rounded-2xl border border-border/50 bg-white p-3.5 transition-all duration-200 hover:border-border hover:shadow-sm"
               >
-                <img :src="item.img" :alt="item.name" class="h-20 w-20 rounded-xl object-cover bg-[#f0ede6] flex-shrink-0" />
+                <img :src="item.img" :alt="item.name" loading="lazy" class="h-20 w-20 rounded-xl object-cover bg-[#f0ede6] flex-shrink-0" />
 
                 <div class="flex flex-1 flex-col justify-between self-stretch py-0.5 min-w-0 pr-6">
                   <div class="min-w-0">
@@ -384,7 +384,7 @@
                 :key="item.id"
                 class="group relative flex items-center gap-4 rounded-2xl border border-border/50 bg-white p-3.5 transition-all duration-200 hover:border-border hover:shadow-sm"
               >
-                <img :src="item.img" :alt="item.name" class="h-20 w-20 rounded-xl object-cover bg-[#f0ede6] flex-shrink-0" />
+                <img :src="item.img" :alt="item.name" loading="lazy" class="h-20 w-20 rounded-xl object-cover bg-[#f0ede6] flex-shrink-0" />
 
                 <div class="flex flex-1 flex-col justify-between self-stretch py-0.5 min-w-0 pr-6">
                   <div class="min-w-0">
@@ -508,6 +508,7 @@
             v-if="toastProduct?.img"
             :src="toastProduct.img"
             :alt="toastProduct.name"
+            loading="lazy"
             class="h-10 w-10 flex-shrink-0 rounded-lg object-cover bg-white/10"
           />
           <div v-else class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-primary/20 text-primary">

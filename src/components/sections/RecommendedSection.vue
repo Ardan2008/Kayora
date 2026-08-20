@@ -1,5 +1,5 @@
 <template>
-  <section class="bg-background py-24">
+  <section id="Recommendations" class="bg-background py-24">
     <div class="mx-auto max-w-300 px-6">
 
       <div class="mx-auto mb-14 max-w-155 text-center">
@@ -50,7 +50,7 @@
             class="group flex cursor-pointer flex-col overflow-hidden rounded-[20px] border border-border/60 bg-white transition-all duration-[350ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 hover:shadow-[0_10px_24px_rgba(0,0,0,0.06)]"
           >
             <div class="relative aspect-[5/4] overflow-hidden bg-background">
-              <img :src="p.img" :alt="p.name" class="h-full w-full object-cover transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-110" />
+              <img :src="p.img" :alt="p.name" loading="lazy" class="h-full w-full object-cover transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-110" />
 
               <!-- Wishlist Button (consistent with Shop section) -->
               <button
@@ -128,7 +128,7 @@
                     class="group relative flex flex-col overflow-hidden rounded-2xl border border-border/60 bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_24px_rgba(0,0,0,0.08)]"
                   >
                     <div class="relative aspect-square overflow-hidden bg-background">
-                      <img :src="p.img" :alt="p.name" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                      <img :src="p.img" :alt="p.name" loading="lazy" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
                       <button
                         :class="[
                           'absolute right-2.5 top-2.5 flex h-7 w-7 items-center justify-center rounded-full border-none backdrop-blur-sm transition-all duration-300 shadow-sm cursor-pointer',
@@ -161,7 +161,7 @@
 
                 <!-- Empty state when category has no products yet -->
                 <div v-else class="flex flex-col items-center justify-center py-14 text-center">
-                  <p class="text-sm text-text-muted">Belum ada produk untuk kategori ini.</p>
+                  <p class="text-sm text-text-muted">No products available for this category yet.</p>
                 </div>
               </div>
             </div>
@@ -186,15 +186,15 @@ const { isInWishlist, toggleWishlist } = useWishlist()
 const categories = [
   {
     name: 'Bedroom Furniture',
-    img: '/images/bedroom/bedroom2.png'
+    img: '/images/bedroom/bedroom2.webp'
   },
   {
     name: 'Living Room Furniture',
-    img: '/images/living-room.png'
+    img: '/images/living-room.webp'
   },
   {
     name: 'Dining Room Furniture',
-    img: '/images/dining-room.png'
+    img: '/images/dining-room.webp'
   },
 ]
 
@@ -204,48 +204,48 @@ const recommended = [
     name: 'Bright Lounge Armchair',
     category: 'Chair',
     price: 87.00,
-    img: '/images/chair/chair.png'
+    img: '/images/chair/chair.webp'
   },
   {
     id: 2,
     name: 'Cloud Comfort Sofa',
     category: 'Sofa',
     price: 278.00,
-    img: '/images/sofa/sofa2.png'
+    img: '/images/sofa/sofa2.webp'
   },
   {
     id: 3,
     name: 'Walnut Coffee Table',
     category: 'Table',
     price: 145.00,
-    img: '/images/table/table4.png'
+    img: '/images/table/table4.webp'
   },
   {
     id: 4,
     name: 'Sunshine Accent Chair',
     category: 'Chair',
     price: 189.00,
-    img: '/images/chair/chair2.png'
+    img: '/images/chair/chair2.webp'
   }
 ]
 
 // Product data per category for "View all" popup
 const categoryProducts = {
   'Bedroom Furniture': [
-    { id: 101, name: 'Nordic Oak Bed Frame', category: 'Bed', price: 420.00, img: '/images/bedroom/bedroom3.png' },
-    { id: 102, name: 'Linen Upholstered Headboard', category: 'Bed', price: 210.00, img: '/images/bedroom/bedroom4.png' },
-    { id: 103, name: 'Bedside Table Duo', category: 'Table', price: 95.00, img: '/images/table/table3.png' },
+    { id: 101, name: 'Nordic Oak Bed Frame', category: 'Bed', price: 420.00, img: '/images/bedroom/bedroom3.webp' },
+    { id: 102, name: 'Linen Upholstered Headboard', category: 'Bed', price: 210.00, img: '/images/bedroom/bedroom4.webp' },
+    { id: 103, name: 'Bedside Table Duo', category: 'Table', price: 95.00, img: '/images/table/table3.webp' },
   ],
   'Living Room Furniture': [
-    { id: 201, name: 'Cloud Comfort Sofa', category: 'Sofa', price: 278.00, img: '/images/sofa/sofa3.png' },
-    { id: 202, name: 'Aurora Velvet Sofa', category: 'Sofa', price: 349.00, img: '/images/sofa/sofa2.png' },
-    { id: 203, name: 'Bright Lounge Armchair', category: 'Chair', price: 87.00, img: '/images/chair/chair.png' },
-    { id: 204, name: 'Walnut Coffee Table', category: 'Table', price: 145.00, img: '/images/table/table2.png' },
+    { id: 201, name: 'Cloud Comfort Sofa', category: 'Sofa', price: 278.00, img: '/images/sofa/sofa3.webp' },
+    { id: 202, name: 'Aurora Velvet Sofa', category: 'Sofa', price: 349.00, img: '/images/sofa/sofa2.webp' },
+    { id: 203, name: 'Bright Lounge Armchair', category: 'Chair', price: 87.00, img: '/images/chair/chair.webp' },
+    { id: 204, name: 'Walnut Coffee Table', category: 'Table', price: 145.00, img: '/images/table/table2.webp' },
   ],
   'Dining Room Furniture': [
-    { id: 301, name: 'Golden Column Side Table', category: 'Table', price: 89.00, img: '/images/table/table4.png' },
-    { id: 302, name: "Funct'il Shell Dining Chair", category: 'Chair', price: 168.00, img: '/images/chair/chair2.png' },
-    { id: 303, name: 'Cascade Pendant Lamp', category: 'Table', price: 233.00, img: '/images/table/table5.png' },
+    { id: 301, name: 'Golden Column Side Table', category: 'Table', price: 89.00, img: '/images/table/table4.webp' },
+    { id: 302, name: "Funct'il Shell Dining Chair", category: 'Chair', price: 168.00, img: '/images/chair/chair2.webp' },
+    { id: 303, name: 'Cascade Pendant Lamp', category: 'Table', price: 233.00, img: '/images/table/table5.webp' },
   ],
 }
 

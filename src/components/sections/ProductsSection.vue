@@ -68,6 +68,7 @@
             <img
               :src="product.img"
               :alt="product.name"
+              loading="lazy"
               class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
             <button
@@ -202,7 +203,7 @@ const products = [
     price: 199.00,
     rating: 4.5,
     reviews: 128,
-    img: '/images/chair/chair.png'
+    img: '/images/chair/chair.webp'
   },
   {
     id: 2,
@@ -211,7 +212,7 @@ const products = [
     price: 168.00,
     rating: 4,
     reviews: 76,
-    img: '/images/chair/chair2.png'
+    img: '/images/chair/chair2.webp'
   },
   {
     id: 3,
@@ -220,7 +221,7 @@ const products = [
     price: 233.00,
     rating: 5,
     reviews: 203,
-    img: '/images/table/table3.png'
+    img: '/images/table/table3.webp'
   },
   {
     id: 4,
@@ -229,7 +230,7 @@ const products = [
     price: 89.00,
     rating: 3.5,
     reviews: 42,
-    img: '/images/table/table4.png'
+    img: '/images/table/table4.webp'
   },
   {
     id: 5,
@@ -238,7 +239,7 @@ const products = [
     price: 319.00,
     rating: 4.5,
     reviews: 156,
-    img: '/images/chair/chair.png'
+    img: '/images/chair/chair.webp'
   },
   {
     id: 6,
@@ -247,7 +248,7 @@ const products = [
     price: 278.00,
     rating: 4,
     reviews: 89,
-    img: '/images/sofa/sofa3.png'
+    img: '/images/sofa/sofa3.webp'
   },
   {
     id: 7,
@@ -256,7 +257,7 @@ const products = [
     price: 299.00,
     rating: 5,
     reviews: 174,
-    img: '/images/table/table2.png'
+    img: '/images/table/table2.webp'
   },
   {
     id: 8,
@@ -265,7 +266,7 @@ const products = [
     price: 189.00,
     rating: 3.5,
     reviews: 31,
-    img: '/images/chair/chair.png'
+    img: '/images/chair/chair.webp'
   },
   {
     id: 9,
@@ -274,7 +275,7 @@ const products = [
     price: 349.00,
     rating: 4.5,
     reviews: 211,
-    img: '/images/sofa/sofa3.png'
+    img: '/images/sofa/sofa3.webp'
   }
 ]
 

@@ -41,12 +41,12 @@
         <div class="absolute inset-5 bg-primary [border-radius:28px_28px_28px_260px] max-md:[border-radius:20px_20px_20px_150px]"></div>
 
         <!-- Leaf -->
-        <img src="/images/pot.png" alt="Decorative plant leaves"
+        <img src="/images/pot.webp" alt="Decorative plant leaves" loading="lazy"
         class="absolute left-1/3 top-[6%] z-10 w-[42%] max-w-50 translate-x-[-38%] drop-shadow-[0_10px_20px_rgba(0,0,0,0.15)] max-md:w-[38%] max-md:top-[8%]" />
 
         <!-- Chair (also changes with active product for a livelier feel) -->
         <Transition name="chair-fade" mode="out-in">
-          <img :key="currentProduct.id" :src="currentProduct.image" :alt="currentProduct.name"
+          <img :key="currentProduct.id" :src="currentProduct.image" :alt="currentProduct.name" loading="lazy"
           class="relative z-20 w-[62%] max-w-90 drop-shadow-[0_18px_28px_rgba(0,0,0,0.28)] max-md:w-[56%]" />
         </Transition>
 
@@ -80,7 +80,7 @@
               </button>
 
               <div class="h-16 w-16 shrink-0 overflow-hidden rounded-xl bg-background">
-                <img :src="currentProduct.image" :alt="currentProduct.name" class="h-full w-full object-cover" />
+                <img :src="currentProduct.image" :alt="currentProduct.name" loading="lazy" class="h-full w-full object-cover" />
               </div>
 
               <div class="min-w-0 flex-1">
@@ -140,28 +140,28 @@ const products = ref([
     name: 'Bright Lounge Armchair',
     desc: 'Cozy and comfortable accent chair',
     price: 87,
-    image: '/images/chair/chair.png'
+    image: '/images/chair/chair.webp'
   },
   {
     id: 2,
     name: 'Modern Living Sofa',
     desc: 'Comfortable contemporary sofa for the living room',
     price: 245,
-    image: '/images/sofa/sofa2.png'
+    image: '/images/sofa/sofa2.webp'
   },
   {
     id: 3,
     name: 'Modern Wooden Coffee Table',
     desc: 'Minimalist coffee table with a warm wooden finish',
     price: 120,
-    image: '/images/table/table.png'
+    image: '/images/table/table.webp'
   },
   {
     id: 4,
     name: 'Modern Upholstered Bed',
     desc: 'Elegant upholstered bed with soft neutral bedding',
     price: 420,
-    image: '/images/bedroom/bedroom.png'
+    image: '/images/bedroom/bedroom.webp'
   },
 ])
 

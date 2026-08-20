@@ -21,13 +21,15 @@
         <!-- Decorative Furniture Overlay at Bottom -->
         <div class="relative mt-auto w-full h-[160px] flex items-end justify-between pointer-events-none">
           <img
-            src="/images/sofa/sofa2.png"
+            src="/images/sofa/sofa2.webp"
             alt="Yellow Sofa"
+            loading="lazy"
             class="w-[52%] -ml-6 -mb-4 h-[160px] object-contain filter drop-shadow-[0_12px_20px_rgba(0,0,0,0.3)] transition-transform duration-300"
           />
           <img
-            src="/images/chair/chair.png"
+            src="/images/chair/chair.webp"
             alt="Chair and Table"
+            loading="lazy"
             class="w-[52%] -mr-6 -mb-4 h-[160px] object-contain filter drop-shadow-[0_12px_20px_rgba(0,0,0,0.3)] transition-transform duration-300"
           />
         </div>
@@ -55,6 +57,7 @@
             <img
               :src="item.img"
               :alt="item.name"
+              loading="lazy"
               class="h-[230px] w-full object-contain filter drop-shadow-[0_10px_15px_rgba(0,0,0,0.08)] transition-transform duration-500 hover:scale-105"
             />
           </div>
@@ -71,13 +74,13 @@ const saleProducts = [
     id: 1,
     name:  'Natural Touch Side Table',
     price: 234.00,
-    img:   '/images/chair/chair.png',
+    img:   '/images/chair/chair.webp',
   },
   {
     id: 2,
     name:  'Velvet Classic Armchair',
     price: 234.00,
-    img:   '/images/sofa/sofa.png',
+    img:   '/images/sofa/sofa.webp',
   },
 ]
 </script>
