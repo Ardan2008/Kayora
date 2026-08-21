@@ -76,7 +76,7 @@
             <!-- Wishlist Button (modernized: soft shadow + scale spring + like-pulse) -->
             <button
               :class="[
-                'relative absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full border-none backdrop-blur-md transition-all duration-300 ease-out shadow-[0_2px_8px_rgba(0,0,0,0.12)] cursor-pointer active:scale-90',
+                'absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full border-none backdrop-blur-md transition-all duration-300 ease-out shadow-[0_2px_8px_rgba(0,0,0,0.12)] cursor-pointer active:scale-90',
                 isInWishlist(product.id)
                   ? 'bg-red-500 text-white opacity-100'
                   : 'bg-white/90 text-text opacity-0 group-hover:opacity-100 hover:scale-110 hover:bg-white hover:text-red-500'

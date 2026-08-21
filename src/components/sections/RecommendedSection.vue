@@ -20,14 +20,14 @@
             v-for="(cat, i) in categories"
             :key="cat.name"
             :class="[
-              'relative cursor-pointer overflow-hidden rounded-[20px] bg-cover bg-center min-h-[180px] transition-transform duration-[400ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1',
+              'relative cursor-pointer overflow-hidden rounded-lg bg-cover bg-center min-h-45 transition-transform duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1',
               i === 0 ? 'flex-[1.3]' : 'flex-1'
             ]"
             :style="{ backgroundImage: `url(${cat.img})` }"
             @click="openCategoryModal(cat.name)"
           >
-            <div class="absolute inset-0 z-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent transition-all duration-400 hover:from-black/70 hover:via-black/20"></div>
-            <div class="absolute bottom-6 left-6 right-6 z-[1] flex flex-col items-start gap-2">
+            <div class="absolute inset-0 z-0 bg-linear-to-t from-black/60 via-black/10 to-transparent transition-all duration-400 hover:from-black/70 hover:via-black/20"></div>
+            <div class="absolute bottom-6 left-6 right-6 z-1 flex flex-col items-start gap-2">
               <span class="rounded-full bg-white/92 px-2.5 py-0.5 font-display text-[0.75rem] font-bold tracking-[0.08em] text-primary">0{{ i + 1 }}</span>
               <span class="font-display text-[1.25rem] font-semibold leading-5 text-white">{{ cat.name }}</span>
               <button
@@ -47,9 +47,9 @@
           <div
             v-for="p in recommended"
             :key="p.id"
-            class="group flex cursor-pointer flex-col overflow-hidden rounded-[20px] border border-border/60 bg-white transition-all duration-[350ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 hover:shadow-[0_10px_24px_rgba(0,0,0,0.06)]"
+            class="group flex cursor-pointer flex-col overflow-hidden rounded-lg border border-border/60 bg-white transition-all duration-350 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 hover:shadow-[0_10px_24px_rgba(0,0,0,0.06)]"
           >
-            <div class="relative aspect-[5/4] overflow-hidden bg-background">
+            <div class="relative aspect-5/4 overflow-hidden bg-background">
               <img :src="p.img" :alt="p.name" loading="lazy" class="h-full w-full object-cover transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-110" />
 
               <!-- Wishlist Button (consistent with Shop section) -->
@@ -66,8 +66,8 @@
                 <Heart class="h-4 w-4" :fill="isInWishlist(p.id) ? 'currentColor' : 'none'" />
               </button>
             </div>
-            <div class="flex flex-1 flex-col gap-1 px-[1.125rem] pt-4 pb-5">
-              <span class="text-[0.625rem] font-bold uppercase tracking-[0.1em] text-primary">{{ p.category }}</span>
+            <div class="flex flex-1 flex-col gap-1 px-4.5 pt-4 pb-5">
+              <span class="text-[0.625rem] font-bold uppercase tracking-widest text-primary">{{ p.category }}</span>
               <h4 class="text-[0.9375rem] font-semibold leading-5 text-text">{{ p.name }}</h4>
               <div class="mt-auto flex items-center justify-between pt-2.5">
                 <span class="font-display text-[1.0625rem] font-bold text-text">${{ p.price.toFixed(2) }}</span>
@@ -79,7 +79,7 @@
                     'group/btn relative flex h-9 items-center justify-center overflow-hidden rounded-full border cursor-pointer transition-all duration-300 ease-out active:scale-90',
                     addedIds.has(p.id)
                       ? 'w-9 border-primary bg-primary text-white shadow-[0_6px_16px_rgba(0,0,0,0.16)]'
-                      : 'w-9 border-text/15 bg-transparent text-text shadow-[0_1px_3px_rgba(0,0,0,0.06)] hover:w-[5.5rem] hover:border-primary hover:bg-primary hover:text-white hover:shadow-[0_6px_16px_rgba(0,0,0,0.16)]'
+                      : 'w-9 border-text/15 bg-transparent text-text shadow-[0_1px_3px_rgba(0,0,0,0.06)] hover:w-22 hover:border-primary hover:bg-primary hover:text-white hover:shadow-[0_6px_16px_rgba(0,0,0,0.16)]'
                   ]"
                   aria-label="Add to cart"
                 >
@@ -89,7 +89,7 @@
                   </Transition>
                   <span
                     v-if="!addedIds.has(p.id)"
-                    class="ml-0 max-w-0 overflow-hidden whitespace-nowrap text-[0.7rem] font-semibold opacity-0 transition-all duration-300 group-hover/btn:ml-1 group-hover/btn:max-w-[3.5rem] group-hover/btn:opacity-100"
+                    class="ml-0 max-w-0 overflow-hidden whitespace-nowrap text-[0.7rem] font-semibold opacity-0 transition-all duration-300 group-hover/btn:ml-1 group-hover/btn:max-w-14 group-hover/btn:opacity-100"
                   >
                     Add
                   </span>
@@ -168,7 +168,7 @@
                             'group/btn relative flex h-7 items-center justify-center overflow-hidden rounded-full border cursor-pointer transition-all duration-300 ease-out active:scale-90',
                             addedIds.has(p.id)
                               ? 'w-7 border-primary bg-primary text-white shadow-[0_4px_12px_rgba(0,0,0,0.14)]'
-                              : 'w-7 border-text/20 bg-transparent text-text hover:w-[4.75rem] hover:border-primary hover:bg-primary hover:text-white hover:shadow-[0_4px_12px_rgba(0,0,0,0.14)]'
+                              : 'w-7 border-text/20 bg-transparent text-text hover:w-19 hover:border-primary hover:bg-primary hover:text-white hover:shadow-[0_4px_12px_rgba(0,0,0,0.14)]'
                           ]"
                           aria-label="Add to cart"
                         >
@@ -178,7 +178,7 @@
                           </Transition>
                           <span
                             v-if="!addedIds.has(p.id)"
-                            class="ml-0 max-w-0 overflow-hidden whitespace-nowrap text-[0.65rem] font-semibold opacity-0 transition-all duration-300 group-hover/btn:ml-1 group-hover/btn:max-w-[3rem] group-hover/btn:opacity-100"
+                            class="ml-0 max-w-0 overflow-hidden whitespace-nowrap text-[0.65rem] font-semibold opacity-0 transition-all duration-300 group-hover/btn:ml-1 group-hover/btn:max-w-12 group-hover/btn:opacity-100"
                           >
                             Add
                           </span>

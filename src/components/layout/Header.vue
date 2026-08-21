@@ -263,7 +263,7 @@
                   <ShoppingCart :size="36" stroke-width="1.5" />
                 </div>
                 <h3 class="font-display text-lg font-semibold text-text">Your cart is empty</h3>
-                <p class="mt-1 text-xs text-text-muted leading-relaxed max-w-[220px]">
+                <p class="mt-1 text-xs text-text-muted leading-relaxed max-w-55">
                   Explore our collection and add your favorite items to the cart.
                 </p>
               </div>
@@ -612,7 +612,7 @@
       <Transition name="toast">
         <div
           v-if="isToastVisible"
-          class="fixed bottom-6 right-6 z-100 flex items-center gap-3 overflow-hidden rounded-2xl bg-text pl-3 pr-4 py-3 text-white shadow-[0_16px_40px_rgba(0,0,0,0.25)] backdrop-blur-md max-w-[340px] max-sm:left-4 max-sm:right-4 max-sm:bottom-4 max-sm:max-w-none"
+          class="fixed bottom-6 right-6 z-100 flex items-center gap-3 overflow-hidden rounded-2xl bg-text pl-3 pr-4 py-3 text-white shadow-[0_16px_40px_rgba(0,0,0,0.25)] backdrop-blur-md max-w-85 max-sm:left-4 max-sm:right-4 max-sm:bottom-4 max-sm:max-w-none"
         >
           <img
             v-if="toastProduct?.img"
