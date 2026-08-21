@@ -75,13 +75,11 @@
         <div
           v-if="selectedPost"
           class="fixed inset-0 z-100 flex items-center justify-center bg-black/40 p-4 sm:p-6 backdrop-blur-md"
-          @click="closePost"
         >
           <Transition name="slide-up">
             <div
               v-if="selectedPost"
               class="relative flex max-h-[90vh] w-full max-w-190 flex-col overflow-hidden rounded-4xl bg-white shadow-2xl border border-white/40"
-              @click.stop
             >
               <!-- Fixed Close Button -->
               <button

@@ -72,13 +72,27 @@
               <div class="mt-auto flex items-center justify-between pt-2.5">
                 <span class="font-display text-[1.0625rem] font-bold text-text">${{ p.price.toFixed(2) }}</span>
 
-                <!-- Add to Cart Button (consistent with Shop section) -->
+                <!-- Add to Cart Button (matches Shop section: expanding pill + check confirmation) -->
                 <button
-                  @click.stop="addToCart(p)"
-                  class="flex h-[34px] w-[34px] flex-shrink-0 items-center justify-center rounded-full border-[1.5px] border-text bg-transparent text-text text-[1.15rem] leading-none cursor-pointer transition-all duration-300 hover:border-primary hover:bg-primary/15 hover:text-primary active:bg-primary/25"
+                  @click.stop="handleAddToCart(p)"
+                  :class="[
+                    'group/btn relative flex h-9 items-center justify-center overflow-hidden rounded-full border cursor-pointer transition-all duration-300 ease-out active:scale-90',
+                    addedIds.has(p.id)
+                      ? 'w-9 border-primary bg-primary text-white shadow-[0_6px_16px_rgba(0,0,0,0.16)]'
+                      : 'w-9 border-text/15 bg-transparent text-text shadow-[0_1px_3px_rgba(0,0,0,0.06)] hover:w-[5.5rem] hover:border-primary hover:bg-primary hover:text-white hover:shadow-[0_6px_16px_rgba(0,0,0,0.16)]'
+                  ]"
                   aria-label="Add to cart"
                 >
-                  <Plus class="h-4 w-4" />
+                  <Transition name="icon-swap" mode="out-in">
+                    <Check v-if="addedIds.has(p.id)" key="check" class="h-4 w-4 shrink-0" />
+                    <Plus v-else key="plus" class="h-4 w-4 shrink-0 transition-transform duration-300 group-hover/btn:rotate-90" />
+                  </Transition>
+                  <span
+                    v-if="!addedIds.has(p.id)"
+                    class="ml-0 max-w-0 overflow-hidden whitespace-nowrap text-[0.7rem] font-semibold opacity-0 transition-all duration-300 group-hover/btn:ml-1 group-hover/btn:max-w-[3.5rem] group-hover/btn:opacity-100"
+                  >
+                    Add
+                  </span>
                 </button>
               </div>
             </div>
@@ -93,13 +107,12 @@
       <Transition name="fade" appear>
         <div
           v-if="activeCategoryModal"
-          class="fixed inset-0 z-[110] flex items-center justify-center bg-black/45 backdrop-blur-md px-6 max-sm:px-4"
-          @click.self="closeCategoryModal"
+          class="fixed inset-0 z-110 flex items-center justify-center bg-black/45 backdrop-blur-md px-6 max-sm:px-4"
         >
           <Transition name="modal-pop" appear>
             <div
               v-if="activeCategoryModal"
-              class="relative flex w-full max-w-[760px] max-h-[85vh] flex-col overflow-hidden rounded-[24px] bg-white shadow-[0_30px_80px_rgba(0,0,0,0.35)]"
+              class="relative flex w-full max-w-190 max-h-[85vh] flex-col overflow-hidden rounded-3xl bg-white shadow-[0_30px_80px_rgba(0,0,0,0.35)]"
             >
               <!-- Modal Header -->
               <div class="flex items-center justify-between border-b border-border/70 px-6 py-5 max-sm:px-4">
@@ -147,12 +160,28 @@
                       <h4 class="text-[0.8125rem] font-semibold leading-4.5 text-text line-clamp-1">{{ p.name }}</h4>
                       <div class="mt-auto flex items-center justify-between pt-2">
                         <span class="font-display text-sm font-bold text-text">${{ p.price.toFixed(2) }}</span>
+
+                        <!-- Add to Cart Button (matches Shop section, compact size for modal grid) -->
                         <button
-                          @click.stop="addToCart(p)"
-                          class="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full border border-text/20 bg-transparent text-text cursor-pointer transition-all duration-200 hover:border-primary hover:bg-primary hover:text-white active:scale-90"
+                          @click.stop="handleAddToCart(p)"
+                          :class="[
+                            'group/btn relative flex h-7 items-center justify-center overflow-hidden rounded-full border cursor-pointer transition-all duration-300 ease-out active:scale-90',
+                            addedIds.has(p.id)
+                              ? 'w-7 border-primary bg-primary text-white shadow-[0_4px_12px_rgba(0,0,0,0.14)]'
+                              : 'w-7 border-text/20 bg-transparent text-text hover:w-[4.75rem] hover:border-primary hover:bg-primary hover:text-white hover:shadow-[0_4px_12px_rgba(0,0,0,0.14)]'
+                          ]"
                           aria-label="Add to cart"
                         >
-                          <Plus class="h-3.5 w-3.5" />
+                          <Transition name="icon-swap" mode="out-in">
+                            <Check v-if="addedIds.has(p.id)" key="check" class="h-3.5 w-3.5 shrink-0" />
+                            <Plus v-else key="plus" class="h-3.5 w-3.5 shrink-0 transition-transform duration-300 group-hover/btn:rotate-90" />
+                          </Transition>
+                          <span
+                            v-if="!addedIds.has(p.id)"
+                            class="ml-0 max-w-0 overflow-hidden whitespace-nowrap text-[0.65rem] font-semibold opacity-0 transition-all duration-300 group-hover/btn:ml-1 group-hover/btn:max-w-[3rem] group-hover/btn:opacity-100"
+                          >
+                            Add
+                          </span>
                         </button>
                       </div>
                     </div>
@@ -176,7 +205,7 @@
 
 <script setup>
 import { ref, computed } from 'vue'
-import { Heart, Plus, X } from 'lucide-vue-next'
+import { Heart, Plus, Check, X } from 'lucide-vue-next'
 import { useCart } from '@/composables/useCart.js'
 import { useWishlist } from '@/composables/useWishlist.js'
 
@@ -261,6 +290,19 @@ const openCategoryModal = (name) => {
 const closeCategoryModal = () => {
   activeCategoryModal.value = null
 }
+
+// --- Add to Cart button feedback (matches Shop section behavior) ---
+const addedIds = ref(new Set())
+
+function handleAddToCart(product) {
+  addToCart(product)
+  addedIds.value = new Set(addedIds.value).add(product.id)
+  setTimeout(() => {
+    const next = new Set(addedIds.value)
+    next.delete(product.id)
+    addedIds.value = next
+  }, 1200)
+}
 </script>
 
 <style scoped>
@@ -283,5 +325,19 @@ const closeCategoryModal = () => {
 .modal-pop-leave-to {
   opacity: 0;
   transform: scale(0.94) translateY(12px);
+}
+
+/* Add to Cart icon swap (matches Shop section) */
+.icon-swap-enter-active,
+.icon-swap-leave-active {
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.icon-swap-enter-from {
+  opacity: 0;
+  transform: scale(0.4) rotate(-45deg);
+}
+.icon-swap-leave-to {
+  opacity: 0;
+  transform: scale(0.4) rotate(45deg);
 }
 </style>

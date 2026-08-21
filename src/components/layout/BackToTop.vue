@@ -49,7 +49,7 @@
         <!-- Liquid Fill Layer -->
         <span class="liquid-fill absolute bg-primary"></span>
 
-        <!-- Gelembung -->
+        <!-- Bubbles -->
         <span class="bubble bubble-1 absolute rounded-full bg-white/80"></span>
         <span class="bubble bubble-2 absolute rounded-full bg-white/70"></span>
         <span class="bubble bubble-3 absolute rounded-full bg-white/60"></span>

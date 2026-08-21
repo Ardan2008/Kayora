@@ -5,7 +5,7 @@
       isScrolled ? 'shadow-[0_1px_12px_rgba(0,0,0,0.06)]' : ''
     ]"
   >
-    <div class="mx-auto flex items-center justify-between max-w-[1200px] px-6 py-4 max-sm:px-4 max-sm:py-3">
+    <div class="mx-auto flex items-center justify-between max-w-300 px-6 py-4 max-sm:px-4 max-sm:py-3">
 
       <!-- Logo -->
       <router-link to="/" class="flex-shrink-0 font-display text-[1.375rem] font-bold tracking-tight text-text no-underline max-sm:text-[1.125rem]">
@@ -38,6 +38,16 @@
           @click="isSearchOpen = true"
         >
           <Search :size="18" stroke-width="1.8" />
+        </button>
+
+        <!-- Account Icon Button -->
+        <button
+          type="button"
+          aria-label="Account"
+          class="action-icon inline-flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border-none bg-transparent text-text transition-all duration-200"
+          @click="isAccountOpen = true; isCartOpen = false; isWishlistOpen = false"
+        >
+          <User :size="18" stroke-width="1.8" />
         </button>
 
         <!-- Wishlist Icon Button -->
@@ -98,7 +108,7 @@
 
     <!-- Modern Mobile Menu (slide-over panel) -->
     <Teleport to="body">
-      <div v-if="isMenuOpen" class="fixed inset-0 z-[110] flex justify-end md:hidden">
+      <div v-if="isMenuOpen" class="fixed inset-0 z-110 flex justify-end md:hidden">
         <Transition name="fade" appear>
           <div
             class="fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity"
@@ -112,7 +122,7 @@
             <button
               @click="isMenuOpen = false"
               aria-label="Close menu"
-              class="absolute top-1/2 -left-5 z-20 flex h-10 w-10 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-border/60 bg-white text-text shadow-[0_4px_16px_rgba(0,0,0,0.15)] transition-colors duration-200 hover:bg-primary hover:text-white hover:border-primary"
+              class="absolute top-1/2 -left-5 z-20 flex h-10 w-10 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-border/60 bg-white text-text shadow-[0_4px_16px_rgba(0,0,0,0.15)] transition-all duration-200 hover:bg-primary hover:text-white hover:border-primary"
             >
               <X :size="18" />
             </button>
@@ -208,19 +218,23 @@
       </div>
     </Teleport>
 
-    <!-- Modern Slide-Over Cart Pop-up -->
+    <!-- Slide-Over Cart Pop-up -->
     <Teleport to="body">
-      <div v-if="isCartOpen" class="fixed inset-0 z-[100] flex justify-end">
+      <div
+        class="fixed inset-0 z-100 flex justify-end"
+        :class="isCartOpen ? 'pointer-events-auto' : 'pointer-events-none'"
+      >
         <!-- Glassmorphism Backdrop -->
-        <Transition name="fade" appear>
+        <Transition name="fade">
           <div
+            v-if="isCartOpen"
             class="fixed inset-0 bg-black/40 backdrop-blur-xs transition-opacity"
           ></div>
         </Transition>
 
         <!-- Drawer Content Container -->
-        <Transition name="slide" appear>
-          <div class="relative flex h-full w-full max-w-[420px] flex-col bg-white shadow-2xl z-10 border-l border-border/40">
+        <Transition name="slide">
+          <div v-if="isCartOpen" class="relative flex h-full w-full max-w-105 flex-col bg-white shadow-2xl z-10 border-l border-border/40">
 
             <!-- Header Cart -->
             <div class="flex items-center justify-between border-b border-border/80 px-6 py-5 bg-background/50 max-sm:px-4">
@@ -338,15 +352,19 @@
 
     <!-- Wishlist Slide-Over Pop-up -->
     <Teleport to="body">
-      <div v-if="isWishlistOpen" class="fixed inset-0 z-[100] flex justify-end">
-        <Transition name="fade" appear>
+      <div
+        class="fixed inset-0 z-100 flex justify-end"
+        :class="isWishlistOpen ? 'pointer-events-auto' : 'pointer-events-none'"
+      >
+        <Transition name="fade">
           <div
+            v-if="isWishlistOpen"
             class="fixed inset-0 bg-black/40 backdrop-blur-xs transition-opacity"
           ></div>
         </Transition>
 
-        <Transition name="slide" appear>
-          <div class="relative flex h-full w-full max-w-[420px] flex-col bg-white shadow-2xl z-10 border-l border-border/40">
+        <Transition name="slide">
+          <div v-if="isWishlistOpen" class="relative flex h-full w-full max-w-105 flex-col bg-white shadow-2xl z-10 border-l border-border/40">
 
             <!-- Header Wishlist -->
             <div class="flex items-center justify-between border-b border-border/80 px-6 py-5 bg-background/50 max-sm:px-4">
@@ -374,7 +392,7 @@
                   <Heart :size="36" stroke-width="1.5" />
                 </div>
                 <h3 class="font-display text-lg font-semibold text-text">Your wishlist is empty</h3>
-                <p class="mt-1 text-xs text-text-muted leading-relaxed max-w-[220px]">
+                <p class="mt-1 text-xs text-text-muted leading-relaxed max-w-55">
                   Tap the heart icon on any product to save it here.
                 </p>
               </div>
@@ -436,17 +454,109 @@
       </div>
     </Teleport>
 
+    <!-- Account Slide-Over Pop-up -->
+    <Teleport to="body">
+      <div
+        class="fixed inset-0 z-100 flex justify-end"
+        :class="isAccountOpen ? 'pointer-events-auto' : 'pointer-events-none'"
+      >
+        <Transition name="fade">
+          <div
+            v-if="isAccountOpen"
+            class="fixed inset-0 bg-black/40 backdrop-blur-xs transition-opacity"
+          ></div>
+        </Transition>
+
+        <Transition name="slide">
+          <div
+            v-if="isAccountOpen"
+            class="relative flex h-full w-full max-w-105 flex-col bg-white shadow-2xl z-10 border-l border-border/40"
+          >
+
+            <!-- Header Account -->
+            <div class="flex items-center justify-between border-b border-border/80 px-6 py-5 bg-background/50 max-sm:px-4">
+              <div class="flex items-center gap-2.5">
+                <div class="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary">
+                  <User :size="18" />
+                </div>
+                <h2 class="font-display text-lg font-bold text-text tracking-tight">My Account</h2>
+              </div>
+              <button
+                @click="isAccountOpen = false"
+                class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border-none bg-transparent text-text-muted hover:bg-black/5 hover:text-text transition-colors"
+              >
+                <X :size="18" />
+              </button>
+            </div>
+
+            <div class="flex-1 overflow-y-auto px-6 pt-7 pb-5 max-sm:px-5">
+
+              <!-- Greeting -->
+              <div class="relative mb-8 flex items-start gap-4">
+                <div class="pointer-events-none absolute -top-6 -right-2 h-24 w-24 rounded-full bg-primary/10 blur-2xl"></div>
+                <div class="relative flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-full bg-primary/10 font-serif text-2xl font-semibold text-primary">
+                  {{ currentUser.name.charAt(0) }}
+                </div>
+                <div class="min-w-0 pt-1">
+                  <p class="text-[0.6875rem] font-semibold uppercase tracking-[0.14em] text-text-muted">Welcome back</p>
+                  <h3 class="mt-1 font-serif text-[1.65rem] leading-tight text-text truncate">{{ currentUser.name }}</h3>
+                  <p class="mt-0.5 truncate text-[0.75rem] text-text-muted">{{ currentUser.email }}</p>
+                </div>
+              </div>
+
+              <!-- Menu -->
+              <nav class="border-t border-border/70">
+                <button
+                  v-for="item in accountMenuItems"
+                  :key="item.label"
+                  type="button"
+                  class="group flex w-full cursor-pointer items-center gap-4 border-b border-border/70 bg-transparent px-1 py-4 text-left transition-colors duration-200 hover:bg-primary/4"
+                >
+                  <component
+                    :is="item.icon"
+                    :size="17"
+                    stroke-width="1.6"
+                    class="flex-shrink-0 text-text-muted transition-colors duration-200 group-hover:text-primary"
+                  />
+                  <span class="min-w-0 flex-1">
+                    <span class="block text-[0.875rem] font-medium text-text">{{ item.label }}</span>
+                    <span class="block truncate text-[0.7rem] text-text-muted">{{ item.description }}</span>
+                  </span>
+                  <ArrowRight
+                    :size="15"
+                    class="flex-shrink-0 -translate-x-1 text-primary opacity-0 transition-all duration-200 group-hover:translate-x-0 group-hover:opacity-100"
+                  />
+                </button>
+              </nav>
+            </div>
+
+            <!-- Footer Sign Out -->
+            <div class="border-t border-border/80 px-6 py-5 max-sm:px-5">
+              <button
+                type="button"
+                class="group inline-flex cursor-pointer items-center gap-2 border-none bg-transparent p-0 text-[0.8125rem] font-semibold text-text-muted transition-colors duration-200 hover:text-red-500"
+              >
+                <LogOut :size="15" class="transition-transform duration-200 group-hover:-translate-x-0.5" />
+                <span>Sign out</span>
+              </button>
+            </div>
+
+          </div>
+        </Transition>
+      </div>
+    </Teleport>
+
     <!-- Search Overlay (centered, transparent blurred backdrop) -->
     <Teleport to="body">
       <Transition name="fade" appear>
         <div
           v-if="isSearchOpen"
-          class="fixed inset-0 z-[100] flex items-center justify-center bg-black/25 backdrop-blur-md px-6 max-sm:px-4"
+          class="fixed inset-0 z-100 flex items-center justify-center bg-black/25 backdrop-blur-md px-6 max-sm:px-4"
         >
           <Transition name="search-pop" appear>
             <div
               v-if="isSearchOpen"
-              class="relative w-full max-w-[560px] rounded-3xl bg-white/95 backdrop-blur-xl shadow-[0_25px_70px_rgba(0,0,0,0.3)] border border-white/60 overflow-hidden"
+              class="relative w-full max-w-140 rounded-3xl bg-white/95 backdrop-blur-xl shadow-[0_25px_70px_rgba(0,0,0,0.3)] border border-white/60 overflow-hidden"
               @click.stop
             >
               <!-- Close Button -->
@@ -502,7 +612,7 @@
       <Transition name="toast">
         <div
           v-if="isToastVisible"
-          class="fixed bottom-6 right-6 z-[100] flex items-center gap-3 overflow-hidden rounded-2xl bg-text pl-3 pr-4 py-3 text-white shadow-[0_16px_40px_rgba(0,0,0,0.25)] backdrop-blur-md max-w-[340px] max-sm:left-4 max-sm:right-4 max-sm:bottom-4 max-sm:max-w-none"
+          class="fixed bottom-6 right-6 z-100 flex items-center gap-3 overflow-hidden rounded-2xl bg-text pl-3 pr-4 py-3 text-white shadow-[0_16px_40px_rgba(0,0,0,0.25)] backdrop-blur-md max-w-[340px] max-sm:left-4 max-sm:right-4 max-sm:bottom-4 max-sm:max-w-none"
         >
           <img
             v-if="toastProduct?.img"
@@ -536,7 +646,7 @@
           </button>
 
           <!-- Auto-dismiss progress bar -->
-          <div class="absolute bottom-0 left-0 h-[3px] bg-primary toast-progress"></div>
+          <div class="absolute bottom-0 left-0 h-0.75 bg-primary toast-progress"></div>
         </div>
       </Transition>
     </Teleport>
@@ -546,7 +656,7 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted, watch, nextTick } from 'vue'
-import { ShoppingCart, Search, Heart, Menu, X, Plus, Minus, Trash2, Check, Home, ShoppingBag, LayoutGrid, Tag, BookOpen, ChevronRight } from 'lucide-vue-next'
+import { ShoppingCart, Search, Heart, Menu, X, Plus, Minus, Trash2, Check, Home, ShoppingBag, LayoutGrid, BookOpen, MessageCircleQuestionMark, ChevronRight, User, Package, MapPin, CreditCard, Settings, HelpCircle, LogOut, ArrowRight } from 'lucide-vue-next'
 import { useCart } from '@/composables/useCart.js'
 import { useWishlist } from '@/composables/useWishlist.js'
 import { useSearch } from '@/composables/useSearch.js'
@@ -580,16 +690,31 @@ const isMenuOpen        = ref(false)
 const isScrolled        = ref(false)
 const isSearchOpen      = ref(false)
 const isWishlistOpen    = ref(false)
+const isAccountOpen     = ref(false)
 const isWishlistBouncing = ref(false)
 const activeLink        = ref('#home')
 const searchInput       = ref(null)
 
+const currentUser = {
+  name: 'Jordan Lee',
+  email: 'jordan.lee@email.com',
+}
+
+const accountMenuItems = [
+  { label: 'My Orders',        description: 'Track and manage your orders', icon: Package },
+  { label: 'Saved Addresses',  description: 'Manage delivery addresses',    icon: MapPin },
+  { label: 'Payment Methods',  description: 'Cards and payment options',    icon: CreditCard },
+  { label: 'Account Settings', description: 'Profile, password & privacy', icon: Settings },
+  { label: 'Help & Support',   description: 'FAQs and contact us',         icon: HelpCircle },
+]
+
 const navItems = [
-  { label: 'Home',       href: '#home',       icon: Home },
-  { label: 'Shop',       href: '#shop',       icon: ShoppingBag },
-  { label: 'Collection', href: '#collection', icon: LayoutGrid },
-  { label: 'Categories', href: '#categories', icon: Tag },
-  { label: 'Blog',       href: '#blog',       icon: BookOpen },
+  
+  { label: 'Home',       href: '#home',           icon: Home },
+  { label: 'Shop',       href: '#shop',           icon: ShoppingBag },
+  { label: 'Collection', href: '#Recommendations', icon: LayoutGrid },
+  { label: 'Blog',       href: '#blog',            icon: BookOpen },
+  { label: 'FAQ',        href: '#faq',             icon: MessageCircleQuestionMark },
 ]
 
 let manualOverride = false

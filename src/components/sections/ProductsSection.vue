@@ -10,10 +10,11 @@
         <p v-if="hasQuery" class="mt-2 text-sm text-text-muted">
           Showing results for <span class="font-semibold text-primary">"{{ searchQuery }}"</span>
           <button
-            class="ml-2 cursor-pointer border-none bg-transparent p-0 text-xs font-semibold text-text-muted underline hover:text-primary"
+            class="ml-2 inline-flex cursor-pointer items-center gap-1 rounded-full bg-primary/10 px-2.5 py-1 text-xs font-semibold text-primary transition-all duration-200 hover:gap-1.5 hover:bg-primary/15"
             @click="clearSearch"
           >
             Clear
+            <X class="h-3 w-3" />
           </button>
         </p>
       </div>
@@ -61,27 +62,37 @@
         <div
           v-for="product in filteredProducts"
           :key="product.id"
-          class="group cursor-pointer overflow-hidden rounded-[16px] border border-border/60 bg-white transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_12px_28px_rgba(0,0,0,0.08)]"
+          class="group cursor-pointer overflow-hidden rounded-2xl border border-border/60 bg-white transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_12px_28px_rgba(0,0,0,0.08)]"
         >
           <!-- Product Image Container -->
-          <div class="relative aspect-[4/3] overflow-hidden bg-[#f0ede6]">
+          <div class="relative aspect-4/3 overflow-hidden bg-[#f0ede6]">
             <img
               :src="product.img"
               :alt="product.name"
               loading="lazy"
               class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
+
+            <!-- Wishlist Button (modernized: soft shadow + scale spring + like-pulse) -->
             <button
               :class="[
-                'absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full border-none backdrop-blur-sm transition-all duration-300 shadow-sm cursor-pointer',
+                'relative absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full border-none backdrop-blur-md transition-all duration-300 ease-out shadow-[0_2px_8px_rgba(0,0,0,0.12)] cursor-pointer active:scale-90',
                 isInWishlist(product.id)
                   ? 'bg-red-500 text-white opacity-100'
-                  : 'bg-white/90 text-text opacity-0 group-hover:opacity-100 hover:bg-red-50 hover:text-red-500'
+                  : 'bg-white/90 text-text opacity-0 group-hover:opacity-100 hover:scale-110 hover:bg-white hover:text-red-500'
               ]"
               :aria-label="isInWishlist(product.id) ? 'Remove from wishlist' : 'Add to wishlist'"
-              @click.stop="toggleWishlist(product)"
+              @click.stop="handleWishlist(product)"
             >
-              <Heart class="h-4 w-4" :fill="isInWishlist(product.id) ? 'currentColor' : 'none'" />
+              <span
+                v-if="likedPulse.has(product.id)"
+                class="absolute inset-0 rounded-full bg-red-500/50 animate-ping"
+              />
+              <Heart
+                class="relative h-4 w-4 transition-transform duration-300"
+                :class="isInWishlist(product.id) ? 'scale-125' : ''"
+                :fill="isInWishlist(product.id) ? 'currentColor' : 'none'"
+              />
             </button>
           </div>
 
@@ -113,13 +124,27 @@
                 ${{ product.price.toFixed(2) }}
               </span>
 
-              <!-- Modern Add to Cart Button -->
+              <!-- Add to Cart Button (modernized: expanding pill on hover + added confirmation) -->
               <button
-                @click.stop="addToCart(product)"
-                class="flex h-8 w-8 items-center justify-center rounded-full border border-text/20 bg-transparent text-text cursor-pointer transition-all duration-200 hover:border-primary hover:bg-primary hover:text-white active:scale-90"
+                @click.stop="handleAddToCart(product)"
+                :class="[
+                  'group/btn relative flex h-9 items-center justify-center overflow-hidden rounded-full border cursor-pointer transition-all duration-300 ease-out active:scale-90',
+                  addedIds.has(product.id)
+                    ? 'w-9 border-primary bg-primary text-white shadow-[0_6px_16px_rgba(0,0,0,0.16)]'
+                    : 'w-9 border-text/15 bg-transparent text-text shadow-[0_1px_3px_rgba(0,0,0,0.06)] hover:w-22 hover:border-primary hover:bg-primary hover:text-white hover:shadow-[0_6px_16px_rgba(0,0,0,0.16)]'
+                ]"
                 aria-label="Add to cart"
               >
-                <Plus class="h-4 w-4" />
+                <Transition name="icon-swap" mode="out-in">
+                  <Check v-if="addedIds.has(product.id)" key="check" class="h-4 w-4 shrink-0" />
+                  <Plus v-else key="plus" class="h-4 w-4 shrink-0 transition-transform duration-300 group-hover/btn:rotate-90" />
+                </Transition>
+                <span
+                  v-if="!addedIds.has(product.id)"
+                  class="ml-0 max-w-0 overflow-hidden whitespace-nowrap text-[0.7rem] font-semibold opacity-0 transition-all duration-300 group-hover/btn:ml-1 group-hover/btn:max-w-14 group-hover/btn:opacity-100"
+                >
+                  Add
+                </span>
               </button>
             </div>
           </div>
@@ -129,7 +154,7 @@
       <!-- Empty State -->
       <div
         v-else
-        class="mx-auto flex max-w-[420px] flex-col items-center justify-center rounded-[20px] border border-dashed border-border/80 bg-white/60 px-8 py-16 text-center shadow-sm"
+        class="mx-auto flex max-w-105 flex-col items-center justify-center rounded-lg border border-dashed border-border/80 bg-white/60 px-8 py-16 text-center shadow-sm"
       >
         <div class="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-[#f0ede6] text-text-muted">
           <Search class="h-6 w-6" />
@@ -140,11 +165,14 @@
             ? `We couldn't find any products matching "${searchQuery}".`
             : "We couldn't find any products in this category. Try selecting a different filter." }}
         </p>
+
+        <!-- Clear Search Button (modernized: icon + lift on hover) -->
         <button
           v-if="hasQuery"
-          class="mt-4 cursor-pointer rounded-full border-none bg-primary px-5 py-2 text-xs font-semibold text-white hover:opacity-90"
+          class="mt-4 inline-flex cursor-pointer items-center gap-1.5 rounded-full border-none bg-primary px-5 py-2.5 text-xs font-semibold text-white shadow-[0_4px_12px_rgba(0,0,0,0.12)] transition-all duration-300 hover:-translate-y-0.5 hover:opacity-95 hover:shadow-[0_8px_20px_rgba(0,0,0,0.18)] active:translate-y-0"
           @click="clearSearch"
         >
+          <RotateCcw class="h-3.5 w-3.5" />
           Clear search
         </button>
       </div>
@@ -155,7 +183,7 @@
 
 <script setup>
 import { ref, reactive, computed, nextTick, onMounted } from 'vue'
-import { Search, Heart, Plus, Check, Star } from 'lucide-vue-next'
+import { Search, Heart, Plus, Check, Star, X, RotateCcw } from 'lucide-vue-next'
 import { useCart } from '@/composables/useCart.js'
 import { useWishlist } from '@/composables/useWishlist.js'
 import { useSearch } from '@/composables/useSearch.js'
@@ -193,7 +221,33 @@ onMounted(() => {
   nextTick(updateIndicator)
   window.addEventListener('resize', updateIndicator)
 })
-// --- End sliding indicator logic ---
+
+// --- Button click feedback ---
+const addedIds = ref(new Set())
+const likedPulse = ref(new Set())
+
+function handleAddToCart(product) {
+  addToCart(product)
+  addedIds.value = new Set(addedIds.value).add(product.id)
+  setTimeout(() => {
+    const next = new Set(addedIds.value)
+    next.delete(product.id)
+    addedIds.value = next
+  }, 1200)
+}
+
+function handleWishlist(product) {
+  const wasLiked = isInWishlist(product.id)
+  toggleWishlist(product)
+  if (!wasLiked) {
+    likedPulse.value = new Set(likedPulse.value).add(product.id)
+    setTimeout(() => {
+      const next = new Set(likedPulse.value)
+      next.delete(product.id)
+      likedPulse.value = next
+    }, 600)
+  }
+}
 
 const products = [
   {
@@ -308,6 +362,20 @@ const filteredProducts = computed(() => {
 }
 .product-grid-leave-active {
   position: absolute;
+}
+
+/* Add to Cart icon swap */
+.icon-swap-enter-active,
+.icon-swap-leave-active {
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.icon-swap-enter-from {
+  opacity: 0;
+  transform: scale(0.4) rotate(-45deg);
+}
+.icon-swap-leave-to {
+  opacity: 0;
+  transform: scale(0.4) rotate(45deg);
 }
 
 /* Toast Animation */

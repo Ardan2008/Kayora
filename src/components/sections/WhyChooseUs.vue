@@ -1,6 +1,5 @@
 <template>
   <section id="categories" class="bg-background py-12 sm:py-24 relative overflow-hidden w-full">
-    <!-- Adjusted padding and max-width for seamless mobile fit -->
     <div class="mx-auto max-w-300 px-4 sm:px-6 w-full flex flex-col lg:grid lg:grid-cols-12 gap-8 sm:gap-12 items-center">
 
       <!-- Left: Accordion Section -->
@@ -80,7 +79,6 @@
                 v-show="openIndex === i"
                 class="overflow-hidden transition-all duration-300 ease-out"
               >
-                <!-- Reduced padding-left for mobile responsiveness -->
                 <div class="px-4 pb-4 pt-0 sm:px-6 sm:pb-6 text-[0.8125rem] sm:text-[0.875rem] leading-relaxed text-text-muted pl-10 sm:pl-13">
                   {{ item.body }}
                 </div>
@@ -90,44 +88,59 @@
         </div>
       </div>
 
-      <!-- Right: Video Card -->
+      <!-- Right: Video Reel Card -->
       <div class="w-full lg:col-span-5">
-        <div class="relative group cursor-pointer overflow-hidden rounded-lg sm:rounded-[28px] bg-slate-900 shadow-2xl w-full">
-          <!-- Thumbnail Image -->
-          <img
-            src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80"
-            alt="Living room showcase"
-            class="h-80 sm:h-120 w-full object-cover opacity-90 transition-transform duration-700 ease-out group-hover:scale-105 group-hover:opacity-80"
-          />
-          
-          <!-- Gradient Overlay -->
-          <div class="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent"></div>
+        <div class="relative mx-auto overflow-hidden rounded-lg sm:rounded-[28px] bg-slate-900 shadow-2xl w-full max-w-90 aspect-9/16">
 
-          <!-- Top Floating Tag -->
-          <div class="absolute top-4 left-4 sm:top-6 sm:left-6">
-            <span class="rounded-full bg-white/20 border border-white/30 px-3 py-1 sm:px-3.5 sm:py-1.5 text-[0.625rem] sm:text-[0.6875rem] font-semibold uppercase tracking-wider text-white backdrop-blur-md">
-              Watch Experience
-            </span>
+          <!-- Embedded Reel (shown once playing) -->
+          <iframe
+            v-if="isPlaying"
+            class="absolute inset-0 h-full w-full"
+            :src="`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0&playsinline=1`"
+            title="Behind The Craft — Kayora"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+
+          <!-- Thumbnail / Cover State -->
+          <div v-else class="group absolute inset-0 cursor-pointer" @click="isPlaying = true">
+            <img
+              :src="`https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`"
+              alt="Behind The Craft reel thumbnail"
+              class="h-full w-full object-cover opacity-90 transition-transform duration-700 ease-out group-hover:scale-105 group-hover:opacity-80"
+            />
+
+            <!-- Gradient Overlay -->
+            <div class="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent"></div>
+
+            <!-- Top Floating Tag -->
+            <div class="absolute top-4 left-4 sm:top-6 sm:left-6">
+              <span class="rounded-full bg-white/20 border border-white/30 px-3 py-1 sm:px-3.5 sm:py-1.5 text-[0.625rem] sm:text-[0.6875rem] font-semibold uppercase tracking-wider text-white backdrop-blur-md">
+                Watch Reel
+              </span>
+            </div>
+
+            <!-- Center Play Button -->
+            <div class="absolute inset-0 flex items-center justify-center">
+              <button
+                type="button"
+                class="relative flex h-14 w-14 sm:h-20 sm:w-20 items-center justify-center rounded-full border border-white/40 bg-white/20 text-white backdrop-blur-md transition-all duration-500 group-hover:scale-110 group-hover:bg-white group-hover:text-black shadow-2xl cursor-pointer"
+                aria-label="Play Reel"
+              >
+                <Play class="h-5 w-5 sm:h-6 sm:w-6 fill-current translate-x-0.5" />
+              </button>
+            </div>
+
+            <!-- Bottom Text Overlay -->
+            <div class="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 text-white">
+              <p class="text-[0.6875rem] sm:text-[0.75rem] font-semibold tracking-widest uppercase text-white/70">Behind The Craft</p>
+              <h3 class="text-[1rem] sm:text-[1.125rem] font-medium leading-snug mt-0.5 sm:mt-1">
+                Inside Our Sustainable Design Workshop
+              </h3>
+            </div>
           </div>
 
-          <!-- Center Play Button -->
-          <div class="absolute inset-0 flex items-center justify-center">
-            <button 
-              type="button"
-              class="relative flex h-14 w-14 sm:h-20 sm:w-20 items-center justify-center rounded-full border border-white/40 bg-white/20 text-white backdrop-blur-md transition-all duration-500 group-hover:scale-110 group-hover:bg-white group-hover:text-black shadow-2xl cursor-pointer" 
-              aria-label="Play Video"
-            >
-              <Play class="h-5 w-5 sm:h-6 sm:w-6 fill-current translate-x-0.5" />
-            </button>
-          </div>
-
-          <!-- Bottom Text Overlay -->
-          <div class="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 text-white">
-            <p class="text-[0.6875rem] sm:text-[0.75rem] font-semibold tracking-widest uppercase text-white/70">Behind The Craft</p>
-            <h3 class="text-[1rem] sm:text-[1.125rem] font-medium leading-snug mt-0.5 sm:mt-1">
-              Inside Our Sustainable Design Workshop
-            </h3>
-          </div>
         </div>
       </div>
 
@@ -140,6 +153,10 @@ import { ref } from 'vue'
 import { Plus, Minus, Play } from 'lucide-vue-next'
 
 const openIndex = ref(0)
+
+// Reel video state
+const videoId = 'UELVSZC06BE'
+const isPlaying = ref(false)
 
 const items = [
   {

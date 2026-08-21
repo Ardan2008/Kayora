@@ -9,6 +9,7 @@ import RecommendedSection from '@/components/sections/RecommendedSection.vue'
 import TestimonialsSection from '@/components/sections/TestimonialsSection.vue'
 import CountdownSection   from '@/components/sections/CountdownSection.vue'
 import BlogSection        from '@/components/sections/BlogSection.vue'
+import FaqSection         from '@/components/sections/FaqSection.vue'
 </script>
 
 <template>
@@ -23,5 +24,6 @@ import BlogSection        from '@/components/sections/BlogSection.vue'
     <TestimonialsSection />
     <CountdownSection />
     <BlogSection />
+    <FaqSection />
   </div>
 </template>
