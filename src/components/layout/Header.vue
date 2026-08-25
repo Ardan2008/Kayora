@@ -8,7 +8,7 @@
     <div class="mx-auto flex items-center justify-between max-w-300 px-6 py-4 max-sm:px-4 max-sm:py-3">
 
       <!-- Logo -->
-      <router-link to="/" class="flex-shrink-0 font-display text-[1.375rem] font-bold tracking-tight text-text no-underline max-sm:text-[1.125rem]">
+      <router-link to="/" class="shrink-0 font-display text-[1.375rem] font-bold tracking-tight text-text no-underline max-sm:text-[1.125rem]">
         Kayora
       </router-link>
 
@@ -29,7 +29,7 @@
       </nav>
 
       <!-- Actions -->
-      <div class="flex flex-shrink-0 items-center gap-2 max-sm:gap-1">
+      <div class="flex shrink-0 items-center gap-2 max-sm:gap-1">
         <!-- Search Icon Button -->
         <button
           type="button"
@@ -131,7 +131,7 @@
             <div class="relative border-b border-white/10 bg-text px-6 pt-5 pb-4">
               <div>
                 <span class="font-display text-xl font-bold tracking-tight text-white">Kayora</span>
-                <div class="mt-1.5 h-[2px] w-8 bg-primary"></div>
+                <div class="mt-1.5 h-0.5 w-8 bg-primary"></div>
               </div>
 
               <p class="mt-3 text-[0.75rem] font-medium uppercase tracking-[0.12em] text-white/40">
@@ -156,7 +156,7 @@
               >
                 <span
                   :class="[
-                    'flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-xl transition-colors duration-200',
+                    'flex h-8 w-8 shrink-0 items-center justify-center rounded-xl transition-colors duration-200',
                     activeLink === item.href ? 'bg-primary text-white' : 'bg-[#f0ede6] text-text-muted group-hover:text-primary'
                   ]"
                 >
@@ -274,7 +274,7 @@
                 :key="item.id"
                 class="group relative flex items-center gap-4 rounded-2xl border border-border/50 bg-white p-3.5 transition-all duration-200 hover:border-border hover:shadow-sm"
               >
-                <img :src="item.img" :alt="item.name" loading="lazy" class="h-20 w-20 rounded-xl object-cover bg-[#f0ede6] flex-shrink-0" />
+                <img :src="item.img" :alt="item.name" loading="lazy" class="h-20 w-20 rounded-xl object-cover bg-[#f0ede6] shrink-0" />
 
                 <div class="flex flex-1 flex-col justify-between self-stretch py-0.5 min-w-0 pr-6">
                   <div class="min-w-0">
@@ -402,7 +402,7 @@
                 :key="item.id"
                 class="group relative flex items-center gap-4 rounded-2xl border border-border/50 bg-white p-3.5 transition-all duration-200 hover:border-border hover:shadow-sm"
               >
-                <img :src="item.img" :alt="item.name" loading="lazy" class="h-20 w-20 rounded-xl object-cover bg-[#f0ede6] flex-shrink-0" />
+                <img :src="item.img" :alt="item.name" loading="lazy" class="h-20 w-20 rounded-xl object-cover bg-[#f0ede6] shrink-0" />
 
                 <div class="flex flex-1 flex-col justify-between self-stretch py-0.5 min-w-0 pr-6">
                   <div class="min-w-0">
@@ -494,13 +494,21 @@
               <!-- Greeting -->
               <div class="relative mb-8 flex items-start gap-4">
                 <div class="pointer-events-none absolute -top-6 -right-2 h-24 w-24 rounded-full bg-primary/10 blur-2xl"></div>
-                <div class="relative flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-full bg-primary/10 font-serif text-2xl font-semibold text-primary">
+                <div class="relative flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-primary/10 font-serif text-2xl font-semibold text-primary">
                   {{ currentUser.name.charAt(0) }}
                 </div>
                 <div class="min-w-0 pt-1">
                   <p class="text-[0.6875rem] font-semibold uppercase tracking-[0.14em] text-text-muted">Welcome back</p>
-                  <h3 class="mt-1 font-serif text-[1.65rem] leading-tight text-text truncate">{{ currentUser.name }}</h3>
-                  <p class="mt-0.5 truncate text-[0.75rem] text-text-muted">{{ currentUser.email }}</p>
+                  <TruncatedText
+                    :text="currentUser.name"
+                    as="h3"
+                    className="mt-1 font-serif text-[1.65rem] leading-tight text-text"
+                  />
+                  <TruncatedText
+                    :text="currentUser.email"
+                    as="p"
+                    className="mt-0.5 text-[0.75rem] text-text-muted"
+                  />
                 </div>
               </div>
 
@@ -516,15 +524,23 @@
                     :is="item.icon"
                     :size="17"
                     stroke-width="1.6"
-                    class="flex-shrink-0 text-text-muted transition-colors duration-200 group-hover:text-primary"
+                    class="shrink-0 text-text-muted transition-colors duration-200 group-hover:text-primary"
                   />
                   <span class="min-w-0 flex-1">
-                    <span class="block text-[0.875rem] font-medium text-text">{{ item.label }}</span>
-                    <span class="block truncate text-[0.7rem] text-text-muted">{{ item.description }}</span>
+                    <TruncatedText
+                      :text="item.label"
+                      as="span"
+                      className="block text-[0.875rem] font-medium text-text"
+                    />
+                    <TruncatedText
+                      :text="item.description"
+                      as="span"
+                      className="block text-[0.7rem] text-text-muted"
+                    />
                   </span>
                   <ArrowRight
                     :size="15"
-                    class="flex-shrink-0 -translate-x-1 text-primary opacity-0 transition-all duration-200 group-hover:translate-x-0 group-hover:opacity-100"
+                    class="shrink-0 -translate-x-1 text-primary opacity-0 transition-all duration-200 group-hover:translate-x-0 group-hover:opacity-100"
                   />
                 </button>
               </nav>
@@ -535,6 +551,7 @@
               <button
                 type="button"
                 class="group inline-flex cursor-pointer items-center gap-2 border-none bg-transparent p-0 text-[0.8125rem] font-semibold text-text-muted transition-colors duration-200 hover:text-red-500"
+                @click="handleSignOut"
               >
                 <LogOut :size="15" class="transition-transform duration-200 group-hover:-translate-x-0.5" />
                 <span>Sign out</span>
@@ -569,7 +586,7 @@
               </button>
 
               <div class="flex items-center gap-3 pl-6 pr-16 py-5 max-sm:pl-4 max-sm:pr-14">
-                <div class="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+                <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
                   <Search :size="18" stroke-width="2" />
                 </div>
                 <input
@@ -583,7 +600,7 @@
                 />
                 <button
                   v-if="searchQuery"
-                  class="flex h-7 w-7 flex-shrink-0 cursor-pointer items-center justify-center rounded-full border-none bg-transparent text-text-muted transition-colors duration-200 hover:bg-primary-soft hover:text-primary"
+                  class="flex h-7 w-7 shrink-0 cursor-pointer items-center justify-center rounded-full border-none bg-transparent text-text-muted transition-colors duration-200 hover:bg-primary-soft hover:text-primary"
                   aria-label="Clear search"
                   @click="clearSearch"
                 >
@@ -619,9 +636,9 @@
             :src="toastProduct.img"
             :alt="toastProduct.name"
             loading="lazy"
-            class="h-10 w-10 flex-shrink-0 rounded-lg object-cover bg-white/10"
+            class="h-10 w-10 shrink-0 rounded-lg object-cover bg-white/10"
           />
-          <div v-else class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-primary/20 text-primary">
+          <div v-else class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/20 text-primary">
             <Check :size="16" />
           </div>
 
@@ -632,7 +649,7 @@
 
           <button
             @click="isCartOpen = true; isWishlistOpen = false; dismissToast()"
-            class="flex-shrink-0 rounded-full border border-white/20 px-3 py-1.5 text-[0.6875rem] font-semibold text-white cursor-pointer bg-transparent hover:bg-primary hover:border-primary transition-colors"
+            class="shrink-0 rounded-full border border-white/20 px-3 py-1.5 text-[0.6875rem] font-semibold text-white cursor-pointer bg-transparent hover:bg-primary hover:border-primary transition-colors"
           >
             View
           </button>
@@ -640,7 +657,7 @@
           <button
             @click="dismissToast"
             aria-label="Dismiss"
-            class="flex-shrink-0 flex h-5 w-5 items-center justify-center rounded-full border-none bg-transparent text-white/40 cursor-pointer hover:text-white transition-colors"
+            class="shrink-0 flex h-5 w-5 items-center justify-center rounded-full border-none bg-transparent text-white/40 cursor-pointer hover:text-white transition-colors"
           >
             <X :size="13" />
           </button>
@@ -661,6 +678,8 @@ import { useCart } from '@/composables/useCart.js'
 import { useWishlist } from '@/composables/useWishlist.js'
 import { useSearch } from '@/composables/useSearch.js'
 import TruncatedText from '@/components/TruncatedText.vue'
+import Swal from 'sweetalert2'
+import { useRouter } from 'vue-router'
 
 const {
   cartItems,
@@ -686,6 +705,8 @@ const {
 
 const { searchQuery, clearSearch: resetSearch, hasQuery } = useSearch()
 
+const router = useRouter()
+
 const isMenuOpen        = ref(false)
 const isScrolled        = ref(false)
 const isSearchOpen      = ref(false)
@@ -696,25 +717,222 @@ const activeLink        = ref('#home')
 const searchInput       = ref(null)
 
 const currentUser = {
-  name: 'Jordan Lee',
-  email: 'jordan.lee@email.com',
+  name: 'Ardan Ramadhan Putra Hidayat',
+  email: 'ramadhanardan69@gmail.com',
 }
 
 const accountMenuItems = [
-  { label: 'My Orders',        description: 'Track and manage your orders', icon: Package },
-  { label: 'Saved Addresses',  description: 'Manage delivery addresses',    icon: MapPin },
-  { label: 'Payment Methods',  description: 'Cards and payment options',    icon: CreditCard },
+  { label: 'My Orders', description: 'Track and manage your orders', icon: Package },
+  { label: 'Saved Addresses', description: 'Manage delivery addresses', icon: MapPin },
+  { label: 'Payment Methods', description: 'Cards and payment options', icon: CreditCard },
   { label: 'Account Settings', description: 'Profile, password & privacy', icon: Settings },
-  { label: 'Help & Support',   description: 'FAQs and contact us',         icon: HelpCircle },
+  { label: 'Help & Support', description: 'FAQs and contact us', icon: HelpCircle },
 ]
 
+const handleSignOut = async () => {
+  const result = await Swal.fire({
+    html: `
+      <div class="flex flex-col items-center text-center px-1" style="font-family: var(--font-body, 'Inter', sans-serif);">
+        <div id="signout-icon" class="flex h-14 w-14 items-center justify-center rounded-full mb-4">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#5F7A68" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+            <polyline points="16 17 21 12 16 7" />
+            <line x1="21" y1="12" x2="9" y2="12" />
+          </svg>
+        </div>
+        <h2 class="text-[1.25rem] font-semibold mb-1.5" style="font-family: var(--font-display, 'DM Serif Display', serif); color: var(--color-text, #2E2E2A); letter-spacing: -0.01em;">
+          Sign out of your account?
+        </h2>
+        <p class="text-[0.8125rem] leading-relaxed max-w-65" style="color: var(--color-text-muted, #85837B); font-weight: 400;">
+          You'll need to sign in again to access your orders, wishlist, and saved details.
+        </p>
+      </div>
+    `,
+    showCancelButton: true,
+    confirmButtonText: 'Yes, sign out',
+    cancelButtonText: 'Cancel',
+    reverseButtons: true,
+    focusCancel: true,
+    buttonsStyling: false,
+    backdrop: 'rgba(46, 46, 42, 0.4)',
+    customClass: {
+      popup:
+        'rounded-[28px] px-7 pt-8 pb-7 w-full max-w-95 border shadow-[0_20px_60px_rgba(46,46,42,0.18),0_2px_8px_rgba(46,46,42,0.06)]',
+      actions: 'gap-2.5 mt-6 w-full flex-nowrap',
+      confirmButton:
+        'flex-1 whitespace-nowrap rounded-[14px] border-none px-4 py-2.5 text-[0.8125rem] font-medium cursor-pointer active:scale-[0.96]',
+      cancelButton:
+        'flex-1 whitespace-nowrap rounded-[14px] border-none px-4 py-2.5 text-[0.8125rem] font-medium cursor-pointer active:scale-[0.96]',
+    },
+    didOpen: () => {
+      const popup = Swal.getPopup()
+      const actionsContainer = Swal.getActions()
+      const confirmBtn = Swal.getConfirmButton()
+      const cancelBtn = Swal.getCancelButton()
+      const iconCircle = document.getElementById('signout-icon')
+
+      popup.style.background = 'rgba(255, 255, 255, 0.9)'
+      popup.style.backdropFilter = 'blur(24px)'
+      popup.style.webkitBackdropFilter = 'blur(24px)'
+      popup.style.border = '1px solid rgba(230, 226, 216, 0.8)'
+
+      const baseTransition = 'all 0.25s cubic-bezier(0.4, 0, 0.2, 1)'
+
+      // === Icon circle — glass sage, NO border, depth via shadow + inner sheen ===
+      iconCircle.style.background = 'rgba(124, 152, 133, 0.14)'
+      iconCircle.style.backdropFilter = 'blur(10px) saturate(140%)'
+      iconCircle.style.webkitBackdropFilter = 'blur(10px) saturate(140%)'
+      iconCircle.style.boxShadow =
+        'inset 0 1px 1px rgba(255,255,255,0.6), inset 0 -6px 10px rgba(124,152,133,0.08), 0 4px 14px rgba(124,152,133,0.15)'
+
+      // === Confirm button — glass primary, borderless, depth via shadow ===
+      confirmBtn.style.background = 'rgba(124, 152, 133, 0.85)'
+      confirmBtn.style.backdropFilter = 'blur(16px) saturate(160%)'
+      confirmBtn.style.webkitBackdropFilter = 'blur(16px) saturate(160%)'
+      confirmBtn.style.color = '#FFFFFF'
+      confirmBtn.style.boxShadow =
+        'inset 0 1px 0 rgba(255,255,255,0.25), 0 4px 14px rgba(95,122,104,0.3)'
+      confirmBtn.style.transition = baseTransition
+      confirmBtn.style.outline = 'none'
+      confirmBtn.onmouseenter = () => (confirmBtn.style.background = 'rgba(95, 122, 104, 0.92)')
+      confirmBtn.onmouseleave = () => (confirmBtn.style.background = 'rgba(124, 152, 133, 0.85)')
+
+      // === Cancel button — glass light, borderless ===
+      cancelBtn.style.background = 'rgba(255, 255, 255, 0.5)'
+      cancelBtn.style.backdropFilter = 'blur(16px) saturate(140%)'
+      cancelBtn.style.webkitBackdropFilter = 'blur(16px) saturate(140%)'
+      cancelBtn.style.color = '#2E2E2A'
+      cancelBtn.style.boxShadow =
+        'inset 0 1px 0 rgba(255,255,255,0.7), 0 2px 8px rgba(46,46,42,0.06)'
+      cancelBtn.style.transition = baseTransition
+      cancelBtn.style.outline = 'none'
+      cancelBtn.onmouseenter = () => (cancelBtn.style.background = 'rgba(255, 255, 255, 0.75)')
+      cancelBtn.onmouseleave = () => (cancelBtn.style.background = 'rgba(255, 255, 255, 0.5)')
+
+      // === Focus glow — sage green, layered on top of resting shadow ===
+      const applyFocusStyle = (btn, isConfirm) => {
+        const restingShadow = isConfirm
+          ? 'inset 0 1px 0 rgba(255,255,255,0.25), 0 4px 14px rgba(95,122,104,0.3)'
+          : 'inset 0 1px 0 rgba(255,255,255,0.7), 0 2px 8px rgba(46,46,42,0.06)'
+        const glow = isConfirm
+          ? '0 0 0 4px rgba(124,152,133,0.2), 0 0 0 1.5px #5F7A68'
+          : '0 0 0 4px rgba(124,152,133,0.16), 0 0 0 1.5px #7C9885'
+        btn.style.boxShadow = `${glow}, ${restingShadow}`
+        btn.style.transform = 'translateY(-1px)'
+      }
+
+      const removeFocusStyle = (btn, isConfirm) => {
+        btn.style.boxShadow = isConfirm
+          ? 'inset 0 1px 0 rgba(255,255,255,0.25), 0 4px 14px rgba(95,122,104,0.3)'
+          : 'inset 0 1px 0 rgba(255,255,255,0.7), 0 2px 8px rgba(46,46,42,0.06)'
+        btn.style.transform = 'translateY(0)'
+      }
+
+      confirmBtn.addEventListener('focus', () => applyFocusStyle(confirmBtn, true))
+      confirmBtn.addEventListener('blur', () => removeFocusStyle(confirmBtn, true))
+      cancelBtn.addEventListener('focus', () => applyFocusStyle(cancelBtn, false))
+      cancelBtn.addEventListener('blur', () => removeFocusStyle(cancelBtn, false))
+
+      applyFocusStyle(cancelBtn, false)
+
+      const getButtonsLeftToRight = () =>
+        Array.from(actionsContainer.querySelectorAll('button')).sort(
+          (a, b) => a.getBoundingClientRect().left - b.getBoundingClientRect().left
+        )
+
+      const handleKeydown = (e) => {
+        if (!['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(e.key)) return
+        e.preventDefault()
+
+        const buttons = getButtonsLeftToRight()
+        const currentIndex = buttons.indexOf(document.activeElement)
+        const direction = e.key === 'ArrowRight' || e.key === 'ArrowDown' ? 1 : -1
+        const baseIndex = currentIndex === -1 ? 0 : currentIndex
+        const nextIndex = (baseIndex + direction + buttons.length) % buttons.length
+
+        buttons[nextIndex]?.focus()
+      }
+
+      popup.addEventListener('keydown', handleKeydown)
+    },
+  })
+
+  if (result.isConfirmed) {
+    isAccountOpen.value = false
+
+    await Swal.fire({
+      html: `
+        <style>
+          @keyframes drawCheck {
+            to { stroke-dashoffset: 0; }
+          }
+          @keyframes popIn {
+            0%   { transform: scale(0.6); opacity: 0; }
+            60%  { transform: scale(1.08); opacity: 1; }
+            100% { transform: scale(1); opacity: 1; }
+          }
+          @keyframes ringPulse {
+            0%   { transform: scale(0.9); opacity: 0.6; }
+            100% { transform: scale(1.35); opacity: 0; }
+          }
+          #success-icon-wrap { animation: popIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+          #success-ring { animation: ringPulse 1.6s cubic-bezier(0.2, 0.6, 0.4, 1) 0.3s infinite; }
+          #success-check { stroke-dasharray: 24; stroke-dashoffset: 24; animation: drawCheck 0.45s ease-out 0.35s forwards; }
+        </style>
+        <div class="flex flex-col items-center text-center px-1" style="font-family: var(--font-body, 'Inter', sans-serif);">
+          <div style="position: relative; width: 64px; height: 64px; margin-bottom: 18px;">
+            <div id="success-ring" style="position: absolute; inset: 0; border-radius: 9999px; background: rgba(124,152,133,0.25);"></div>
+            <div id="success-icon-wrap" class="flex h-16 w-16 items-center justify-center rounded-full" style="position: relative;">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+                <polyline id="success-check" points="20 6 9 17 4 12" stroke="#5F7A68" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </div>
+          </div>
+          <h2 class="text-[1.3rem] font-semibold mb-1.5" style="font-family: var(--font-display, 'DM Serif Display', serif); color: var(--color-text, #2E2E2A); letter-spacing: -0.01em;">
+            You're signed out
+          </h2>
+          <p class="text-[0.8125rem] leading-relaxed" style="color: var(--color-text-muted, #85837B);">
+            Taking you back to the homepage
+          </p>
+        </div>
+      `,
+      timer: 2700,
+      timerProgressBar: true,
+      showConfirmButton: false,
+      allowOutsideClick: false,
+      backdrop: 'rgba(46, 46, 42, 0.4)',
+      customClass: {
+        popup:
+          'rounded-[28px] px-7 pt-9 pb-8 w-full max-w-90 shadow-[0_20px_60px_rgba(46,46,42,0.18),0_2px_8px_rgba(46,46,42,0.06)]',
+        timerProgressBar: '!bg-[#7C9885] !h-[3px]',
+      },
+      didOpen: () => {
+        const popup = Swal.getPopup()
+        const iconWrap = document.getElementById('success-icon-wrap')
+
+        popup.style.background = 'rgba(255, 255, 255, 0.9)'
+        popup.style.backdropFilter = 'blur(24px)'
+        popup.style.webkitBackdropFilter = 'blur(24px)'
+        popup.style.border = 'none'
+
+        iconWrap.style.background = 'rgba(124, 152, 133, 0.14)'
+        iconWrap.style.backdropFilter = 'blur(10px) saturate(140%)'
+        iconWrap.style.webkitBackdropFilter = 'blur(10px) saturate(140%)'
+        iconWrap.style.boxShadow =
+          'inset 0 1px 1px rgba(255,255,255,0.6), inset 0 -6px 10px rgba(124,152,133,0.08), 0 4px 14px rgba(124,152,133,0.2)'
+      },
+    })
+
+    router.push('/')
+  }
+}
+
 const navItems = [
-  
-  { label: 'Home',       href: '#home',           icon: Home },
-  { label: 'Shop',       href: '#shop',           icon: ShoppingBag },
-  { label: 'Collection', href: '#Recommendations', icon: LayoutGrid },
-  { label: 'Blog',       href: '#blog',            icon: BookOpen },
-  { label: 'FAQ',        href: '#faq',             icon: MessageCircleQuestionMark },
+  { label: 'Home', href: '#home', icon: Home },
+  { label: 'Shop', href: '#shop', icon: ShoppingBag },
+  { label: 'Featured', href: '#featured', icon: LayoutGrid },
+  { label: 'Blog', href: '#blog', icon: BookOpen },
+  { label: 'FAQ', href: '#faq', icon: MessageCircleQuestionMark },
 ]
 
 let manualOverride = false

@@ -1,13 +1,13 @@
 <template>
-  <section id="Recommendations" class="bg-background py-24">
+  <section id="featured" class="bg-background py-24">
     <div class="mx-auto max-w-300 px-6">
 
       <div class="mx-auto mb-14 max-w-155 text-center">
         <span class="mb-3 inline-block text-[0.6875rem] font-bold uppercase tracking-[0.16em] text-primary">Curated For You</span>
-        <h2 class="font-display text-[2.25rem] leading-[1.15] text-text">Most Recommend Product For You</h2>
+        <h2 class="font-display text-[2.25rem] leading-[1.15] text-text">Featured Furniture</h2>
         <p class="mt-3.5 text-[0.9375rem] leading-7 text-text-muted">
-          Discover top-recommended furniture tailored to your style and needs. Elevate your home with
-          pieces designed for comfort and elegance.
+          Discover our handpicked furniture pieces, thoughtfully selected <br />
+          to bring comfort, style, and elegance to your home.
         </p>
       </div>
 

@@ -110,7 +110,7 @@ const socials = [
 const quickLinks = [
   { label: 'About Us',    href: '#about' },
   { label: 'Blog',        href: '#blog' },
-  { label: 'Collections', href: '#shop' },
+  { label: 'Shop', href: '#shop' },
   { label: 'Recommendations',     href: '#Recommendations' },
 ]
 </script>
