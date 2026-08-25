@@ -32,7 +32,7 @@
           >
             <!-- Sliding glass indicator -->
             <div
-              class="absolute left-0 top-1.5 bottom-1.5 rounded-full bg-white/95 shadow-[0_2px_10px_rgba(0,0,0,0.14),inset_0_1px_0_rgba(255,255,255,0.9)] backdrop-blur-md transition-all duration-300 ease-[cubic-bezier(0.34,1.15,0.64,1)]"
+              class="absolute left-0 top-1.5 bottom-1.5 rounded-full bg-primary shadow-[0_2px_10px_rgba(0,0,0,0.14),inset_0_1px_0_rgba(255,255,255,0.9)] backdrop-blur-md transition-all duration-300 ease-[cubic-bezier(0.34,1.15,0.64,1)]"
               :style="indicatorStyle"
             />
 
@@ -42,7 +42,7 @@
               :ref="el => setTabRef(el, tab)"
               :class="[
                 'relative z-10 rounded-full px-5 py-2 text-[0.8125rem] font-medium transition-colors duration-300 cursor-pointer',
-                activeTab === tab ? 'text-text' : 'text-text-muted hover:text-text'
+                activeTab === tab ? 'text-white/90' : 'text-text-muted hover:text-text'
               ]"
               @click="selectTab(tab)"
             >
