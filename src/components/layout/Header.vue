@@ -12,7 +12,7 @@
         Kayora
       </router-link>
 
-      <!-- Desktop Navigation -->
+      <!-- Navigasi Desktop -->
       <nav class="flex flex-1 items-center justify-center gap-8 max-md:hidden">
         <a
           v-for="item in navItems"
@@ -28,9 +28,9 @@
         </a>
       </nav>
 
-      <!-- Actions -->
+      <!-- Aksi -->
       <div class="flex shrink-0 items-center gap-2 max-sm:gap-1">
-        <!-- Search Icon Button -->
+        <!-- Tombol Ikon Pencarian -->
         <button
           type="button"
           aria-label="Search"
@@ -40,7 +40,7 @@
           <Search :size="18" stroke-width="1.8" />
         </button>
 
-        <!-- Account Icon Button -->
+        <!-- Tombol Ikon Akun -->
         <button
           type="button"
           aria-label="Account"
@@ -50,7 +50,7 @@
           <User :size="18" stroke-width="1.8" />
         </button>
 
-        <!-- Wishlist Icon Button -->
+        <!-- Tombol Ikon Wishlist -->
         <button
           type="button"
           aria-label="Wishlist"
@@ -71,7 +71,7 @@
           </Transition>
         </button>
 
-        <!-- Cart Icon Button -->
+        <!-- Tombol Ikon Keranjang -->
         <button
           type="button"
           aria-label="Cart"
@@ -83,7 +83,7 @@
         >
           <ShoppingCart :size="18" stroke-width="1.8" />
 
-          <!-- Badge Counter -->
+          <!-- Penghitung Badge -->
           <Transition name="badge-pop">
             <span
               v-if="totalCartCount > 0"
@@ -94,7 +94,7 @@
           </Transition>
         </button>
 
-        <!-- Mobile Menu Button -->
+        <!-- Tombol Menu Mobile -->
         <button
           class="hidden cursor-pointer border-none bg-transparent p-1 text-text max-md:inline-flex relative h-8 w-8 items-center justify-center rounded-full transition-colors duration-200 hover:bg-primary-soft hover:text-primary"
           aria-label="Toggle menu"
@@ -106,7 +106,7 @@
 
     </div>
 
-    <!-- Modern Mobile Menu (slide-over panel) -->
+    <!-- Menu Mobile Modern (panel slide-over) -->
     <Teleport to="body">
       <div v-if="isMenuOpen" class="fixed inset-0 z-110 flex justify-end md:hidden">
         <Transition name="fade" appear>
@@ -118,7 +118,7 @@
         <Transition name="slide" appear>
           <div class="relative flex h-full w-full max-w-[320px] flex-col overflow-visible bg-white shadow-2xl z-10">
 
-            <!-- Floating Close Button (straddles the panel's left edge, vertically centered) -->
+            <!-- Tombol tutup melayang (menjembatani tepi kiri panel, sejajar vertikal) -->
             <button
               @click="isMenuOpen = false"
               aria-label="Close menu"
@@ -127,7 +127,7 @@
               <X :size="18" />
             </button>
 
-            <!-- Header panel -->
+            <!-- Panel Header -->
             <div class="relative border-b border-white/10 bg-text px-6 pt-5 pb-4">
               <div>
                 <span class="font-display text-xl font-bold tracking-tight text-white">Kayora</span>
@@ -139,7 +139,7 @@
               </p>
             </div>
 
-            <!-- Nav Links -->
+            <!-- Tautan Navigasi -->
             <nav class="flex-1 overflow-y-auto px-4 py-5">
               <a
                 v-for="(item, idx) in navItems"
@@ -170,7 +170,7 @@
               </a>
             </nav>
 
-            <!-- Quick Actions Footer -->
+            <!-- Footer Aksi Cepat -->
             <div class="border-t border-border/70 bg-background/60 px-5 py-5 space-y-3">
               <button
                 class="flex w-full cursor-pointer items-center gap-3 rounded-2xl border-none bg-white px-4 py-3 text-left shadow-sm"
@@ -218,13 +218,13 @@
       </div>
     </Teleport>
 
-    <!-- Slide-Over Cart Pop-up -->
+    <!-- Pop-up Slide-Over Keranjang -->
     <Teleport to="body">
       <div
         class="fixed inset-0 z-100 flex justify-end"
         :class="isCartOpen ? 'pointer-events-auto' : 'pointer-events-none'"
       >
-        <!-- Glassmorphism Backdrop -->
+        <!-- Latar Glassmorphism -->
         <Transition name="fade">
           <div
             v-if="isCartOpen"
@@ -232,11 +232,11 @@
           ></div>
         </Transition>
 
-        <!-- Drawer Content Container -->
+        <!-- Kontainer Konten Drawer -->
         <Transition name="slide">
           <div v-if="isCartOpen" class="relative flex h-full w-full max-w-105 flex-col bg-white shadow-2xl z-10 border-l border-border/40">
 
-            <!-- Header Cart -->
+            <!-- Header Keranjang -->
             <div class="flex items-center justify-between border-b border-border/80 px-6 py-5 bg-background/50 max-sm:px-4">
               <div class="flex items-center gap-2.5">
                 <div class="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary">
@@ -255,9 +255,9 @@
               </button>
             </div>
 
-            <!-- Cart Product List -->
+            <!-- Daftar Produk Keranjang -->
             <div class="flex-1 overflow-y-auto px-6 py-4 space-y-3 max-sm:px-4">
-              <!-- Empty State Cart -->
+              <!-- State Kosong Keranjang -->
               <div v-if="cartItems.length === 0" class="flex h-full flex-col items-center justify-center text-center py-12">
                 <div class="mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-[#F5F3EF] text-text-muted/60">
                   <ShoppingCart :size="36" stroke-width="1.5" />
@@ -268,7 +268,7 @@
                 </p>
               </div>
 
-              <!-- Product Item Card -->
+              <!-- Kartu Item Produk -->
               <div
                 v-for="item in cartItems"
                 :key="item.id"
@@ -295,7 +295,7 @@
                       ${{ (item.price * item.quantity).toFixed(2) }}
                     </span>
 
-                    <!-- Quantity Control Buttons -->
+                    <!-- Tombol Kontrol Jumlah -->
                     <div class="flex items-center gap-1.5 rounded-full border border-border/80 bg-background/60 p-0.5">
                       <button
                         @click="updateQuantity(item.id, -1)"
@@ -314,7 +314,7 @@
                   </div>
                 </div>
 
-                <!-- Remove Item Button -->
+                <!-- Tombol Hapus Item -->
                 <button
                   @click="removeFromCart(item.id)"
                   class="absolute top-3 right-3 text-text-muted/50 hover:text-red-500 cursor-pointer p-1 transition-colors border-none bg-transparent"
@@ -325,7 +325,7 @@
               </div>
             </div>
 
-            <!-- Footer & Checkout Info -->
+            <!-- Footer & Info Checkout -->
             <div v-if="cartItems.length > 0" class="border-t border-border/80 p-6 space-y-4 bg-background/50 max-sm:p-4">
               <div class="space-y-1.5">
                 <div class="flex items-center justify-between text-xs text-text-muted">
@@ -350,7 +350,7 @@
       </div>
     </Teleport>
 
-    <!-- Wishlist Slide-Over Pop-up -->
+    <!-- Pop-up Slide-Over Wishlist -->
     <Teleport to="body">
       <div
         class="fixed inset-0 z-100 flex justify-end"
@@ -385,7 +385,7 @@
               </button>
             </div>
 
-            <!-- List Wishlist -->
+            <!-- Daftar Wishlist -->
             <div class="flex-1 overflow-y-auto px-6 py-4 space-y-3 max-sm:px-4">
               <div v-if="wishlistItems.length === 0" class="flex h-full flex-col items-center justify-center text-center py-12">
                 <div class="mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-[#F5F3EF] text-text-muted/60">
@@ -454,7 +454,7 @@
       </div>
     </Teleport>
 
-    <!-- Account Slide-Over Pop-up -->
+    <!-- Pop-up Slide-Over Akun -->
     <Teleport to="body">
       <div
         class="fixed inset-0 z-100 flex justify-end"
@@ -473,7 +473,7 @@
             class="relative flex h-full w-full max-w-105 flex-col bg-white shadow-2xl z-10 border-l border-border/40"
           >
 
-            <!-- Header Account -->
+            <!-- Header Akun -->
             <div class="flex items-center justify-between border-b border-border/80 px-6 py-5 bg-background/50 max-sm:px-4">
               <div class="flex items-center gap-2.5">
                 <div class="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary">
@@ -491,7 +491,7 @@
 
             <div class="flex-1 overflow-y-auto px-6 pt-7 pb-5 max-sm:px-5">
 
-              <!-- Greeting -->
+              <!-- Sapaan -->
               <div class="relative mb-8 flex items-start gap-4">
                 <div class="pointer-events-none absolute -top-6 -right-2 h-24 w-24 rounded-full bg-primary/10 blur-2xl"></div>
                 <div class="relative flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-primary/10 font-serif text-2xl font-semibold text-primary">
@@ -563,7 +563,7 @@
       </div>
     </Teleport>
 
-    <!-- Search Overlay (centered, transparent blurred backdrop) -->
+    <!-- Overlay Pencarian (terpusat, latar buram transparan) -->
     <Teleport to="body">
       <Transition name="fade" appear>
         <div
@@ -576,7 +576,7 @@
               class="relative w-full max-w-140 rounded-3xl bg-white/95 backdrop-blur-xl shadow-[0_25px_70px_rgba(0,0,0,0.3)] border border-white/60 overflow-hidden"
               @click.stop
             >
-              <!-- Close Button -->
+              <!-- Tombol Tutup -->
               <button
                 class="absolute top-4 right-4 flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border-none bg-text text-white shadow-lg transition-transform duration-200 hover:scale-105 hover:bg-primary"
                 aria-label="Close search"
@@ -608,7 +608,7 @@
                 </button>
               </div>
 
-              <!-- Quick result count / hint -->
+              <!-- Petunjuk / jumlah hasil cepat -->
               <div class="border-t border-border/60 bg-background/60 px-6 py-3 text-[0.75rem] text-text-muted max-sm:px-4">
                 <template v-if="hasQuery">
                   Press <span class="font-semibold text-text">Enter</span> to view results for
@@ -624,7 +624,7 @@
       </Transition>
     </Teleport>
 
-    <!-- Cart Toast Notification -->
+    <!-- Notifikasi Toast Keranjang -->
     <Teleport to="body">
       <Transition name="toast">
         <div
@@ -662,7 +662,7 @@
             <X :size="13" />
           </button>
 
-          <!-- Auto-dismiss progress bar -->
+          <!-- Bar progres penutupan otomatis -->
           <div class="absolute bottom-0 left-0 h-0.75 bg-primary toast-progress"></div>
         </div>
       </Transition>
@@ -673,7 +673,7 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted, watch, nextTick } from 'vue'
-import { ShoppingCart, Search, Heart, Menu, X, Plus, Minus, Trash2, Check, Home, ShoppingBag, LayoutGrid, BookOpen, MessageCircleQuestionMark, ChevronRight, User, Package, MapPin, CreditCard, Settings, HelpCircle, LogOut, ArrowRight } from 'lucide-vue-next'
+import { ShoppingCart, Search, Heart, Menu, X, Plus, Minus, Trash2, Check, Home, ShoppingBag, LayoutGrid, BookOpen, MessageCircleQuestionMark, Quote, ChevronRight, User, Package, MapPin, CreditCard, Settings, HelpCircle, LogOut, ArrowRight } from 'lucide-vue-next'
 import { useCart } from '@/composables/useCart.js'
 import { useWishlist } from '@/composables/useWishlist.js'
 import { useSearch } from '@/composables/useSearch.js'
@@ -778,14 +778,14 @@ const handleSignOut = async () => {
 
       const baseTransition = 'all 0.25s cubic-bezier(0.4, 0, 0.2, 1)'
 
-      // === Icon circle — glass sage, NO border, depth via shadow + inner sheen ===
+      // === Lingkaran ikon — kaca sage, tanpa border, kedalaman via shadow + kilau dalam ===
       iconCircle.style.background = 'rgba(124, 152, 133, 0.14)'
       iconCircle.style.backdropFilter = 'blur(10px) saturate(140%)'
       iconCircle.style.webkitBackdropFilter = 'blur(10px) saturate(140%)'
       iconCircle.style.boxShadow =
         'inset 0 1px 1px rgba(255,255,255,0.6), inset 0 -6px 10px rgba(124,152,133,0.08), 0 4px 14px rgba(124,152,133,0.15)'
 
-      // === Confirm button — glass primary, borderless, depth via shadow ===
+      // === Tombol konfirmasi — kaca primer, tanpa border, kedalaman via shadow ===
       confirmBtn.style.background = 'rgba(124, 152, 133, 0.85)'
       confirmBtn.style.backdropFilter = 'blur(16px) saturate(160%)'
       confirmBtn.style.webkitBackdropFilter = 'blur(16px) saturate(160%)'
@@ -797,7 +797,7 @@ const handleSignOut = async () => {
       confirmBtn.onmouseenter = () => (confirmBtn.style.background = 'rgba(95, 122, 104, 0.92)')
       confirmBtn.onmouseleave = () => (confirmBtn.style.background = 'rgba(124, 152, 133, 0.85)')
 
-      // === Cancel button — glass light, borderless ===
+      // === Tombol batal — kaca terang, tanpa border ===
       cancelBtn.style.background = 'rgba(255, 255, 255, 0.5)'
       cancelBtn.style.backdropFilter = 'blur(16px) saturate(140%)'
       cancelBtn.style.webkitBackdropFilter = 'blur(16px) saturate(140%)'
@@ -809,7 +809,7 @@ const handleSignOut = async () => {
       cancelBtn.onmouseenter = () => (cancelBtn.style.background = 'rgba(255, 255, 255, 0.75)')
       cancelBtn.onmouseleave = () => (cancelBtn.style.background = 'rgba(255, 255, 255, 0.5)')
 
-      // === Focus glow — sage green, layered on top of resting shadow ===
+      // === Focus glow — hijau sage, ditumpuk di atas shadow dasar ===
       const applyFocusStyle = (btn, isConfirm) => {
         const restingShadow = isConfirm
           ? 'inset 0 1px 0 rgba(255,255,255,0.25), 0 4px 14px rgba(95,122,104,0.3)'
@@ -931,6 +931,7 @@ const navItems = [
   { label: 'Home', href: '#home', icon: Home },
   { label: 'Shop', href: '#shop', icon: ShoppingBag },
   { label: 'Featured', href: '#featured', icon: LayoutGrid },
+  { label: 'Testimonials', href: '#testimonials', icon: Quote },
   { label: 'Blog', href: '#blog', icon: BookOpen },
   { label: 'FAQ', href: '#faq', icon: MessageCircleQuestionMark },
 ]
@@ -941,38 +942,72 @@ const setActive = (href) => {
   manualOverride = true
   window.clearTimeout(setActive._t)
   setActive._t = window.setTimeout(() => { manualOverride = false }, 700)
+
+  // Sinkronkan URL tanpa menambah history baru & tanpa jump/scroll paksa
+  if (window.location.hash !== href) {
+    window.history.replaceState(null, '', href)
+  }
 }
 
-const handleScroll = () => { isScrolled.value = window.scrollY > 40 }
+const sectionEls = ref([])
+let retryTimer = null
 
-let observer = null
-const setupScrollSpy = () => {
-  const sections = navItems
+const getSectionEls = () => {
+  sectionEls.value = navItems
     .map(item => document.querySelector(item.href))
     .filter(Boolean)
+}
 
-  if (!sections.length) return
+const updateActiveFromScroll = () => {
+  if (manualOverride || !sectionEls.value.length) return
 
-  observer = new IntersectionObserver(
-    (entries) => {
-      if (manualOverride) return
+  const scrollPos = window.scrollY + 120
+  let newActive
 
-      const visible = entries
-        .filter(e => e.isIntersecting)
-        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0]
+  if (window.scrollY < 10) {
+    newActive = `#${sectionEls.value[0].id}`
+  } else {
+    const scrolledToBottom =
+      window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2
 
-      if (visible) {
-        activeLink.value = `#${visible.target.id}`
+    if (scrolledToBottom) {
+      newActive = `#${sectionEls.value[sectionEls.value.length - 1].id}`
+    } else {
+      let current = sectionEls.value[0]
+      for (const section of sectionEls.value) {
+        if (section.offsetTop <= scrollPos) {
+          current = section
+        }
       }
-    },
-    {
-      root: null,
-      rootMargin: '-30% 0px -60% 0px',
-      threshold: [0, 0.25, 0.5, 0.75, 1],
+      newActive = `#${current.id}`
     }
-  )
+  }
 
-  sections.forEach(section => observer.observe(section))
+  activeLink.value = newActive
+
+  // Update URL hash mengikuti section yang lagi kelihatan saat scroll
+  if (window.location.hash !== newActive) {
+    window.history.replaceState(null, '', newActive)
+  }
+}
+
+const handleScroll = () => {
+  isScrolled.value = window.scrollY > 40
+  updateActiveFromScroll()
+}
+
+const setupScrollSpy = () => {
+  window.clearTimeout(retryTimer)
+  getSectionEls()
+
+  if (!sectionEls.value.length) {
+    // Section belum dirender (mis. konten route yang dipasang belakangan) —
+    // coba lagi sebentar lagi daripada berhenti diam-diam.
+    retryTimer = window.setTimeout(setupScrollSpy, 150)
+    return
+  }
+
+  updateActiveFromScroll()
 }
 
 const clearSearch = () => {
@@ -994,12 +1029,14 @@ const submitSearch = () => {
 }
 
 onMounted(() => {
-  window.addEventListener('scroll', handleScroll)
+  window.addEventListener('scroll', handleScroll, { passive: true })
+  window.addEventListener('resize', setupScrollSpy)
   nextTick(() => setupScrollSpy())
 })
 onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll)
-  observer?.disconnect()
+  window.removeEventListener('resize', setupScrollSpy)
+  window.clearTimeout(retryTimer)
 })
 
 watch(isSearchOpen, async (open) => {
@@ -1009,7 +1046,7 @@ watch(isSearchOpen, async (open) => {
   }
 })
 
-// Cute little bounce on the heart icon whenever the wishlist count changes
+// Pantulan kecil pada ikon hati setiap jumlah wishlist berubah
 watch(totalWishlistCount, () => {
   isWishlistBouncing.value = true
   window.setTimeout(() => { isWishlistBouncing.value = false }, 400)
@@ -1043,7 +1080,7 @@ watch(totalWishlistCount, () => {
   color: var(--color-primary);
 }
 
-/* Dynamic Keyframe Animations */
+/* Animasi Keyframe Dinamis */
 @keyframes cartBounce {
   0% { transform: scale(1); }
   50% { transform: scale(1.25) rotate(-6deg); }
@@ -1063,7 +1100,7 @@ watch(totalWishlistCount, () => {
   transform: scale(0);
 }
 
-/* Slide Transition Panel */
+/* Panel Transisi Slide */
 .slide-enter-active,
 .slide-leave-active {
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
@@ -1082,7 +1119,7 @@ watch(totalWishlistCount, () => {
   opacity: 0;
 }
 
-/* Search Modal Pop Transition */
+/* Transisi Pop Modal Pencarian */
 .search-pop-enter-active {
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -1095,20 +1132,7 @@ watch(totalWishlistCount, () => {
   transform: scale(0.92) translateY(8px);
 }
 
-/* Toast Animation */
-.toast-enter-active,
-.toast-leave-active {
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.toast-enter-from {
-  opacity: 0;
-  transform: translateY(20px) scale(0.95);
-}
-.toast-leave-to {
-  opacity: 0;
-  transform: translateY(10px) scale(0.98);
-}
-
+/* Animasi Toast */
 .toast-enter-active {
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }

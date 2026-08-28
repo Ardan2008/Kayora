@@ -7,24 +7,26 @@
 
     <div class="relative mx-auto max-w-300 px-4 sm:px-6 w-full">
 
-      <!-- Section Header -->
-      <div class="mx-auto mb-12 sm:mb-16 max-w-165 text-center">
-        <span class="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-3.5 py-1.5 text-[0.6875rem] font-bold uppercase tracking-[0.14em] text-primary">
-          <CircleHelp :size="12" stroke-width="2.5" />
-          Help Center
-        </span>
-        <h2 class="mt-4 font-display text-[1.875rem] sm:text-[2.75rem] leading-[1.15] tracking-tight text-text">
-          Answers, before <br class="hidden sm:inline" />
-          <span class="font-normal italic text-primary">you have to ask.</span>
-        </h2>
-        <p class="mt-3 sm:mt-4 text-[0.875rem] sm:text-[0.9375rem] leading-[1.7] text-text-muted max-w-lg mx-auto">
+      <!-- Header Bagian -->
+      <div class="mb-14 sm:mb-20 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 sm:gap-8">
+        <div>
+          <span class="inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/8 px-4 py-1.5 text-[0.6875rem] sm:text-[0.75rem] font-extrabold uppercase tracking-[0.2em] text-primary">
+            FAQ
+          </span>
+          <h2 class="mt-4 font-display text-[2rem] sm:text-[2.75rem] leading-[1.1] tracking-tight text-text">
+            Answers, before <br class="hidden sm:inline" />
+            <span class="font-normal italic text-primary">you have to ask.</span>
+          </h2>
+        </div>
+
+        <p class="max-w-xs text-[0.8125rem] sm:text-[0.9375rem] italic leading-[1.7] text-text-muted lg:pb-2 lg:text-right">
           Everything you need to know about ordering, delivery, and caring for your Kayora pieces.
         </p>
       </div>
 
       <div class="flex flex-col lg:grid lg:grid-cols-12 gap-8 sm:gap-12 items-start">
 
-        <!-- Left: Support Card (stays fixed in place; only the accordion column scrolls) -->
+        <!-- Kiri: Kartu Dukungan (tetap di tempat; hanya kolom akordeon yang scroll) -->
         <div class="w-full lg:col-span-4 lg:self-start lg:sticky lg:top-28">
           <div class="relative overflow-hidden rounded-xl sm:rounded-[28px] border border-border/60 bg-white/70 backdrop-blur-md p-6 sm:p-8 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.05)]">
             <div class="pointer-events-none absolute -top-10 -right-10 h-32 w-32 rounded-full bg-primary/10 blur-2xl"></div>
@@ -48,7 +50,7 @@
               Contact Support
             </a>
 
-            <!-- Trust Stats Strip -->
+            <!-- Strip Statistik Kepercayaan -->
             <div class="relative mt-7 grid grid-cols-3 gap-3 border-t border-border/60 pt-6">
               <div v-for="stat in stats" :key="stat.label" class="text-center sm:text-left">
                 <p class="font-display text-[1.25rem] sm:text-[1.375rem] font-bold text-text leading-none">{{ stat.value }}</p>
@@ -58,7 +60,7 @@
           </div>
         </div>
 
-        <!-- Right: Accordion -->
+        <!-- Kanan: Akordeon -->
         <div class="w-full lg:col-span-8 space-y-3 sm:space-y-4">
 
           <TransitionGroup name="faq-list" tag="div" class="space-y-3 sm:space-y-4">

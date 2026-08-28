@@ -6,16 +6,16 @@
         :key="i"
         class="group relative flex items-center gap-5 overflow-hidden rounded-[18px] border border-primary-dark/10 bg-primary p-8 py-8 px-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_24px_rgba(0,0,0,0.08)]"
       >
-        <!-- Top highlight — thin light line at the top edge, characteristic of Apple glass -->
+        <!-- Highlight atas — garis tipis di tepi atas, ciri khas kaca Apple -->
         <div class="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/50 to-transparent"></div>
 
-        <!-- Radial glow on hover, simulating light reflection on glass surface -->
+        <!-- Glow radial saat hover, mensimulasikan pantulan cahaya di permukaan kaca -->
         <div
           class="pointer-events-none absolute -inset-px opacity-0 transition-opacity duration-500 group-hover:opacity-100"
           style="background: radial-gradient(200px circle at 15% 15%, rgba(255,255,255,0.15), transparent 70%)"
         ></div>
 
-        <!-- Icon circle — real glass: blur + translucent border -->
+        <!-- Lingkaran ikon — kaca asli: blur + border tembus pandang -->
         <div class="relative flex h-[54px] w-[54px] flex-shrink-0 items-center justify-center rounded-full border border-white/25 bg-white/15 shadow-[inset_0_1px_0_rgba(255,255,255,0.3)] backdrop-blur-md transition-transform duration-500 group-hover:scale-105">
           <component :is="feat.icon" :size="26" stroke-width="1.5" color="#fff" />
         </div>

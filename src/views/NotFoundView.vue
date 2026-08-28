@@ -1,5 +1,5 @@
 <template>
-  <!-- Loading Screen -->
+  <!-- Layar Loading -->
   <div v-if="loading" class="loading-screen">
     <div class="spinner-wrapper">
       <div class="ring ring-outer"></div>
@@ -9,7 +9,7 @@
     <p class="loading-text">Loading...</p>
   </div>
 
-  <!-- 404 Content -->
+  <!-- Konten 404 -->
   <div
     v-else
     class="flex min-h-screen flex-col items-center justify-center text-center px-6 bg-background"

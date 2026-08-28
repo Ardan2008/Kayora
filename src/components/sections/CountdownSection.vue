@@ -1,10 +1,10 @@
 <template>
   <section class="relative bg-primary py-12 lg:py-16 overflow-hidden w-full">
-    <!-- Main Container -->
+    <!-- Kontainer Utama -->
     <div class="mx-auto max-w-[1200px] px-4 sm:px-6 w-full">
       <div class="flex flex-col lg:grid lg:grid-cols-12 gap-8 lg:gap-0 items-center">
 
-        <!-- Top/Left: Chair Image -->
+        <!-- Atas/Kiri: Gambar Kursi -->
         <div class="w-full lg:col-span-3 flex justify-center order-2 lg:order-1">
           <img
             src="/images/chair/chair.webp"
@@ -14,7 +14,7 @@
           />
         </div>
 
-        <!-- Center: Text + Timer + Button -->
+        <!-- Tengah: Teks + Timer + Tombol -->
         <div class="w-full lg:col-span-6 text-center lg:pr-4 z-10 order-1 lg:order-2">
           <h2 class="mb-3 sm:mb-4 font-display text-[1.75rem] sm:text-[2.25rem] leading-tight tracking-tight text-white">
             Countdown for biggest discount
@@ -24,10 +24,10 @@
             Elegant, comfortable, and affordable just for a limited time!
           </p>
 
-          <!-- Timer with Colon (:) Centered -->
+          <!-- Timer dengan Titik Dua (:) di Tengah -->
           <div class="mb-6 sm:mb-8 flex items-center justify-center gap-1.5 sm:gap-3">
             <template v-for="(unit, index) in timer" :key="unit.label">
-              <!-- Box Timer -->
+              <!-- Kotak Timer -->
               <div class="flex flex-col items-center justify-center rounded-xl sm:rounded-2xl bg-white/15 px-2.5 py-2 sm:px-4 sm:py-3 min-w-[60px] sm:min-w-[76px] backdrop-blur-sm">
                 <span class="font-display text-[1.5rem] sm:text-[2.25rem] font-bold leading-none text-white tabular-nums">
                   {{ unit.value }}
@@ -37,7 +37,7 @@
                 </span>
               </div>
 
-              <!-- Colon Separator -->
+              <!-- Pemisah Titik Dua -->
               <span
                 v-if="index < timer.length - 1"
                 class="text-[1rem] sm:text-[1.25rem] font-bold text-white/80 self-center -mt-2 px-0.5 select-none"
@@ -47,7 +47,7 @@
             </template>
           </div>
 
-          <!-- CTA Button -->
+          <!-- Tombol CTA -->
           <a
             href="#shop"
             class="inline-flex items-center justify-center rounded-full bg-white px-7 sm:px-8 py-3 sm:py-3.5 text-[0.75rem] sm:text-[0.8125rem] font-bold uppercase tracking-widest text-text no-underline transition-all duration-300 hover:bg-black hover:text-white hover:shadow-lg"
@@ -56,7 +56,7 @@
           </a>
         </div>
 
-        <!-- Bottom/Right: Sofa Image -->
+        <!-- Bawah/Kanan: Gambar Sofa -->
         <div class="w-full lg:col-span-3 relative flex items-center justify-center lg:justify-end order-3">
           <img
             src="/images/sofa/sofa.webp"

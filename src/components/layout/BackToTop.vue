@@ -6,17 +6,17 @@
       aria-label="Back to top"
       class="group fixed bottom-6 right-6 z-40 flex h-13 w-13 cursor-pointer items-center justify-center rounded-full border-none bg-transparent p-0 transition-transform duration-300 hover:scale-105 active:scale-95 max-sm:bottom-4 max-sm:right-4 max-sm:h-12 max-sm:w-12"
     >
-      <!-- Glow halo behind -->
+      <!-- Halo glow di belakang -->
       <span
         class="absolute inset-0 rounded-full bg-primary/30 opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-100"
       ></span>
 
-      <!-- SVG Progress Ring -->
+      <!-- Cincin Progres SVG -->
       <svg
         class="absolute inset-0 h-full w-full -rotate-90 pointer-events-none"
         viewBox="0 0 52 52"
       >
-        <!-- Track Ring: Dark and transparent for contrast on light backgrounds -->
+        <!-- Cincin Lintasan: gelap dan transparan untuk kontras pada latar terang -->
         <circle
           cx="26"
           cy="26"
@@ -27,7 +27,7 @@
           class="text-black/15 dark:text-white/20"
         />
 
-        <!-- Progress Indicator Ring -->
+        <!-- Cincin Indikator Progres -->
         <circle
           cx="26"
           cy="26"
@@ -42,19 +42,19 @@
         />
       </svg>
 
-      <!-- Core Glass Button (Apple Aesthetic + Auto Contrast) -->
+      <!-- Tombol Kaca Inti (Estetika Apple + Kontras Otomatis) -->
       <span
         class="glass-core relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-full max-sm:h-9 max-sm:w-9"
       >
-        <!-- Liquid Fill Layer -->
+        <!-- Lapisan Isi Cair -->
         <span class="liquid-fill absolute bg-primary"></span>
 
-        <!-- Bubbles -->
+        <!-- Gelembung -->
         <span class="bubble bubble-1 absolute rounded-full bg-white/80"></span>
         <span class="bubble bubble-2 absolute rounded-full bg-white/70"></span>
         <span class="bubble bubble-3 absolute rounded-full bg-white/60"></span>
 
-        <!-- Arrow Icon with Auto-Invert Color based on Background -->
+        <!-- Ikon Panah dengan Warna Ter-balik Otomatis berdasarkan Latar -->
         <span class="relative z-10 flex items-center justify-center blend-icon">
           <ArrowUp
             :size="16"
@@ -109,9 +109,9 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-/* Adaptive Apple Glassmorphism */
+/* Glassmorphism Apple Adaptif */
 .glass-core {
-  /* Uses a color blend to remain readable on both white and dark backgrounds */
+  /* Menggunakan campuran warna agar tetap terbaca pada latar terang dan gelap */
   background: rgba(255, 255, 255, 0.45);
   backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
@@ -123,7 +123,7 @@ onUnmounted(() => {
   transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Dark Mode OOTB (Automatically adapts if root HTML has a dark class) */
+/* Mode Gelap Siap Pakai (beradaptasi otomatis jika HTML root punya kelas dark) */
 :global(.dark) .glass-core {
   background: rgba(30, 30, 30, 0.55);
   border-color: rgba(255, 255, 255, 0.15);
@@ -132,9 +132,9 @@ onUnmounted(() => {
     inset 0 1px 1px rgba(255, 255, 255, 0.2);
 }
 
-/* Auto Invert Icon Color: Arrow is black on light bg, white on liquid/dark bg */
+/* Warna Ikon Ter-balik Otomatis: Panah hitam di latar terang, putih di kaca/gelap */
 .blend-icon {
-  color: #1c1c1e; /* Default arrow color on light background */
+  color: #1c1c1e; /* Warna panah default pada latar terang */
   transition: color 0.3s ease;
 }
 
@@ -142,12 +142,12 @@ onUnmounted(() => {
   color: #ffffff;
 }
 
-/* On hover & liquid fill, arrow color is forced to white */
+/* Saat hover & isi cair, warna panah dipaksa putih */
 .group:hover .blend-icon {
   color: #ffffff !important;
 }
 
-/* Vue Transition (Fade Up) */
+/* Transisi Vue (Fade Up) */
 .fade-up-enter-active {
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -166,7 +166,7 @@ onUnmounted(() => {
   transform: translateY(12px) scale(0.8);
 }
 
-/* Liquid Fill Effect */
+/* Efek Isi Cair */
 .liquid-fill {
   left: 50%;
   bottom: -20%;
@@ -188,7 +188,7 @@ onUnmounted(() => {
   border-radius: 38%;
 }
 
-/* Bubbles Effect */
+/* Efek Gelembung */
 .bubble {
   bottom: 0%;
   opacity: 0;

@@ -62,7 +62,7 @@ onUnmounted(() => {
 
 watch(() => props.text, () => nextTick(checkOverflow))
 
-// clicking outside closes the tooltip that was "pinned" via tap/click
+// klik di luar menutup tooltip yang "disematkan" via tap/klik
 const handleClickOutside = (e) => {
   const el = textRef.value?.$el || textRef.value
   if (isPinned.value && el && !el.contains(e.target)) isPinned.value = false

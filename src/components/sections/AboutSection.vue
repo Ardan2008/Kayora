@@ -2,24 +2,26 @@
   <section id="about" class="bg-background py-20 overflow-hidden">
     <div class="mx-auto grid max-w-300 grid-cols-2 gap-12 px-6 items-center max-lg:grid-cols-1 max-lg:gap-12">
 
-      <!-- Left: Text Content -->
+      <!-- Kiri: Konten Teks -->
       <div class="z-10">
-        
-        <!-- Subtitle Badge / Tag -->
-        <span class="mb-3 inline-block text-[0.75rem] font-semibold uppercase tracking-widest text-primary">About Us</span>
 
-        <!-- Modern Editorial Heading -->
+        <!-- Badge / Tag Subtitle -->
+        <span class="mb-3 sm:mb-4 inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/8 px-4 py-1.5 text-[0.6875rem] sm:text-[0.75rem] font-extrabold uppercase tracking-[0.2em] text-primary">
+          About Us
+        </span>
+
+        <!-- Heading Editorial Modern -->
         <h2 class="mb-6 font-display text-[2.25rem] sm:text-[2.75rem] leading-[1.12] tracking-tight text-text">
           Designing Spaces That <br />
           <span class="font-normal italic text-primary">Feel Like Home</span>
         </h2>
 
-        <!-- Paragraph Typography -->
+        <!-- Tipografi Paragraf -->
         <p class="mb-8 text-[0.9375rem] font-normal leading-[1.75] text-text-muted max-w-115 tracking-normal">
           At <strong class="font-semibold text-text">Kayora</strong>, we believe great design starts with comfort and ends with personal expression. From cozy corners to statement pieces, our interiors bring warmth, function, and timeless beauty to every room.
         </p>
         
-        <!-- Clean Editorial Button: LEARN MORE -->
+        <!-- Tombol Editorial Bersih: Pelajari Lebih Lanjut -->
         <button
           type="button"
           @click="openModal"
@@ -29,10 +31,10 @@
         </button>
       </div>
 
-      <!-- Right: Overlapping Layout -->
+      <!-- Kanan: Tata Letak Tumpang Tindih -->
       <div class="relative w-full h-115 sm:h-125 flex items-center justify-center">
-        
-        <!-- Main Large Image -->
+
+        <!-- Gambar Besar Utama -->
         <div class="absolute left-0 top-0 h-95 sm:h-105 w-[62%] sm:w-[65%] overflow-hidden rounded-2xl shadow-xl z-10 bg-slate-100">
           <TransitionGroup name="fade">
             <img
@@ -47,7 +49,7 @@
           </TransitionGroup>
         </div>
 
-        <!-- Secondary Accent Image -->
+        <!-- Gambar Aksen Sekunder -->
         <div class="absolute right-0 bottom-0 h-65 sm:h-75 w-[50%] sm:w-[52%] overflow-hidden rounded-2xl shadow-2xl z-20 bg-slate-100 border-4 border-background">
           <TransitionGroup name="fade">
             <img
@@ -66,7 +68,7 @@
 
     </div>
 
-    <!-- Premium Modal Section -->
+    <!-- Bagian Modal -->
     <Teleport to="body">
       <Transition name="modal">
         <div
@@ -81,72 +83,77 @@
             aria-modal="true"
             aria-labelledby="about-modal-title"
             tabindex="-1"
-            class="relative flex max-h-[88vh] w-full max-w-150 flex-col overflow-hidden rounded-2xl bg-white shadow-xl transition-all border border-border/40"
+            class="relative flex w-full max-w-220 max-h-[86vh] overflow-hidden rounded-2xl bg-white shadow-xl transition-all border border-border/40 max-lg:max-h-[92vh] max-lg:flex-col"
           >
-            <!-- Header Image Banner -->
-            <div class="relative h-48 sm:h-56 w-full shrink-0 overflow-hidden bg-slate-100">
+            <!-- Kiri: Panel Gambar Tetap -->
+            <div class="relative w-[42%] shrink-0 overflow-hidden bg-slate-100 max-lg:w-full max-lg:h-56">
               <img
-                src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800&q=80"
+                src="/images/about-banner.webp"
                 alt="Interior Design Artistry"
                 class="h-full w-full object-cover"
               />
               <div class="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent"></div>
-              
+
               <span class="absolute top-5 left-6 text-[0.7rem] font-semibold tracking-widest text-white/90 uppercase">
                 Our Story
               </span>
 
-              <button
-                type="button"
-                @click="closeModal"
-                aria-label="Close"
-                class="absolute right-4 top-4 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-black/30 text-white transition-colors duration-200 hover:bg-black/60 border-none"
-              >
-                <X class="h-4 w-4" />
-              </button>
-
               <div class="absolute bottom-5 left-6 right-6">
-                <h3 id="about-modal-title" class="font-display text-[1.5rem] sm:text-[1.75rem] font-semibold leading-tight text-white">
+                <h3 id="about-modal-title" class="font-display text-[1.5rem] sm:text-[1.75rem] font-semibold tracking-wider leading-tight text-white">
                   Crafting Timeless Comfort
                 </h3>
               </div>
             </div>
 
-            <!-- Content Area -->
-            <div class="overflow-y-auto p-6 sm:p-8 space-y-4 text-[0.875rem] leading-relaxed text-text-muted">
-              <p class="text-text font-medium text-[0.9375rem] leading-7">
-                At Kayora, we believe great design starts with comfort and ends with personal expression. Every space tells a story — we simply provide the masterpiece pieces to write it with.
-              </p>
-              
-              <hr class="border-border/60 my-2" />
+            <!-- Tombol Tutup -->
+            <button
+              type="button"
+              @click="closeModal"
+              aria-label="Close"
+              class="absolute right-4 top-4 z-20 flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-white/80 text-text backdrop-blur-md transition-all duration-200 hover:bg-primary hover:text-white shadow-sm border border-border/60"
+            >
+              <X class="h-4 w-4" />
+            </button>
 
-              <p>
-                It began with a simple frustration: furniture that looked good in a showroom but never quite fit real life. So we set out to design pieces that hold up to daily use without giving up on craft — solid joinery, natural materials, and finishes that age gracefully over time.
-              </p>
+            <!-- Kanan: Panel Konten (area scroll + footer tetap) -->
+            <div class="flex flex-1 flex-col min-h-0">
 
-              <div class="my-4 rounded-lg bg-slate-50 p-4 border-l-2 border-primary">
-                <p class="italic text-text text-[0.8438rem] leading-6">
-                  "Furniture shouldn't just fill a room — it should anchor your moments, support your routines, and inspire your daily living."
+              <!-- Konten yang Dapat Discroll -->
+              <div class="custom-scrollbar flex-1 overflow-y-auto p-6 sm:p-8 pb-0 space-y-4 text-[0.875rem] leading-relaxed text-text-muted">
+                <p class="text-text font-medium text-[0.9375rem] leading-7">
+                  At Kayora, we believe great design starts with comfort and ends with personal expression. Every space tells a story — we simply provide the masterpiece pieces to write it with.
+                </p>
+
+                <hr class="border-border/60 my-2" />
+
+                <p>
+                  It began with a simple frustration: furniture that looked good in a showroom but never quite fit real life. So we set out to design pieces that hold up to daily use without giving up on craft — solid joinery, natural materials, and finishes that age gracefully over time.
+                </p>
+
+                <div class="my-4 rounded-lg bg-slate-50 p-4 border-l-2 border-primary">
+                  <p class="italic text-text text-[0.8438rem] leading-6">
+                    "Furniture shouldn't just fill a room — it should anchor your moments, support your routines, and inspire your daily living."
+                  </p>
+                </div>
+
+                <p class="pb-8">
+                  Every collection is developed with independent artisans who share that same high standard, from the hand-carved frame of a sofa to the rich grain of a dining table. We test every piece for living, not just for photographs.
                 </p>
               </div>
 
-              <p>
-                Every collection is developed with independent artisans who share that same high standard, from the hand-carved frame of a sofa to the rich grain of a dining table. We test every piece for living, not just for photographs.
-              </p>
-            </div>
+              <!-- Footer Tetap (tidak ikut scroll) -->
+              <div class="shrink-0 border-t border-border/60 bg-slate-50/50 px-6 py-4 sm:px-8 flex items-center justify-between">
+                <span class="text-[0.75rem] font-mono text-text-muted tracking-wider uppercase">Kayora</span>
 
-            <!-- Modal Footer -->
-            <div class="shrink-0 border-t border-border/60 bg-slate-50/50 px-6 py-4 flex items-center justify-between">
-              <span class="text-[0.75rem] font-mono text-text-muted tracking-wider uppercase">Kayora Studio</span>
-              
-              <!-- Clean Secondary Button: Got It -->
-              <button
-                type="button"
-                @click="closeModal"
-                class="inline-flex items-center justify-center rounded-full bg-text px-6 py-2 text-[0.75rem] font-medium tracking-wider text-white transition-colors duration-200 hover:bg-primary active:scale-95 cursor-pointer border-none"
-              >
-                Got It
-              </button>
+                <!-- Tombol Sekunder Bersih: Mengerti -->
+                <button
+                  type="button"
+                  @click="closeModal"
+                  class="inline-flex items-center justify-center rounded-full bg-text px-6 py-2 text-[0.75rem] font-medium tracking-wider text-white transition-colors duration-200 hover:bg-primary active:scale-95 cursor-pointer border-none"
+                >
+                  Got It
+                </button>
+              </div>
             </div>
 
           </div>
@@ -191,7 +198,7 @@ onUnmounted(() => {
   if (timer) clearInterval(timer)
 })
 
-// Modal Logic
+// Logika Modal
 const isModalOpen = ref(false)
 const modalPanel = ref(null)
 let lastFocusedEl = null
@@ -222,7 +229,7 @@ function handleKeydown(e) {
 </script>
 
 <style scoped>
-/* Ultra-smooth Crossfade Animation */
+/* Animasi Crossfade Sangat Halus */
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
@@ -233,7 +240,7 @@ function handleKeydown(e) {
   opacity: 0;
 }
 
-/* Modal Simple Fade & Scale */
+/* Modal Fade & Scale Sederhana */
 .modal-enter-active,
 .modal-leave-active {
   transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
@@ -243,5 +250,18 @@ function handleKeydown(e) {
 .modal-leave-to {
   opacity: 0;
   transform: scale(0.97);
+}
+
+/* Scrollbar Tipis Kustom di Dalam Modal */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+  margin: 20px 0;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--color-primary-light);
+  border-radius: 3px;
 }
 </style>

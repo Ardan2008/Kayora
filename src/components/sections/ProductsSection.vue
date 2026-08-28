@@ -19,10 +19,10 @@
         </p>
       </div>
 
-      <!-- Filter Tabs -->
+      <!-- Tab Filter -->
       <div class="mb-10 flex flex-wrap justify-center gap-2">
         <div class="relative">
-          <!-- Decorative blurred blobs so the glass effect has something to refract -->
+          <!-- Gumpalan blur dekoratif agar efek kaca punya sesuatu untuk dibiaskan -->
           <div class="pointer-events-none absolute -top-6 left-8 h-16 w-16 rounded-full bg-primary/25 blur-2xl"></div>
           <div class="pointer-events-none absolute -top-4 right-10 h-14 w-14 rounded-full bg-[#C89B3C]/20 blur-2xl"></div>
 
@@ -30,7 +30,7 @@
             ref="tabContainer"
             class="relative flex flex-wrap justify-center gap-1.5 rounded-full border border-white/50 bg-white/25 p-1.5 shadow-[0_8px_32px_rgba(0,0,0,0.08)] backdrop-blur-xl backdrop-saturate-150"
           >
-            <!-- Sliding glass indicator -->
+            <!-- Indikator kaca geser -->
             <div
               class="absolute left-0 top-1.5 bottom-1.5 rounded-full bg-primary shadow-[0_2px_10px_rgba(0,0,0,0.14),inset_0_1px_0_rgba(255,255,255,0.9)] backdrop-blur-md transition-all duration-300 ease-[cubic-bezier(0.34,1.15,0.64,1)]"
               :style="indicatorStyle"
@@ -52,7 +52,7 @@
         </div>
       </div>
 
-      <!-- Product Grid -->
+      <!-- Grid Produk -->
       <TransitionGroup
         v-if="filteredProducts.length"
         name="product-grid"
@@ -64,7 +64,7 @@
           :key="product.id"
           class="group cursor-pointer overflow-hidden rounded-2xl border border-border/60 bg-white transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_12px_28px_rgba(0,0,0,0.08)]"
         >
-          <!-- Product Image Container -->
+          <!-- Kontainer Gambar Produk -->
           <div class="relative aspect-4/3 overflow-hidden bg-[#f0ede6]">
             <img
               :src="product.img"
@@ -73,7 +73,7 @@
               class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
 
-            <!-- Wishlist Button (modernized: soft shadow + scale spring + like-pulse) -->
+            <!-- Tombol Wishlist (modern: soft shadow + scale spring + like-pulse) -->
             <button
               :class="[
                 'absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full border-none backdrop-blur-md transition-all duration-300 ease-out shadow-[0_2px_8px_rgba(0,0,0,0.12)] cursor-pointer active:scale-90',
@@ -96,7 +96,7 @@
             </button>
           </div>
 
-          <!-- Product Details -->
+          <!-- Detail Produk -->
           <div class="px-4 py-4">
             <span class="text-[0.625rem] font-bold uppercase tracking-[0.08em] text-primary">
               {{ product.category }}
@@ -105,7 +105,7 @@
               {{ product.name }}
             </h3>
 
-            <!-- Star Rating -->
+            <!-- Rating Bintang -->
             <div class="mb-3 flex items-center gap-1">
               <div class="flex gap-0.5">
                 <Star
@@ -124,7 +124,7 @@
                 ${{ product.price.toFixed(2) }}
               </span>
 
-              <!-- Add to Cart Button (modernized: expanding pill on hover + added confirmation) -->
+              <!-- Tombol Tambah ke Keranjang (modern: pill melebar saat hover + konfirmasi ditambah) -->
               <button
                 @click.stop="handleAddToCart(product)"
                 :class="[
@@ -151,7 +151,7 @@
         </div>
       </TransitionGroup>
 
-      <!-- Empty State -->
+      <!-- State Kosong -->
       <div
         v-else
         class="mx-auto flex max-w-105 flex-col items-center justify-center rounded-lg border border-dashed border-border/80 bg-white/60 px-8 py-16 text-center shadow-sm"
@@ -166,7 +166,7 @@
             : "We couldn't find any products in this category. Try selecting a different filter." }}
         </p>
 
-        <!-- Clear Search Button (modernized: icon + lift on hover) -->
+        <!-- Tombol Hapus Pencarian (modern: ikon + terangkat saat hover) -->
         <button
           v-if="hasQuery"
           class="mt-4 inline-flex cursor-pointer items-center gap-1.5 rounded-full border-none bg-primary px-5 py-2.5 text-xs font-semibold text-white shadow-[0_4px_12px_rgba(0,0,0,0.12)] transition-all duration-300 hover:-translate-y-0.5 hover:opacity-95 hover:shadow-[0_8px_20px_rgba(0,0,0,0.18)] active:translate-y-0"
@@ -195,7 +195,7 @@ const { searchQuery, clearSearch, hasQuery } = useSearch()
 const tabs = ['All', 'Chair', 'Table', 'Sofa', 'Bed']
 const activeTab = ref('All')
 
-// --- Sliding glass indicator logic ---
+// --- Logika indikator kaca geser ---
 const tabContainer = ref(null)
 const tabRefs = reactive({})
 const indicatorStyle = reactive({ width: '0px', transform: 'translateX(0px)' })
@@ -222,7 +222,7 @@ onMounted(() => {
   window.addEventListener('resize', updateIndicator)
 })
 
-// --- Button click feedback ---
+// --- Umpan balik klik tombol ---
 const addedIds = ref(new Set())
 const likedPulse = ref(new Set())
 
@@ -364,7 +364,7 @@ const filteredProducts = computed(() => {
   position: absolute;
 }
 
-/* Add to Cart icon swap */
+/* Pergantian ikon Tambah ke Keranjang */
 .icon-swap-enter-active,
 .icon-swap-leave-active {
   transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -378,7 +378,7 @@ const filteredProducts = computed(() => {
   transform: scale(0.4) rotate(45deg);
 }
 
-/* Toast Animation */
+/* Animasi Toast */
 .toast-enter-active,
 .toast-leave-active {
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);

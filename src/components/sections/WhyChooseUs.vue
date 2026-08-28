@@ -2,9 +2,16 @@
   <section id="categories" class="bg-background py-12 sm:py-24 relative overflow-hidden w-full">
     <div class="mx-auto max-w-300 px-4 sm:px-6 w-full flex flex-col lg:grid lg:grid-cols-12 gap-8 sm:gap-12 items-center">
 
-      <!-- Left: Accordion Section -->
+      <!-- Kiri: Bagian Akordeon -->
       <div class="w-full lg:col-span-7">
-        <!-- Modern Editorial Heading -->
+        <!-- Label Eyebrow -->
+        <div class="mb-3 sm:mb-4 flex items-center gap-2.5">
+          <span class="inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/8 px-4 py-1.5 text-[0.6875rem] sm:text-[0.75rem] font-extrabold uppercase tracking-[0.2em] text-primary">
+            Why Choose Us
+          </span>
+        </div>
+
+        <!-- Heading Editorial Modern -->
         <h2 class="font-display text-[1.875rem] sm:text-[2.75rem] leading-[1.15] tracking-tight text-text">
           Crafting Excellence <br class="hidden sm:inline" />
           <span class="font-normal italic text-primary">In Every Detail.</span>
@@ -14,7 +21,7 @@
           The core hallmarks that define our furniture identity and set us apart as industry leaders.
         </p>
 
-        <!-- Fresh Modern Accordion -->
+        <!-- Akordeon Modern Segar -->
         <div class="space-y-3 sm:space-y-4 w-full">
           <div
             v-for="(item, i) in items"
@@ -26,14 +33,14 @@
                 : 'border-border/60 bg-transparent hover:border-primary/20'
             ]"
           >
-            <!-- Accordion Header -->
+            <!-- Header Akordeon -->
             <button
               type="button"
               class="flex w-full cursor-pointer items-center justify-between gap-3 p-4 sm:p-6 text-left border-none bg-transparent"
               @click="openIndex = openIndex === i ? -1 : i"
             >
               <div class="flex items-center gap-3 sm:gap-4 pr-2">
-                <!-- Index Number -->
+                <!-- Nomor Indeks -->
                 <span 
                   :class="[
                     'font-mono text-[0.75rem] sm:text-[0.8125rem] font-bold transition-colors duration-300 shrink-0',
@@ -43,7 +50,7 @@
                   0{{ i + 1 }}
                 </span>
                 
-                <!-- Title -->
+                <!-- Judul -->
                 <span 
                   :class="[
                     'text-[0.9375rem] sm:text-[1rem] font-semibold tracking-wide transition-colors duration-300 leading-snug',
@@ -54,7 +61,7 @@
                 </span>
               </div>
 
-              <!-- Animated Toggle Icon -->
+              <!-- Ikon Toggle Beranimasi -->
               <span 
                 :class="[
                   'flex h-7 w-7 sm:h-8 sm:w-8 shrink-0 items-center justify-center rounded-full transition-all duration-300',
@@ -68,7 +75,7 @@
               </span>
             </button>
 
-            <!-- Accordion Content -->
+            <!-- Konten Akordeon -->
             <Transition
               name="accordion"
               @before-enter="beforeEnter"
@@ -88,11 +95,11 @@
         </div>
       </div>
 
-      <!-- Right: Video Reel Card -->
+      <!-- Kanan: Kartu Video Reel -->
       <div class="w-full lg:col-span-5">
         <div class="relative mx-auto overflow-hidden rounded-lg sm:rounded-[28px] bg-slate-900 shadow-2xl w-full max-w-90 aspect-9/16">
 
-          <!-- Embedded Reel (shown once playing) -->
+          <!-- Reel Tertanam (ditampilkan saat diputar) -->
           <iframe
             v-if="isPlaying"
             class="absolute inset-0 h-full w-full"
@@ -103,7 +110,7 @@
             allowfullscreen
           ></iframe>
 
-          <!-- Thumbnail / Cover State -->
+          <!-- State Thumbnail / Sampul -->
           <div v-else class="group absolute inset-0 cursor-pointer" @click="isPlaying = true">
             <img
               :src="`https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`"
@@ -111,17 +118,17 @@
               class="h-full w-full object-cover opacity-90 transition-transform duration-700 ease-out group-hover:scale-105 group-hover:opacity-80"
             />
 
-            <!-- Gradient Overlay -->
+            <!-- Overlay Gradien -->
             <div class="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent"></div>
 
-            <!-- Top Floating Tag -->
+            <!-- Tag Melayang di Atas -->
             <div class="absolute top-4 left-4 sm:top-6 sm:left-6">
               <span class="rounded-full bg-white/20 border border-white/30 px-3 py-1 sm:px-3.5 sm:py-1.5 text-[0.625rem] sm:text-[0.6875rem] font-semibold uppercase tracking-wider text-white backdrop-blur-md">
                 Watch Reel
               </span>
             </div>
 
-            <!-- Center Play Button -->
+            <!-- Tombol Putar di Tengah -->
             <div class="absolute inset-0 flex items-center justify-center">
               <button
                 type="button"
@@ -132,7 +139,7 @@
               </button>
             </div>
 
-            <!-- Bottom Text Overlay -->
+            <!-- Overlay Teks di Bawah -->
             <div class="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 text-white">
               <p class="text-[0.6875rem] sm:text-[0.75rem] font-semibold tracking-widest uppercase text-white/70">Behind The Craft</p>
               <h3 class="text-[1rem] sm:text-[1.125rem] font-medium leading-snug mt-0.5 sm:mt-1">
@@ -154,7 +161,7 @@ import { Plus, Minus, Play } from 'lucide-vue-next'
 
 const openIndex = ref(0)
 
-// Reel video state
+// Status reel video
 const videoId = 'UELVSZC06BE'
 const isPlaying = ref(false)
 
@@ -177,7 +184,7 @@ const items = [
   },
 ]
 
-// Smooth Height Transitions Hooks
+// Hook Transisi Tinggi yang Halus
 const beforeEnter = (el) => {
   el.style.height = '0'
   el.style.opacity = '0'

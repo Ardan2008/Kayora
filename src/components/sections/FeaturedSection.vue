@@ -11,10 +11,10 @@
         </p>
       </div>
 
-      <!-- Bento layout: hero category + product grid -->
+      <!-- Tata letak Bento: hero kategori + grid produk -->
       <div class="grid grid-cols-[0.85fr_2fr] gap-6 items-stretch max-md:grid-cols-1">
 
-        <!-- Category tiles (left column, staggered bento) -->
+        <!-- Ubin kategori (kolom kiri, bento berselang-seling) -->
         <div class="flex flex-col gap-6 h-full max-md:flex-row max-sm:flex-col">
           <div
             v-for="(cat, i) in categories"
@@ -42,7 +42,7 @@
           </div>
         </div>
 
-        <!-- Product cards (right columns) -->
+        <!-- Kartu produk (kolom kanan) -->
         <div class="grid grid-cols-2 grid-rows-2 gap-6">
           <div
             v-for="p in recommended"
@@ -52,7 +52,7 @@
             <div class="relative aspect-5/4 overflow-hidden bg-background">
               <img :src="p.img" :alt="p.name" loading="lazy" class="h-full w-full object-cover transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-110" />
 
-              <!-- Wishlist Button (consistent with Shop section) -->
+              <!-- Tombol Wishlist (konsisten dengan bagian Shop) -->
               <button
                 :class="[
                   'absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full border-none backdrop-blur-sm transition-all duration-300 shadow-sm cursor-pointer',
@@ -72,7 +72,7 @@
               <div class="mt-auto flex items-center justify-between pt-2.5">
                 <span class="font-display text-[1.0625rem] font-bold text-text">${{ p.price.toFixed(2) }}</span>
 
-                <!-- Add to Cart Button (matches Shop section: expanding pill + check confirmation) -->
+                <!-- Tombol Tambah ke Keranjang (sama dengan bagian Shop: pill melebar + konfirmasi centang) -->
                 <button
                   @click.stop="handleAddToCart(p)"
                   :class="[
@@ -102,7 +102,7 @@
       </div>
     </div>
 
-    <!-- Category "View All" Modal -->
+    <!-- Modal "Lihat Semua" Kategori -->
     <Teleport to="body">
       <Transition name="fade" appear>
         <div
@@ -114,7 +114,7 @@
               v-if="activeCategoryModal"
               class="relative flex w-full max-w-190 max-h-[85vh] flex-col overflow-hidden rounded-3xl bg-white shadow-[0_30px_80px_rgba(0,0,0,0.35)]"
             >
-              <!-- Modal Header -->
+              <!-- Header Modal -->
               <div class="flex items-center justify-between border-b border-border/70 px-6 py-5 max-sm:px-4">
                 <div>
                   <span class="text-[0.6875rem] font-bold uppercase tracking-[0.14em] text-primary">Category</span>
@@ -129,7 +129,7 @@
                 </button>
               </div>
 
-              <!-- Modal Product Grid -->
+              <!-- Grid Produk Modal -->
               <div class="flex-1 overflow-y-auto px-6 py-6 max-sm:px-4">
                 <div
                   v-if="activeCategoryProducts.length"
@@ -161,7 +161,7 @@
                       <div class="mt-auto flex items-center justify-between pt-2">
                         <span class="font-display text-sm font-bold text-text">${{ p.price.toFixed(2) }}</span>
 
-                        <!-- Add to Cart Button (matches Shop section, compact size for modal grid) -->
+                        <!-- Tombol Tambah ke Keranjang (sama dengan Shop, ukuran kompak untuk grid modal) -->
                         <button
                           @click.stop="handleAddToCart(p)"
                           :class="[
@@ -188,7 +188,7 @@
                   </div>
                 </div>
 
-                <!-- Empty state when category has no products yet -->
+                <!-- State kosong saat kategori belum punya produk -->
                 <div v-else class="flex flex-col items-center justify-center py-14 text-center">
                   <p class="text-sm text-text-muted">No products available for this category yet.</p>
                 </div>
@@ -201,7 +201,6 @@
 
   </section>
 </template>
-
 
 <script setup>
 import { ref, computed } from 'vue'
@@ -258,7 +257,7 @@ const recommended = [
   }
 ]
 
-// Product data per category for "View all" popup
+// Data produk per kategori untuk popup "Lihat semua"
 const categoryProducts = {
   'Bedroom Furniture': [
     { id: 101, name: 'Nordic Oak Bed Frame', category: 'Bed', price: 420.00, img: '/images/bedroom/bedroom3.webp' },
@@ -291,7 +290,7 @@ const closeCategoryModal = () => {
   activeCategoryModal.value = null
 }
 
-// --- Add to Cart button feedback (matches Shop section behavior) ---
+// --- Umpan balik tombol Tambah ke Keranjang (sesuai perilaku bagian Shop) ---
 const addedIds = ref(new Set())
 
 function handleAddToCart(product) {
@@ -327,7 +326,7 @@ function handleAddToCart(product) {
   transform: scale(0.94) translateY(12px);
 }
 
-/* Add to Cart icon swap (matches Shop section) */
+/* Pergantian ikon Tambah ke Keranjang (sesuai bagian Shop) */
 .icon-swap-enter-active,
 .icon-swap-leave-active {
   transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);

@@ -1,11 +1,11 @@
 <template>
   <section id="blog" class="relative bg-[#FAF9F6] py-24 overflow-hidden">
-    <!-- Ambient Background Glow -->
+    <!-- Glow Latar Ambien -->
     <div class="pointer-events-none absolute -top-40 left-1/2 h-125 w-125 -translate-x-1/2 rounded-full bg-primary/5 blur-[120px]"></div>
 
     <div class="relative mx-auto max-w-300 px-6">
 
-      <!-- Section Header -->
+      <!-- Header Bagian -->
       <div class="mx-auto mb-16 max-w-155 text-center">
         <h2 class="font-display text-4xl font-semibold leading-tight text-text sm:text-[2.75rem]">
           Latest From Our Journal
@@ -15,7 +15,7 @@
         </p>
       </div>
 
-      <!-- Modern Blog Grid -->
+      <!-- Grid Blog Modern -->
       <div class="grid grid-cols-3 gap-8 max-lg:grid-cols-2 max-md:grid-cols-1">
         <article
           v-for="post in posts"
@@ -23,7 +23,7 @@
           @click="openPost(post)"
           class="group relative flex flex-col justify-between cursor-pointer overflow-hidden rounded-3xl border border-black/5 bg-white/70 p-3.5 transition-all duration-500 hover:-translate-y-2 hover:border-primary/30 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.08)]"
         >
-          <!-- Image Container -->
+          <!-- Kontainer Gambar -->
           <div class="relative aspect-16/11 w-full overflow-hidden rounded-[18px] bg-[#f0ede6]">
             <img
               :src="post.img"
@@ -32,13 +32,13 @@
               class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-108"
             />
             
-            <!-- Glassmorphism Badge -->
+            <!-- Badge Glassmorphism -->
             <span class="absolute top-3.5 left-3.5 rounded-full border border-white/30 bg-white/70 px-3.5 py-1 text-[0.625rem] font-bold uppercase tracking-widest text-text backdrop-blur-md shadow-xs">
               {{ post.category }}
             </span>
           </div>
 
-          <!-- Content Details -->
+          <!-- Detail Konten -->
           <div class="flex flex-1 flex-col justify-between px-2 pt-5 pb-2">
             <div>
               <div class="mb-2.5 flex items-center gap-2 text-[0.75rem] text-text-muted/70">
@@ -54,7 +54,7 @@
               </p>
             </div>
 
-            <!-- Magnetic Read More Link -->
+            <!-- Tautan Baca Selengkapnya Magnetik -->
             <div class="mt-6 flex items-center justify-between border-t border-border/40 pt-4">
               <span class="text-[0.8125rem] font-bold text-text transition-colors group-hover:text-primary">
                 Read Article
@@ -69,7 +69,7 @@
 
     </div>
 
-    <!-- Luxury Reading Modal -->
+    <!-- Modal Membaca Mewah (Lanskap) -->
     <Teleport to="body">
       <Transition name="fade">
         <div
@@ -79,58 +79,69 @@
           <Transition name="slide-up">
             <div
               v-if="selectedPost"
-              class="relative flex max-h-[90vh] w-full max-w-190 flex-col overflow-hidden rounded-4xl bg-white shadow-2xl border border-white/40"
+              class="relative flex w-full max-w-260 max-h-[88vh] overflow-hidden rounded-4xl bg-white shadow-2xl border border-white/40 max-lg:max-h-[92vh] max-lg:flex-col"
             >
-              <!-- Fixed Close Button -->
+              <!-- Tombol Tutup Tetap -->
               <button
                 @click="closePost"
-                class="absolute top-6 right-6 z-10 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-border/60 bg-white/80 text-text backdrop-blur-md transition-all hover:bg-primary hover:text-white hover:rotate-90 shadow-sm"
+                class="absolute top-6 right-6 z-20 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-border/60 bg-white/80 text-text backdrop-blur-md transition-all hover:bg-primary hover:text-white hover:rotate-90 shadow-sm"
                 aria-label="Close modal"
               >
                 <X :size="18" />
               </button>
 
-              <!-- Inner Scrollable Content -->
-              <div class="custom-scrollbar overflow-y-auto p-6 sm:p-10">
-                <!-- Modal Content -->
-                <div class="mb-4 flex items-center gap-3">
-                  <span class="rounded-full bg-primary/10 px-3.5 py-1 text-[0.6875rem] font-bold uppercase tracking-wider text-primary">
-                    {{ selectedPost.category }}
-                  </span>
-                  <span class="text-[0.75rem] text-text-muted">{{ selectedPost.date }}</span>
-                  <span class="text-[0.75rem] text-text-muted">•</span>
-                  <span class="text-[0.75rem] text-text-muted">{{ selectedPost.readTime }} min read</span>
+              <!-- Kiri: Panel Gambar Tetap -->
+              <div class="relative w-[42%] shrink-0 overflow-hidden bg-[#f0ede6] max-lg:w-full max-lg:h-64">
+                <img :src="selectedPost.img" :alt="selectedPost.title" loading="lazy" class="h-full w-full object-cover" />
+                <div class="pointer-events-none absolute inset-0 bg-linear-to-t from-black/30 via-transparent to-transparent max-lg:block hidden"></div>
+
+                <!-- Badge kategori di atas gambar (desktop) -->
+                <span class="absolute bottom-6 left-6 rounded-full bg-white/85 px-3.5 py-1.5 text-[0.6875rem] font-bold uppercase tracking-wider text-text backdrop-blur-md shadow-sm max-lg:hidden">
+                  {{ selectedPost.category }}
+                </span>
+              </div>
+
+              <!-- Kanan: Panel Konten (area scroll + footer tetap) -->
+              <div class="flex flex-1 flex-col min-h-0">
+
+                <!-- Konten yang Dapat Discroll -->
+                <div class="custom-scrollbar flex-1 overflow-y-auto p-6 sm:p-10 pb-0">
+                  <!-- Konten Modal -->
+                  <div class="mb-4 flex items-center gap-3 max-lg:mt-1">
+                    <span class="rounded-full bg-primary/10 px-3.5 py-1 text-[0.6875rem] font-bold uppercase tracking-wider text-primary lg:hidden">
+                      {{ selectedPost.category }}
+                    </span>
+                    <span class="text-[0.75rem] text-text-muted">{{ selectedPost.date }}</span>
+                    <span class="text-[0.75rem] text-text-muted">•</span>
+                    <span class="text-[0.75rem] text-text-muted">{{ selectedPost.readTime }} min read</span>
+                  </div>
+
+                  <h2 class="font-display text-2xl font-bold leading-tight text-text sm:text-[1.75rem] mb-6 pr-8">
+                    {{ selectedPost.title }}
+                  </h2>
+
+                  <!-- Isi Konten Artikel -->
+                  <div class="space-y-5 text-[0.9375rem] leading-relaxed text-text-muted/90 pb-8">
+                    <p class="font-medium text-text text-base leading-relaxed border-l-2 border-primary pl-4">
+                      {{ selectedPost.excerpt }}
+                    </p>
+                    <p>
+                      {{ selectedPost.content }}
+                    </p>
+                    <p>
+                      At Kayora, design is not merely about aesthetic arrangement; it is about creating balance and emotion within functional living quarters. Choosing the right furniture pieces sets the rhythm for your entire home experience.
+                    </p>
+                  </div>
                 </div>
 
-                <h2 class="font-display text-2xl font-bold leading-tight text-text sm:text-3xl mb-6 pr-8">
-                  {{ selectedPost.title }}
-                </h2>
-
-                <div class="mb-8 aspect-video w-full overflow-hidden rounded-lg bg-[#f0ede6] shadow-sm">
-                  <img :src="selectedPost.img" :alt="selectedPost.title" loading="lazy" class="h-full w-full object-cover" />
-                </div>
-
-                <!-- Article Content Body -->
-                <div class="space-y-5 text-[0.9375rem] leading-relaxed text-text-muted/90">
-                  <p class="font-medium text-text text-base leading-relaxed border-l-2 border-primary pl-4">
-                    {{ selectedPost.excerpt }}
-                  </p>
-                  <p>
-                    {{ selectedPost.content }}
-                  </p>
-                  <p>
-                    At Kayora, design is not merely about aesthetic arrangement; it is about creating balance and emotion within functional living quarters. Choosing the right furniture pieces sets the rhythm for your entire home experience.
-                  </p>
-                </div>
-
-                <!-- Modal Footer -->
-                <div class="mt-10 flex items-center justify-between border-t border-border/60 pt-6">
+                <!-- Footer Tetap (tidak ikut scroll) -->
+                <div class="shrink-0 flex items-center justify-between border-t border-border/60 px-6 py-6 sm:px-10 bg-white">
                   <div class="flex items-center gap-3">
                     <div class="h-9 w-9 rounded-full bg-primary/10 flex items-center justify-center font-bold text-primary text-xs">
                       KY
                     </div>
                     <div>
-                      <p class="text-xs font-bold text-text">Kayora Editorial</p>
+                      <p class="text-xs font-bold text-text">Kayora</p>
                       <p class="text-[0.6875rem] text-text-muted">Design & Architecture</p>
                     </div>
                   </div>
@@ -203,12 +214,12 @@ const posts = [
 </script>
 
 <style scoped>
-/* Smooth Scale Hover Effect */
+/* Efek Hover Skala Halus */
 .scale-108 {
   transform: scale(1.08);
 }
 
-/* Modal Transition Effects */
+/* Efek Transisi Modal */
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
@@ -231,7 +242,7 @@ const posts = [
   transform: translateY(15px) scale(0.98);
 }
 
-/* Custom Thin Scrollbar Inside Modal */
+/* Scrollbar Tipis Kustom di Dalam Modal */
 .custom-scrollbar::-webkit-scrollbar {
   width: 6px;
 }
@@ -240,10 +251,7 @@ const posts = [
   margin: 20px 0;
 }
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.15);
-  border-radius: 10px;
-}
-.custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: var(--color-primary, #000);
+  background: var(--color-primary-light);
+  border-radius: 3px;
 }
 </style>

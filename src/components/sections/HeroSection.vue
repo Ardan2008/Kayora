@@ -1,7 +1,7 @@
 <template>
   <!-- Hero -->
   <section id="home" class="grid grid-cols-2 overflow-hidden pt-16 max-md:grid-cols-1">
-    <!-- Left: Content -->
+    <!-- Kiri: Konten -->
     <div class="flex items-center bg-background py-16 pl-16 pr-12 max-md:p-12">
       <div class="max-w-110">
         <span class="mt-2 inline-block rounded-full py-1 text-[0.6875rem] font-semibold uppercase tracking-wider text-primary">Mega Sale Upto 75%</span>
@@ -20,7 +20,7 @@
           SHOP NOW
         </a>
 
-        <!-- Stats -->
+        <!-- Statistik -->
         <div class="mt-10 flex items-center gap-4">
           <div class="flex flex-col gap-1 rounded-xl border border-text/20 px-5 py-3">
             <span class="font-display text-[1.875rem] leading-none text-text">567+</span>
@@ -34,23 +34,32 @@
       </div>
     </div>
 
-    <!-- Right: diagonal green/cream panel -->
+    <!-- Kanan: panel diagonal hijau/krem -->
     <div class="relative flex min-h-155 items-center justify-center overflow-hidden bg-background max-md:min-h-120">
 
-        <!-- Dark green shape -->
+        <!-- Bentuk hijau tua -->
         <div class="absolute inset-5 bg-primary [border-radius:28px_28px_28px_260px] max-md:[border-radius:20px_20px_20px_150px]"></div>
 
-        <!-- Leaf -->
-        <img src="/images/pot.webp" alt="Decorative plant leaves" loading="lazy"
-        class="absolute left-1/3 top-[6%] z-10 w-[42%] max-w-50 translate-x-[-38%] drop-shadow-[0_10px_20px_rgba(0,0,0,0.15)] max-md:w-[38%] max-md:top-[8%]" />
+        <!-- Daun -->
+        <img
+          src="/images/pot.webp"
+          alt="Decorative plant leaves"
+          loading="lazy"
+          class="absolute left-1/3 top-[6%] z-10 w-[42%] max-w-50 translate-x-[-38%] drop-shadow-[0_10px_20px_rgba(0,0,0,0.15)] max-md:w-[38%] max-md:top-[8%]"
+        />
 
-        <!-- Chair (also changes with active product for a livelier feel) -->
+        <!-- Kursi (juga berganti mengikuti produk aktif agar terasa lebih hidup) -->
         <Transition name="chair-fade" mode="out-in">
-          <img :key="currentProduct.id" :src="currentProduct.image" :alt="currentProduct.name" loading="lazy"
-          class="relative z-20 w-[62%] max-w-90 drop-shadow-[0_18px_28px_rgba(0,0,0,0.28)] max-md:w-[56%]" />
+          <img
+            :key="currentProduct.id"
+            :src="currentProduct.image"
+            :alt="currentProduct.name"
+            loading="lazy"
+            class="relative z-20 w-[62%] max-w-90 drop-shadow-[0_18px_28px_rgba(0,0,0,0.28)] max-md:w-[56%]"
+          />
         </Transition>
 
-        <!-- Product card (auto-rotating) -->
+        <!-- Kartu produk (rotasi otomatis) -->
         <div
           class="absolute bottom-20 right-12 z-30 w-80 max-md:right-1/2 max-md:bottom-8 max-md:translate-x-1/2"
           @mouseenter="stopAutoRotate"
@@ -61,7 +70,7 @@
               :key="currentProduct.id"
               class="relative flex items-center gap-4 rounded-2xl bg-white p-4 shadow-[0_16px_36px_rgba(0,0,0,0.16)]"
             >
-              <!-- Wishlist Heart Button -->
+              <!-- Tombol Hati Wishlist -->
               <button
                 :class="[
                   'absolute -top-2.5 -right-2.5 flex h-8 w-8 items-center justify-center rounded-full border-0 shadow-[0_4px_12px_rgba(0,0,0,0.15)] cursor-pointer outline-none transition-all duration-300 z-10',
@@ -84,7 +93,7 @@
               </div>
 
               <div class="min-w-0 flex-1">
-                <!-- Star Rating via Lucide -->
+                <!-- Rating Bintang via Lucide -->
                 <div class="mb-1 flex items-center gap-0.5 text-amber-500">
                   <Star v-for="i in 5" :key="i" class="h-3 w-3 fill-amber-500 stroke-amber-500" />
                 </div>
@@ -109,7 +118,7 @@
             </div>
           </Transition>
 
-          <!-- Progress dots -->
+          <!-- Titik progres -->
           <div class="mt-3 flex justify-center gap-1.5">
             <button
               v-for="(product, index) in products"
@@ -223,7 +232,7 @@ onUnmounted(stopAutoRotate)
   animation: spin-slow 14s linear infinite;
 }
 
-/* Product card transition */
+/* Transisi kartu produk */
 .product-fade-enter-active,
 .product-fade-leave-active {
   transition: opacity 0.45s cubic-bezier(0.4, 0, 0.2, 1), transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
@@ -237,7 +246,7 @@ onUnmounted(stopAutoRotate)
   transform: translateY(-14px) scale(0.96);
 }
 
-/* Chair image swap */
+/* Pergantian gambar kursi */
 .chair-fade-enter-active,
 .chair-fade-leave-active {
   transition: opacity 0.5s ease, transform 0.5s ease;
@@ -251,7 +260,7 @@ onUnmounted(stopAutoRotate)
   transform: scale(1.05);
 }
 
-/* Icon swap on add-to-cart button */
+/* Pergantian ikon pada tombol tambah-ke-keranjang */
 .icon-swap-enter-active,
 .icon-swap-leave-active {
   transition: opacity 0.2s ease, transform 0.2s ease;

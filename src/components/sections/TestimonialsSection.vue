@@ -1,11 +1,11 @@
 <template>
-  <section class="bg-[#FAF8F5] py-12 sm:py-20 overflow-hidden w-full">
-    <div class="mx-auto max-w-[1140px] px-4 sm:px-6 w-full">
+  <section id="testimonials" class="bg-[#FAF8F5] py-12 sm:py-20 overflow-hidden w-full">
+    <div class="mx-auto max-w-285 px-4 sm:px-6 w-full">
 
-      <!-- Subtitle & Title: Asymmetric Left-Aligned -->
+      <!-- Subtitle & Judul: Rata Kiri Asimetris -->
       <div class="mb-8 sm:mb-12 flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6">
         <div>
-          <span class="mb-2 block text-[0.75rem] font-semibold uppercase tracking-widest text-primary">
+          <span class="mb-3 sm:mb-4 inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/8 px-4 py-1.5 text-[0.6875rem] sm:text-[0.75rem] font-extrabold uppercase tracking-[0.2em] text-primary">
             Testimonials
           </span>
           <h2 class="font-display text-[1.875rem] sm:text-[2.75rem] leading-[1.12] tracking-tight text-text">
@@ -18,39 +18,39 @@
         </p>
       </div>
 
-      <!-- Testimonials Grid (1 Card on Mobile, 2 Cards on Desktop) -->
+      <!-- Grid Testimoni (1 Kartu di Mobile, 2 Kartu di Desktop) -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 w-full">
         <div
           v-for="(t, index) in visibleTestimonials"
           :key="index"
-          class="flex flex-col md:flex-row overflow-hidden rounded-[20px] sm:rounded-[24px] bg-white shadow-sm border border-black/5 min-h-auto md:min-h-[340px] w-full"
+          class="flex flex-col md:flex-row overflow-hidden rounded-lg sm:rounded-3xl bg-white shadow-sm border border-black/5 min-h-auto md:min-h-85 w-full"
         >
-          <!-- Image Container (Top on Mobile, Right on Desktop) -->
-          <div class="relative w-full md:w-[50%] md:min-w-[200px] h-56 md:h-auto overflow-hidden shrink-0 order-first md:order-last">
+          <!-- Kontainer Gambar (Atas di Mobile, Kanan di Desktop) -->
+          <div class="relative w-full md:w-[50%] md:min-w-50 h-56 md:h-auto overflow-hidden shrink-0 order-first md:order-last">
             <img
               :src="t.avatar"
               :alt="t.name"
               loading="lazy"
               class="h-full w-full object-cover object-center"
             />
-            <!-- Dark Gradient Overlay for text readability -->
-            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-5 md:p-6 text-white">
+            <!-- Overlay Gradien Gelap agar teks mudah dibaca -->
+            <div class="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-5 md:p-6 text-white">
               <h4 class="font-bold text-[1rem] md:text-[1.125rem] leading-snug">{{ t.name }}</h4>
               <p class="text-[0.75rem] md:text-[0.8125rem] text-white/80 mt-0.5">{{ t.role }}</p>
             </div>
           </div>
 
-          <!-- Text Content Box (Bottom on Mobile, Left on Desktop) -->
+          <!-- Kotak Konten Teks (Bawah di Mobile, Kiri di Desktop) -->
           <div class="flex-1 p-6 md:p-8 flex flex-col justify-between bg-[#FDFBF7] order-last md:order-first">
             <div>
-              <!-- Quote Icon (Brownish/Terracotta) -->
+              <!-- Ikon Kutipan (Kecoklat-Terakota) -->
               <div class="mb-3 md:mb-4 text-[#B85C38]">
-                <svg width="32" height="24" class="md:w-[36px] md:h-[28px]" viewBox="0 0 36 28" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <svg width="32" height="24" class="md:w-9 md:h-7" viewBox="0 0 36 28" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                   <path d="M0 28V16.3333C0 7.31111 5.4 1.86667 16.2 0L18 3.5C12.6 4.97778 9.9 8.24444 9.9 13.3H16.2V28H0ZM19.8 28V16.3333C19.8 7.31111 25.2 1.86667 36 0L37.8 3.5C32.4 4.97778 29.7 8.24444 29.7 13.3H36V28H19.8Z"/>
                 </svg>
               </div>
 
-              <!-- Star Rating + Number -->
+              <!-- Rating Bintang + Angka -->
               <div class="flex items-center gap-2 mb-3 md:mb-4">
                 <div class="flex items-center gap-1 text-amber-500">
                   <Star v-for="n in 5" :key="n" class="h-3.5 w-3.5 md:h-4 md:w-4 fill-amber-500 stroke-amber-500" />
@@ -58,7 +58,7 @@
                 <span class="font-bold text-xs md:text-sm text-black ml-1">5.0</span>
               </div>
 
-              <!-- Testimonial Text -->
+              <!-- Teks Testimoni -->
               <p class="text-[0.8125rem] md:text-[0.875rem] leading-relaxed text-[#555555]">
                 "{{ t.text }}"
               </p>
@@ -67,9 +67,9 @@
         </div>
       </div>
 
-      <!-- Bottom Controls: Arrows on Left, Slide Counter on Right -->
+      <!-- Kontrol Bawah: Panah di Kiri, Penghitung Slide di Kanan -->
       <div class="mt-8 sm:mt-10 flex items-center justify-between w-full">
-        <!-- Prev/Next Navigation Buttons -->
+        <!-- Tombol Navigasi Sebelumnya/Berikutnya -->
         <div class="flex items-center gap-3">
           <button
             @click="prevSlide"
@@ -87,7 +87,7 @@
           </button>
         </div>
 
-        <!-- Slide Indicator Line / Number -->
+        <!-- Garis Indikator / Nomor Slide -->
         <div class="flex items-center gap-2 text-[0.75rem] sm:text-[0.8125rem] font-medium text-[#777]">
           <span>0{{ currentIndex + 1 }}</span>
           <div class="h-0.5 w-8 sm:w-12 bg-black/10 relative overflow-hidden rounded-full">
@@ -135,7 +135,7 @@ const testimonials = [
   },
 ]
 
-// Monitor window size to show 1 item on mobile and 2 on desktop
+// Pantau ukuran layar untuk menampilkan 1 item di mobile dan 2 di desktop
 const checkScreenSize = () => {
   isMobile.value = window.innerWidth < 768
 }
@@ -149,7 +149,7 @@ onUnmounted(() => {
   window.removeEventListener('resize', checkScreenSize)
 })
 
-// Dynamic slide calculation based on device screen
+// Perhitungan slide dinamis berdasarkan layar perangkat
 const visibleTestimonials = computed(() => {
   if (isMobile.value) {
     return [testimonials[currentIndex.value]]

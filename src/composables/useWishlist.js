@@ -1,6 +1,6 @@
 import { ref, computed } from 'vue'
 
-// Singleton state — shared across all components that import useWishlist()
+// State singleton — dibagikan ke semua komponen yang mengimpor useWishlist()
 const wishlistItems = ref([])
 
 export function useWishlist() {
@@ -9,12 +9,12 @@ export function useWishlist() {
   }
 
   const addToWishlist = (product) => {
-    // Normalize fields for consistency across the app (wishlist, cart, toast, etc.)
+    // Normalisasi field agar konsisten di seluruh aplikasi
     const normalized = {
       id: product.id,
       name: product.name,
       price: product.price,
-      img: product.img || product.image, // fallback from 'image' to 'img'
+      img: product.img || product.image, // fallback dari 'image' ke 'img'
       category: product.category || product.desc || '',
     }
 

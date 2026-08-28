@@ -10,12 +10,12 @@ let toastTimer = null
 
 export function useCart() {
   const addToCart = (product) => {
-    // Normalize fields for consistency across the app (cart, wishlist, toast, etc.)
+    // Normalisasi field agar konsisten di seluruh aplikasi (keranjang, wishlist, toast, dll.)
     const normalized = {
       id: product.id,
       name: product.name,
       price: product.price,
-      img: product.img || product.image, // fallback from 'image' to 'img'
+      img: product.img || product.image, // fallback dari 'image' ke 'img'
       category: product.category || product.desc || '',
     }
 
