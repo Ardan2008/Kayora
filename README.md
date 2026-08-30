@@ -284,6 +284,6 @@ The source code is available on GitHub:
 
 **Ardan Ramadhan**
 
-Full-Stack Developer & Web Developement
+Full-Stack Developer & Web Development
 
 Focused on frontend development, modern web technologies, and building clean and user-centered web interfaces.
