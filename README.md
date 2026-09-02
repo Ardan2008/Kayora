@@ -2,8 +2,6 @@
 
 **Kayora** adalah frontend e-commerce furniture modern yang dibangun menggunakan **Vue 3** dan **Vite**. Proyek ini menyediakan antarmuka yang bersih, responsif, dan ramah pengguna untuk menelusuri dan mengeksplorasi produk furniture.
 
-Versi saat ini berfokus pada pengalaman frontend dan menggunakan **dummy/static data** untuk mensimulasikan informasi produk dan interaksi pengguna.
-
 > **Status Proyek:** Frontend Development
 
 ## Live Demo
@@ -16,7 +14,7 @@ Kayora adalah konsep website e-commerce furniture yang dirancang untuk memberika
 
 Antarmuka dibangun dengan Vue 3 menggunakan pendekatan berbasis komponen, dengan fokus pada layout responsif, penyajian produk, navigasi, dan elemen belanja interaktif.
 
-Pada tahap pengembangan saat ini, informasi produk dan katalog dikelola menggunakan data statis pada frontend.
+Pada tahap pengembangan saat ini, informasi produk dan katalog dikelola menggunakan **dummy/static data** untuk mensimulasikan informasi produk dan interaksi pengguna.
 
 ## Fitur
 
