@@ -1,96 +1,85 @@
 # Kayora
 
-**Kayora** is a modern furniture e-commerce frontend built with **Vue 3** and **Vite**. The project is designed to showcase a clean, responsive, and user-friendly shopping interface for discovering furniture products.
+**Kayora** adalah frontend e-commerce furniture modern yang dibangun menggunakan **Vue 3** dan **Vite**. Proyek ini menyediakan antarmuka yang bersih, responsif, dan ramah pengguna untuk menelusuri dan mengeksplorasi produk furniture.
 
-This project currently focuses on the **frontend experience** and uses **dummy data** to simulate product information and user interactions. Backend services, database integration, authentication, and payment processing are not yet implemented.
+Versi saat ini berfokus pada pengalaman frontend dan menggunakan **dummy/static data** untuk mensimulasikan informasi produk dan interaksi pengguna.
 
-> **Project Status:** Frontend Development
+> **Status Proyek:** Frontend Development
 
----
+## Live Demo
+
+[**Lihat Kayora — Live Demo**](https://kayora-furniture.vercel.app/)
 
 ## Overview
 
-Kayora is a frontend web application concept for a modern furniture brand.
+Kayora adalah konsep website e-commerce furniture yang dirancang untuk memberikan pengalaman belanja yang modern dan sederhana.
 
-The project focuses on translating a furniture e-commerce design into a functional web interface using Vue 3. It demonstrates the implementation of reusable components, responsive layouts, navigation, product presentation, and interactive UI elements.
+Antarmuka dibangun dengan Vue 3 menggunakan pendekatan berbasis komponen, dengan fokus pada layout responsif, penyajian produk, navigasi, dan elemen belanja interaktif.
 
-At its current stage, all product and catalog information is provided through **static/dummy data**. The application does not yet communicate with a backend server or database.
+Pada tahap pengembangan saat ini, informasi produk dan katalog dikelola menggunakan data statis pada frontend.
 
----
+## Fitur
 
-## Features
+### Katalog Produk
 
-### Product Catalog
+Menampilkan produk furniture dalam katalog yang terorganisir, memungkinkan pengguna menelusuri produk yang tersedia.
 
-Displays furniture products using structured dummy data, allowing users to explore available products through the catalog.
+### Kategori Produk
 
-### Product Categories
+Mengelompokkan produk furniture ke dalam kategori untuk memudahkan pencarian produk.
 
-Furniture products are organized into categories to make product discovery easier.
+### Search
 
-### Search Interface
+Menyediakan antarmuka pencarian frontend untuk menemukan produk dalam katalog yang tersedia.
 
-Provides a frontend search experience for finding products within the catalog.
+### Wishlist
 
-### Wishlist Interface
+Menyediakan interaksi wishlist untuk menyimpan produk di sisi klien (client-side).
 
-Allows users to interact with wishlist functionality on the frontend.
+### Shopping Cart
 
-### Shopping Cart Interface
-
-Provides a shopping cart experience for managing selected products on the client side.
+Memungkinkan pengguna menambahkan dan mengelola produk furniture pilihan melalui shopping cart frontend.
 
 ### Featured Products
 
-Highlights selected furniture products on the website's main sections.
+Menyoroti produk furniture pilihan di berbagai bagian utama website.
 
 ### Responsive Design
 
-The interface is designed to adapt to desktop, tablet, and mobile screen sizes.
+Dirancang untuk memberikan pengalaman yang konsisten di berbagai ukuran layar desktop, tablet, dan mobile.
 
 ### Client-Side Navigation
 
-Uses Vue Router to provide navigation between different pages and sections of the application.
-
----
+Menggunakan Vue Router untuk navigasi antar halaman dan bagian aplikasi.
 
 ## Tech Stack
 
-| Technology       | Purpose                           |
-| ---------------- | --------------------------------- |
-| **Vue 3**        | Frontend framework                |
-| **Vite**         | Development server and build tool |
-| **JavaScript**   | Application logic                 |
-| **HTML5**        | Page structure                    |
-| **CSS3**         | Styling and responsive design     |
-| **Vue Router**   | Client-side routing               |
-| **Lucide Icons** | UI icons                          |
+| Teknologi         | Fungsi                             |
+| ----------------- | ----------------------------------- |
+| **Vue 3**          | Framework frontend                  |
+| **Vite**           | Development server dan build tool   |
+| **JavaScript**     | Logika aplikasi                     |
+| **HTML5**          | Struktur halaman                    |
+| **CSS3**           | Styling dan desain responsif        |
+| **Vue Router**     | Client-side routing                 |
+| **Lucide Icons**   | Ikon antarmuka pengguna             |
 
----
+## Data
 
-## Data Architecture
+Kayora saat ini menggunakan **dummy/static data** untuk produk dan konten katalognya.
 
-Currently, Kayora does **not use a backend or database**.
-
-Product information and other content displayed throughout the application are provided using **dummy/static data** on the frontend.
+Struktur frontend dirancang agar data statis tersebut nantinya dapat digantikan dengan data dari backend API.
 
 ```text
-User
-  │
-  ▼
 Vue 3 Application
-  │
-  ├── Components
-  ├── Views
-  ├── Vue Router
-  └── Dummy Data
+│
+├── Components
+├── Views
+├── Vue Router
+└── Dummy Data
 ```
 
-The current architecture is intentionally frontend-focused and can later be extended by replacing the dummy data with data retrieved from a backend API.
-
----
-
-## Project Structure
+## Struktur Proyek
 
 ```text
 Kayora/
@@ -114,176 +103,106 @@ Kayora/
 └── README.md
 ```
 
-The project follows a component-based structure to keep the interface organized and make individual UI elements easier to maintain and reuse.
+Proyek ini menggunakan struktur berbasis komponen untuk menjaga antarmuka tetap terorganisir dan dapat digunakan kembali.
 
----
+## Instalasi
 
-## Getting Started
+### Prasyarat
 
-### Prerequisites
-
-Make sure the following tools are installed:
+Pastikan hal berikut sudah terpasang:
 
 * Node.js
 * npm
 * Git
 
-Check the installed versions:
-
-```bash
-node --version
-npm --version
-git --version
-```
-
----
-
-## Installation
-
-Clone the repository:
+### Clone Repository
 
 ```bash
 git clone https://github.com/Ardan2008/Kayora.git
 ```
 
-Navigate to the project directory:
+### Masuk ke Direktori Proyek
 
 ```bash
 cd Kayora
 ```
 
-Install dependencies:
+### Install Dependencies
 
 ```bash
 npm install
 ```
 
----
-
 ## Development
 
-Run the development server:
+Jalankan development server:
 
 ```bash
 npm run dev
 ```
 
-Vite will provide a local development URL that can be opened in your browser.
+Aplikasi akan tersedia melalui URL lokal yang disediakan oleh Vite.
 
-The project supports **Hot Module Replacement (HMR)**, allowing changes to the source code to appear immediately during development.
-
----
+Proyek ini mendukung **Hot Module Replacement (HMR)**, sehingga perubahan langsung terlihat selama development.
 
 ## Production Build
 
-Create an optimized production build:
+Buat production build:
 
 ```bash
 npm run build
 ```
 
-To preview the production build locally:
+Preview production build secara lokal:
 
 ```bash
 npm run preview
 ```
 
----
+## Cakupan Saat Ini
 
-## Current Limitations
+Versi Kayora saat ini berfokus khusus pada pengalaman e-commerce frontend.
 
-Since Kayora is currently a frontend project, several features are not yet connected to a real backend system:
+Yang sudah diimplementasikan:
 
-* No backend API
-* No database
-* No user authentication
-* No persistent user accounts
-* No persistent shopping cart
-* No persistent wishlist
-* No real checkout process
-* No payment gateway
-* Product data is still based on dummy data
+* Katalog produk furniture
+* Kategori produk
+* Antarmuka pencarian produk
+* Featured products
+* Antarmuka wishlist
+* Antarmuka shopping cart
+* Layout responsif
+* Navigasi client-side
+* Data produk statis/dummy
 
-These limitations are part of the current development stage and provide opportunities for future expansion.
+Layanan backend, integrasi database, autentikasi, data pengguna yang persisten, checkout, dan pemrosesan pembayaran belum menjadi bagian dari versi saat ini.
 
----
+## Pengembangan Selanjutnya
 
-## Future Development
+Proyek ini dapat dikembangkan lebih lanjut dengan:
 
-The next development phase could include:
+* Integrasi backend API
+* Integrasi database
+* Autentikasi pengguna
+* Shopping cart yang persisten
+* Wishlist yang persisten
+* Manajemen produk
+* Manajemen pesanan
+* Sistem checkout
+* Integrasi payment gateway
+* Admin dashboard
 
-1. **Backend API**
+## Informasi Proyek
 
-   * Build REST API for products, categories, users, carts, and orders.
+| Informasi        | Detail                          |
+| ----------------- | -------------------------------- |
+| **Proyek**         | Kayora                           |
+| **Tipe**           | Furniture E-Commerce Frontend    |
+| **Framework**      | Vue 3                            |
+| **Build Tool**     | Vite                             |
+| **Sumber Data**    | Dummy / Static Data              |
+| **Status**         | Frontend Development             |
 
-2. **Database**
+## Live Project
 
-   * Store products, users, orders, and other application data in a database.
-
-3. **Authentication**
-
-   * Add user registration, login, and account management.
-
-4. **Persistent Cart & Wishlist**
-
-   * Store user-specific cart and wishlist data.
-
-5. **Checkout**
-
-   * Implement order creation and checkout functionality.
-
-6. **Payment Integration**
-
-   * Connect the application with a payment gateway.
-
-7. **Admin Dashboard**
-
-   * Provide product, inventory, user, and order management.
-
----
-
-## Development Goals
-
-Kayora was developed as a practical frontend project to improve experience in:
-
-* Vue 3
-* Component-based architecture
-* Responsive web development
-* UI/UX implementation
-* Client-side routing
-* JavaScript development
-* Frontend project organization
-* Building realistic e-commerce interfaces
-
----
-
-## Project Information
-
-| Information     | Details                       |
-| --------------- | ----------------------------- |
-| **Project**     | Kayora                        |
-| **Type**        | Furniture E-Commerce Frontend |
-| **Framework**   | Vue 3                         |
-| **Build Tool**  | Vite                          |
-| **Data Source** | Dummy / Static Data           |
-| **Backend**     | Not Implemented               |
-| **Database**    | Not Implemented               |
-| **Status**      | Frontend Development          |
-
----
-
-## Repository
-
-The source code is available on GitHub:
-
-**https://github.com/Ardan2008/Kayora**
-
----
-
-## Author
-
-**Ardan Ramadhan**
-
-Full-Stack Developer & Web Development
-
-Focused on frontend development, modern web technologies, and building clean and user-centered web interfaces.
+[**https://kayora-furniture.vercel.app/**](https://kayora-furniture.vercel.app/)
