@@ -202,7 +202,3 @@ Proyek ini dapat dikembangkan lebih lanjut dengan:
 | **Build Tool**     | Vite                             |
 | **Sumber Data**    | Dummy / Static Data              |
 | **Status**         | Frontend Development             |
-
-## Live Project
-
-[**https://kayora-furniture.vercel.app/**](https://kayora-furniture.vercel.app/)
